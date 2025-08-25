@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\KegiatanModel;
+use DOMDocument;
 
 class KegiatanController extends BaseController
 {
@@ -22,6 +23,21 @@ class KegiatanController extends BaseController
         ];
     }
 
+    /**
+     * Helper function untuk membuat slug dari string.
+     * @param string $string
+     * @return string
+     */
+    private function to_slug($string)
+    {
+        $string = strtolower($string); // Ubah ke huruf kecil
+        $string = preg_replace('/[^a-z0-9\s\-]/', '', $string); // Hapus karakter non-alphanumeric, kecuali spasi dan strip
+        $string = str_replace(' ', '-', $string); // Ganti spasi dengan strip
+        $string = preg_replace('/-+/', '-', $string); // Hapus strip ganda
+        $string = trim($string, '-'); // Hapus strip di awal/akhir
+        return $string;
+    }
+
     public function index()
     {
         $search = $this->request->getVar('search');
@@ -31,8 +47,8 @@ class KegiatanController extends BaseController
 
         if ($search) {
             $kegiatan = $kegiatan->like('judul', $search)
-                                 ->orLike('kategori', $search)
-                                 ->orLike('sub_kategori', $search);
+                ->orLike('kategori', $search)
+                ->orLike('sub_kategori', $search);
         }
 
         if ($kategoriFilter) {
@@ -71,7 +87,7 @@ class KegiatanController extends BaseController
     {
         $kategoriData = $this->getKategoriData();
         $kategoriKeys = array_keys($kategoriData);
-        
+
         $subKategoriValues = [];
         foreach ($kategoriData as $subs) {
             $subKategoriValues = array_merge($subKategoriValues, $subs);
@@ -85,17 +101,13 @@ class KegiatanController extends BaseController
             'konten' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
-        }
-
+        $judul = $this->request->getPost('judul');
+        $slug = $this->to_slug($judul);
         $konten = $this->request->getPost('konten');
-        if (json_decode($konten) === null) {
-            return redirect()->back()->withInput()->with('error', 'Format konten tidak valid.');
-        }
 
         $data = [
-            'judul' => $this->request->getPost('judul'),
+            'judul' => $judul,
+            'slug' => $slug,
             'kategori' => $this->request->getPost('kategori'),
             'sub_kategori' => $this->request->getPost('sub_kategori'),
             'konten' => $konten,
@@ -131,10 +143,10 @@ class KegiatanController extends BaseController
         if (!$kegiatan) {
             return redirect()->to('/admin/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
         }
-        
+
         $kategoriData = $this->getKategoriData();
         $kategoriKeys = array_keys($kategoriData);
-        
+
         $subKategoriValues = [];
         foreach ($kategoriData as $subs) {
             $subKategoriValues = array_merge($subKategoriValues, $subs);
@@ -148,17 +160,22 @@ class KegiatanController extends BaseController
             'konten' => 'required',
         ];
 
+        if ($this->request->getPost('judul') !== $kegiatan['judul']) {
+            $rules['judul'] .= '|is_unique[kegiatan.judul]';
+        }
+
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
 
+        $judul = $this->request->getPost('judul');
+        $slug = $this->to_slug($judul);
+
         $konten = $this->request->getPost('konten');
-        if (json_decode($konten) === null) {
-            return redirect()->back()->withInput()->with('error', 'Format konten tidak valid.');
-        }
 
         $data = [
-            'judul' => $this->request->getPost('judul'),
+            'judul' => $judul,
+            'slug' => $slug,
             'kategori' => $this->request->getPost('kategori'),
             'sub_kategori' => $this->request->getPost('sub_kategori'),
             'konten' => $konten,
@@ -173,16 +190,51 @@ class KegiatanController extends BaseController
 
     public function delete($id)
     {
+        // 1. Ambil data kegiatan dari database sebelum dihapus
+        $kegiatan = $this->kegiatanModel->find($id);
+
+        if (!$kegiatan) {
+            return redirect()->to('/admin/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+        }
+
+        // 2. Gunakan DOMDocument untuk mem-parsing konten HTML
+        $dom = new DOMDocument();
+        // Gunakan @ untuk menekan peringatan HTML parsing yang tidak valid
+        @$dom->loadHTML($kegiatan['konten'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        // 3. Cari semua tag <img>
+        $images = $dom->getElementsByTagName('img');
+        foreach ($images as $img) {
+            $src = $img->getAttribute('src');
+
+            // 4. Periksa apakah URL gambar ada di direktori uploads/kegiatan
+            if (strpos($src, base_url('uploads/kegiatan/')) !== false) {
+                // Ekstrak nama file dari URL
+                $filename = basename($src);
+                $filePath = ROOTPATH . 'public/uploads/kegiatan/' . $filename;
+
+                // 5. Hapus file jika ada
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+        }
+
+        // 6. Hapus data dari database
         if ($this->kegiatanModel->delete($id)) {
             return redirect()->to('/admin/kegiatan')->with('success', 'Kegiatan berhasil dihapus.');
         } else {
             return redirect()->to('/admin/kegiatan')->with('error', 'Gagal menghapus kegiatan.');
         }
     }
-    
-    public function show($id)
+
+    /**
+     * Menampilkan detail kegiatan berdasarkan slug.
+     * @param string $slug
+     */
+    public function show($slug)
     {
-        $kegiatan = $this->kegiatanModel->find($id);
+        $kegiatan = $this->kegiatanModel->where('slug', $slug)->first();
         if (!$kegiatan) {
             return redirect()->to('/admin/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
         }
@@ -193,5 +245,42 @@ class KegiatanController extends BaseController
         ];
 
         return view('admin/kegiatan/show', $data);
+    }
+
+    public function uploadImage()
+    {
+        $validationRule = [
+            'image' => [
+                'label' => 'Gambar',
+                'rules' => 'uploaded[image]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/gif]|max_size[image,2048]',
+                'errors' => [
+                    'uploaded' => 'Tidak ada gambar yang diunggah.',
+                    'is_image' => 'File bukan gambar.',
+                    'mime_in' => 'Format gambar tidak didukung.',
+                    'max_size' => 'Ukuran gambar terlalu besar. Maksimal 2MB.'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($validationRule)) {
+            return $this->response->setJSON(['error' => $this->validator->getError('image')]);
+        }
+
+        $img = $this->request->getFile('image');
+
+        if ($img && $img->isValid()) {
+            $newName = $img->getRandomName();
+            try {
+                $img->move(ROOTPATH . 'public/uploads/kegiatan', $newName);
+                $url = base_url('uploads/kegiatan/' . $newName);
+                return $this->response->setJSON(['url' => $url]);
+            } catch (\Exception $e) {
+                // Memberikan pesan error yang lebih spesifik
+                return $this->response->setJSON(['error' => 'Gagal memindahkan file: ' . $e->getMessage()]);
+            }
+        }
+
+        // Penanganan kasus di mana $img tidak valid atau tidak diunggah dengan benar
+        return $this->response->setJSON(['error' => 'Gagal mengunggah gambar. Pastikan file valid dan tidak ada masalah di sisi server.']);
     }
 }

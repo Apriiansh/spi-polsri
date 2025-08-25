@@ -18,8 +18,9 @@ class ArtikelController extends BaseController
     {
         $data = [
             'title' => 'Manajemen Artikel',
-            'articles' => $this->articleModel->findAll()
+            'articles' => $this->articleModel->getArticlesWithUser()
         ];
+        
         return view('admin/artikel/index', $data);
     }
 

@@ -37,81 +37,51 @@
                     <ul class="space-y-3">
                         <li class="group">
                             <a href="https://sipil.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Teknik Sipil
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://mesin.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Teknik Mesin
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://elektro.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Teknik Elektro
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://teknikkimia.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Teknik Kimia
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://akuntansi.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Akuntansi
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://admbisnis.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Administrasi Bisnis
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://teknikkomputer.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Teknik Komputer
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://www.manajemeninformatika.polsri.ac.id/en" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Manajemen Informatika
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://bahasainggris.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Bahasa dan Pariwisata
                             </a>
                         </li>
                         <li class="group">
                             <a href="https://pertanian.polsri.ac.id/" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Rekayasa Bisnis & Teknologi Pertanian
                             </a>
                         </li>
@@ -129,57 +99,36 @@
                     <ul class="space-y-3">
                         <li class="group">
                             <a href="#" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 Satuan Pengawas Internal (SPI)
                             </a>
                         </li>
                         <li class="group">
                             <a href="#" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 UPT. Perpustakaan
                             </a>
                         </li>
                         <li class="group">
                             <a href="#" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 UPT. Bahasa
                             </a>
                         </li>
                         <li class="group">
                             <a href="#" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 UPT. Teknologi Informasi Dan Komunikasi
                             </a>
                         </li>
                         <li class="group">
                             <a href="#" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 UPT. Teknologi Permesinan Dan Peralatan
                             </a>
                         </li>
                         <li class="group">
                             <a href="#" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 UPT. Layanan Uji Kompetensi
                             </a>
                         </li>
                         <li class="group">
                             <a href="#" class="footer-link flex items-center text-blue-200 hover:text-white hover:translate-x-2 transition-all duration-300 text-sm group">
-                                <svg class="w-3 h-3 mr-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
                                 UPT. Pengembangan Karir Dan Kewirausahaan
                             </a>
                         </li>

@@ -108,6 +108,28 @@ $fullTitle = ($title && $title !== $siteName) ? $title . ' - ' . $siteName : $si
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.6s ease-out 0.1s forwards;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            max-width: none;
+        }
+
+        /* Untuk halaman yang butuh container biasa, tambahkan class khusus */
+        .main-content.with-container {
+            padding: 1rem 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+
+            .main-content.with-container {
+                padding: 1rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-content.with-container {
+                padding: 1.5rem;
+            }
         }
 
         @keyframes fadeInUp {
@@ -177,7 +199,7 @@ $fullTitle = ($title && $title !== $siteName) ? $title . ' - ' . $siteName : $si
     <?= $this->include('layout/navbar') ?>
 
     <!-- Main Content -->
-    <main id="main-content" class="main-content container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow" role="main">
+    <main id="main-content" class="main-content flex-grow" role="main">
         <?= $this->renderSection('content') ?>
     </main>
 
@@ -457,10 +479,6 @@ $fullTitle = ($title && $title !== $siteName) ? $title . ' - ' . $siteName : $si
                 font-size: 12pt;
             }
 
-            .main-content {
-                margin: 0;
-                padding: 0;
-            }
         }
 
         /* High contrast mode support */

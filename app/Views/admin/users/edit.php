@@ -5,8 +5,8 @@
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Pengguna</h1>
 
     <?php if (session()->getFlashdata('errors')): ?>
-        <div class="alert alert-danger">
-            <ul>
+        <div class="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700">
+            <ul class="list-disc pl-5 space-y-1">
                 <?php foreach (session()->getFlashdata('errors') as $error): ?>
                     <li><?= $error; ?></li>
                 <?php endforeach; ?>
@@ -14,29 +14,36 @@
         </div>
     <?php endif; ?>
 
-    <div class="bg-white shadow-lg rounded-xl p-6">
-        <form action="<?= base_url('admin/users/update/' . $user['id']); ?>" method="post">
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="mb-6 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700">
+            <?= session()->getFlashdata('success'); ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="bg-white shadow-lg rounded-2xl p-6">
+        <form action="<?= base_url('admin/users/update/' . $user['id']); ?>" method="post" class="space-y-6">
             <?= csrf_field(); ?>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" id="username" name="username" class="form-input" value="<?= old('username', $user['username']); ?>" required>
+                <div class="flex flex-col">
+                    <label for="username" class="text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <input type="text" id="username" name="username" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value="<?= old('username', $user['username']); ?>" required>
                 </div>
-                <div>
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" name="email" class="form-input" value="<?= old('email', $user['email']); ?>" required>
+                <div class="flex flex-col">
+                    <label for="email" class="text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value="<?= old('email', $user['email']); ?>" required>
                 </div>
-                <div>
-                    <label for="role" class="form-label">Role</label>
-                    <select id="role" name="role" class="form-input" required>
+                <div class="flex flex-col">
+                    <label for="role" class="text-sm font-medium text-gray-700 mb-1">Role</label>
+                    <select id="role" name="role" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
                         <option value="user" <?= old('role', $user['role']) == 'user' ? 'selected' : ''; ?>>User</option>
                         <option value="admin" <?= old('role', $user['role']) == 'admin' ? 'selected' : ''; ?>>Admin</option>
                     </select>
                 </div>
             </div>
-            <div class="mt-6 flex justify-end space-x-4">
-                <a href="<?= base_url('admin/users'); ?>" class="btn-secondary">Batal</a>
-                <button type="submit" class="btn-primary">Simpan Perubahan</button>
+
+            <div class="flex justify-end space-x-4">
+                <a href="<?= base_url('admin/users'); ?>" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition">Batal</a>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">Simpan Perubahan</button>
             </div>
         </form>
     </div>

@@ -19,6 +19,14 @@ class ArticleModel extends Model
         'status'
     ];
 
+    public function getArticlesWithUser()
+    {
+        return $this->select('articles.*, users.username')
+            ->join('users', 'users.id = articles.user_id')
+            ->orderBy('articles.created_at', 'DESC')
+            ->findAll();
+    }
+
     protected bool $allowEmptyInserts = false;
 
     // Dates

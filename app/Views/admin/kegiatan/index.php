@@ -1,139 +1,154 @@
 <?= $this->extend('layout/admin_main') ?>
 
 <?= $this->section('content'); ?>
-<div class="p-6">
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-gray-800"><?= $title; ?></h1>
-        <a href="<?= base_url('admin/kegiatan/create'); ?>" class="btn-primary">Tambah Kegiatan</a>
+<!-- Header dengan Tombol Tambah Kegiatan -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Manajemen Kegiatan</h1>
+        <p class="text-gray-600 mt-1">Kelola kegiatan beserta kategori dan sub-kategorinya</p>
     </div>
+    <a href="<?= base_url('admin/kegiatan/create') ?>" class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg shadow-md hover:bg-primary-dark transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5">
+        <i class="fas fa-plus mr-2"></i>
+        Tambah Kegiatan
+    </a>
+</div>
 
-    <?php if (session()->getFlashdata('success')) : ?>
-        <div class="alert alert-success">
-            <?= session()->getFlashdata('success'); ?>
+<!-- Alert untuk pesan sukses atau error -->
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-6 shadow-sm" role="alert">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <div>
+                <p class="font-bold">Sukses!</p>
+                <p><?= session()->getFlashdata('success'); ?></p>
+            </div>
         </div>
-    <?php endif; ?>
-    <?php if (session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger">
-            <?= session()->getFlashdata('error'); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg mb-6 shadow-sm" role="alert">
+        <div class="flex items-center">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            <div>
+                <p class="font-bold">Error!</p>
+                <p><?= session()->getFlashdata('error'); ?></p>
+            </div>
         </div>
-    <?php endif; ?>
+    </div>
+<?php endif; ?>
 
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden mb-6">
-        <div class="p-4 bg-gray-50 border-b border-gray-200">
-            <h2 class="text-lg font-semibold text-gray-700">Filter Kegiatan</h2>
-        </div>
-        <div class="p-4">
-            <form action="<?= base_url('admin/kegiatan'); ?>" method="get" class="flex flex-wrap gap-3 items-center">
-                <input type="text" name="search" placeholder="Cari kegiatan..."
-                    value="<?= esc($search ?? ''); ?>"
-                    class="border rounded-lg px-3 py-2 text-sm">
-
-                <select name="kategori" id="kategori-filter" class="border rounded-lg px-3 py-2 text-sm">
-                    <option value="">Semua Kategori</option>
-                    <?php foreach ($kategoriData as $kategoriName => $subKategoriList): ?>
-                        <option value="<?= esc($kategoriName); ?>" <?= (isset($kategori_filter) && $kategori_filter == $kategoriName) ? 'selected' : ''; ?>>
-                            <?= esc($kategoriName); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-
-                <select name="subkategori" id="subkategori-filter" class="border rounded-lg px-3 py-2 text-sm">
-                    <option value="">Semua Sub Kategori</option>
-                    <?php
-                    // Populate subcategories if a category is already selected
-                    if (isset($kategori_filter) && !empty($kategori_filter) && isset($kategoriData[$kategori_filter])) {
-                        foreach ($kategoriData[$kategori_filter] as $subKategoriItem) {
-                            echo '<option value="' . esc($subKategoriItem) . '" ' . ((isset($subkategori_filter) && $subkategori_filter == $subKategoriItem) ? 'selected' : '') . '>' . esc($subKategoriItem) . '</option>';
-                        }
-                    }
-                    ?>
-                </select>
-
-                <button type="submit" class="btn-secondary">Filter</button>
+<!-- Container utama -->
+<div class="bg-white shadow-lg rounded-xl overflow-hidden">
+    <!-- Header Card dengan Search -->
+    <div class="px-4 py-5 sm:px-6 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-700">Daftar Kegiatan</h2>
+                <p class="text-sm text-gray-500">Total: <?= count($kegiatan) ?> kegiatan</p>
+            </div>
+            <form action="<?= base_url('admin/kegiatan'); ?>" method="get" class="flex items-center gap-2">
+                <input type="text" name="search" placeholder="Cari..." value="<?= esc($search); ?>" class="text-sm px-3 py-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <button type="submit" class="px-3 py-2 bg-gray-600 text-white rounded-md shadow hover:bg-gray-700 transition-all duration-200">
+                    <i class="fas fa-search"></i>
+                </button>
             </form>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const kategoriFilter = document.getElementById('kategori-filter');
-            const subkategoriFilter = document.getElementById('subkategori-filter');
-            const kategoriData = <?= json_encode($kategoriData); ?>;
-
-            function updateSubkategoriOptions() {
-                const selectedKategori = kategoriFilter.value;
-                subkategoriFilter.innerHTML = '<option value="">Semua Sub Kategori</option>'; // Reset subkategori options
-
-                if (selectedKategori && kategoriData[selectedKategori]) {
-                    kategoriData[selectedKategori].forEach(function(sub) {
-                        const option = document.createElement('option');
-                        option.value = sub;
-                        option.textContent = sub;
-                        // Preserve selected subkategori if it matches
-                        if ('<?= esc($subkategori_filter ?? ''); ?>' === sub) {
-                            option.selected = true;
-                        }
-                        subkategoriFilter.appendChild(option);
-                    });
-                }
-            }
-
-            kategoriFilter.addEventListener('change', updateSubkategoriOptions);
-
-            // Initial update in case a category was pre-selected on page load
-            updateSubkategoriOptions();
-        });
-    </script>
-
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-        <div class="p-4 bg-gray-50 border-b border-gray-200">
-            <h2 class="text-lg font-semibold text-gray-700">Daftar Kegiatan</h2>
-        </div>
-        <div class="p-4 overflow-x-auto">
-            <table class="w-full text-left table-auto">
-                <thead>
-                    <tr class="bg-gray-100 border-b border-gray-200">
-                        <th class="py-3 px-4 font-semibold text-gray-600">No</th>
-                        <th class="py-3 px-4 font-semibold text-gray-600">Judul</th>
-                        <th class="py-3 px-4 font-semibold text-gray-600">Kategori</th>
-                        <th class="py-3 px-4 font-semibold text-gray-600">Sub Kategori</th>
-                        <th class="py-3 px-4 font-semibold text-gray-600">Tanggal</th>
-                        <th class="py-3 px-4 font-semibold text-gray-600">Aksi</th>
+    <!-- Tabel Desktop -->
+    <div class="hidden lg:block">
+        <div class="overflow-x-auto">
+            <table class="w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sub Kategori</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php if (!empty($kegiatan)) : ?>
-                        <?php $i = 1 + (10 * ($pager->getCurrentPage() - 1)); ?>
-                        <?php foreach ($kegiatan as $item) : ?>
-                            <tr class="border-b border-gray-200 hover:bg-gray-50">
-                                <td class="py-3 px-4 text-sm text-gray-700"><?= $i++; ?></td>
-                                <td class="py-3 px-4 text-sm text-gray-700"><?= esc($item['judul']); ?></td>
-                                <td class="py-3 px-4 text-sm text-gray-700"><?= esc($item['kategori'] ?? 'N/A'); ?></td>
-                                <td class="py-3 px-4 text-sm text-gray-700"><?= esc($item['sub_kategori'] ?? 'N/A'); ?></td>
-                                <td class="py-3 px-4 text-sm text-gray-700"><?= esc(date('d M Y', strtotime($item['created_at']))); ?></td>
-                                <td class="py-3 px-4 text-sm text-gray-700 flex items-center space-x-2">
-                                    <a href="<?= base_url('admin/kegiatan/show/' . $item['id']); ?>" class="text-green-600 hover:text-green-800">Lihat</a>
-                                    <a href="<?= base_url('admin/kegiatan/edit/' . $item['id']); ?>" class="text-blue-600 hover:text-blue-800">Edit</a>
-                                    <form action="<?= base_url('admin/kegiatan/delete/' . $item['id']); ?>" method="post"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?');">
-                                        <?= csrf_field(); ?>
-                                        <button type="submit" class="text-red-600 hover:text-red-800">Hapus</button>
-                                    </form>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <?php $i = 1 + ($pager->getCurrentPage() - 1) * $pager->getPerPage(); ?>
+                    <?php if (empty($kegiatan)): ?>
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">Tidak ada kegiatan yang ditemukan.</td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach ($kegiatan as $keg): ?>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-6 py-4 text-sm text-gray-900">#<?= $i++; ?></td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900"><?= esc($keg['judul']); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-500"><?= esc($keg['kategori']); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-500"><?= esc($keg['sub_kategori']); ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center space-x-2">
+                                        <a href="<?= base_url('admin/kegiatan/show/' . $keg['slug']); ?>" class="text-blue-600 hover:text-blue-800 p-1 rounded transition-colors duration-200" title="Lihat">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="<?= base_url('admin/kegiatan/edit/' . $keg['id']); ?>" class="text-yellow-600 hover:text-yellow-800 p-1 rounded transition-colors duration-200" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="<?= base_url('admin/kegiatan/delete/' . $keg['id']); ?>" method="post" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?');">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="text-red-600 hover:text-red-800 p-1 rounded transition-colors duration-200" title="Hapus">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-                    <?php else : ?>
-                        <tr>
-                            <td colspan="6" class="py-3 px-4 text-center text-gray-500">Tidak ada data kegiatan ditemukan.</td>
-                        </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="mt-6">
+    <!-- Card Mobile -->
+    <div class="lg:hidden p-4 space-y-4">
+        <?php if (empty($kegiatan)): ?>
+            <div class="text-center py-4 text-gray-500">Tidak ada kegiatan yang ditemukan.</div>
+        <?php else: ?>
+            <?php foreach ($kegiatan as $keg): ?>
+                <div class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+                    <div class="mb-2">
+                        <h3 class="text-base font-semibold text-gray-900 leading-tight"> <?= esc($keg['judul']); ?> </h3>
+                        <p class="text-xs text-gray-500 mt-1">Kategori: <?= esc($keg['kategori']); ?> | Sub: <?= esc($keg['sub_kategori']); ?></p>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <a href="<?= base_url('admin/kegiatan/show/' . $keg['slug']); ?>" class="text-blue-600 hover:text-blue-800" title="Lihat">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="<?= base_url('admin/kegiatan/edit/' . $keg['id']); ?>" class="text-yellow-600 hover:text-yellow-800" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form action="<?= base_url('admin/kegiatan/delete/' . $keg['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?');">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center p-4">
         <?= $pager->links('default', 'default_full') ?>
     </div>
 </div>
+
+<!-- Floating Action Button Mobile -->
+<div class="sm:hidden fixed bottom-6 right-6 z-10">
+    <a href="<?= base_url('admin/kegiatan/create') ?>" class="w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-primary-dark transition-all duration-300 hover:scale-110">
+        <i class="fas fa-plus text-xl"></i>
+    </a>
+</div>
+
 <?= $this->endSection(); ?>

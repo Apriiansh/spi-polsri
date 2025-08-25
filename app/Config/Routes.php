@@ -23,7 +23,7 @@ $routes->group('', function ($routes) {
 
     // Halaman Kegiatan & Laporan
     $routes->get('kegiatan', 'PublicKegiatanController::index');
-    $routes->get('kegiatan/(:num)', 'PublicKegiatanController::show/$1');
+    $routes->get('kegiatan/(:any)', 'PublicKegiatanController::show/$1');
 
     $routes->get('laporan/create', 'LaporanController::create');
     $routes->post('laporan/store', 'LaporanController::store');
@@ -51,10 +51,13 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
         $routes->get('/', 'Admin\KegiatanController::index');
         $routes->get('create', 'Admin\KegiatanController::create');
         $routes->post('store', 'Admin\KegiatanController::store');
-        $routes->get('show/(:num)', 'Admin\KegiatanController::show/$1');
+        $routes->get('show/(:segment)', 'Admin\KegiatanController::show/$1');
         $routes->get('edit/(:num)', 'Admin\KegiatanController::edit/$1');
         $routes->post('update/(:num)', 'Admin\KegiatanController::update/$1');
-        $routes->post('delete/(:num)', 'Admin\KegiatanController::delete/$1');
+        $routes->delete('delete/(:num)', 'Admin\KegiatanController::delete/$1');
+
+
+        $routes->post('uploadImage', 'Admin\KegiatanController::uploadImage');
     });
 
     $routes->group('artikel', function ($routes) {
@@ -62,7 +65,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
         $routes->post('update-status/(:num)', 'Admin\ArtikelController::updateStatus/$1');
         $routes->get('show/(:num)', 'Admin\ArtikelController::show/$1');
     });
-    
+
     // Laporan Management Routes
     $routes->get('laporan', 'Admin\LaporanController::index');
     $routes->get('laporan/show/(:num)', 'Admin\LaporanController::show/$1');

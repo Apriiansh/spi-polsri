@@ -7,17 +7,18 @@
     </div>
 
     <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success">
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
             <?= session()->getFlashdata('success'); ?>
         </div>
     <?php endif; ?>
     <?php if (session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger">
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
             <?= session()->getFlashdata('error'); ?>
         </div>
     <?php endif; ?>
 
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+    <!-- Desktop Table -->
+    <div class="hidden lg:block bg-white shadow-lg rounded-xl overflow-hidden">
         <div class="p-4 bg-gray-50 border-b border-gray-200">
             <h2 class="text-lg font-semibold text-gray-700">Daftar Laporan</h2>
         </div>
@@ -55,12 +56,11 @@
                                         <?= esc(ucfirst($item['status_laporan'])); ?>
                                     </span>
                                 </td>
-                                <td class="py-3 px-4 text-sm text-gray-700 flex items-center space-x-2">
-                                    <a href="<?= base_url('admin/laporan/show/' . $item['id']); ?>" class="text-blue-600 hover:text-blue-800">Detail</a>
-                                    <form action="<?= base_url('admin/laporan/delete/' . $item['id']); ?>" method="post"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');">
+                                <td class="py-3 px-4 text-sm text-gray-700 flex items-center space-x-3">
+                                    <a href="<?= base_url('admin/laporan/show/' . $item['id']); ?>" class="text-blue-600 hover:text-blue-800"><i class="fas fa-eye"></i></a>
+                                    <form action="<?= base_url('admin/laporan/delete/' . $item['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');">
                                         <?= csrf_field(); ?>
-                                        <button type="submit" class="text-red-600 hover:text-red-800">Hapus</button>
+                                        <button type="submit" class="text-red-600 hover:text-red-800"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -75,7 +75,43 @@
         </div>
     </div>
 
-    <div class="mt-6">
+    <!-- Mobile Card View -->
+    <div class="grid grid-cols-1 gap-4 lg:hidden">
+        <?php if (!empty($laporan)): ?>
+            <?php $i = 1 + (10 * ($pager->getCurrentPage() - 1)); ?>
+            <?php foreach ($laporan as $item): ?>
+                <div class="bg-white shadow-md rounded-lg p-4 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-base font-semibold text-gray-800">#<?= $i++; ?> <?= esc($item['judul']); ?></h3>
+                        <span class="px-2 py-1 rounded-full text-xs font-semibold 
+                            <?php if ($item['status_laporan'] == 'pending'): ?>
+                                bg-yellow-100 text-yellow-800
+                            <?php elseif ($item['status_laporan'] == 'in_progress'): ?>
+                                bg-blue-100 text-blue-800
+                            <?php elseif ($item['status_laporan'] == 'completed'): ?>
+                                bg-green-100 text-green-800
+                            <?php endif; ?>
+                        ">
+                            <?= esc(ucfirst($item['status_laporan'])); ?>
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-600"><span class="font-medium">Kategori:</span> <?= esc($item['kategori_laporan']); ?></p>
+                    <p class="text-sm text-gray-600"><span class="font-medium">Tanggal:</span> <?= esc(date('d M Y', strtotime($item['tgl_kejadian']))); ?></p>
+                    <div class="flex space-x-3 pt-2">
+                        <a href="<?= base_url('admin/laporan/show/' . $item['id']); ?>" class="text-blue-600 hover:text-blue-800"><i class="fas fa-eye"></i></a>
+                        <form action="<?= base_url('admin/laporan/delete/' . $item['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');">
+                            <?= csrf_field(); ?>
+                            <button type="submit" class="text-red-600 hover:text-red-800"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="text-center text-gray-500">Tidak ada laporan yang ditemukan.</div>
+        <?php endif; ?>
+    </div>
+
+    <div class="flex justify-center py-6">
         <?= $pager->links('default', 'default_full') ?>
     </div>
 </div>

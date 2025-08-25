@@ -14,6 +14,10 @@ class PublicKegiatanController extends BaseController
         $this->kegiatanModel = new KegiatanModel();
     }
 
+    /**
+     * Data dummy kategori dan subkategori.
+     * Dalam aplikasi nyata, data ini biasanya diambil dari database.
+     */
     private function getKategoriData()
     {
         return [
@@ -22,6 +26,9 @@ class PublicKegiatanController extends BaseController
         ];
     }
 
+    /**
+     * Menampilkan daftar kegiatan dengan fitur pencarian dan filter.
+     */
     public function index()
     {
         $search = $this->request->getVar('search');
@@ -55,12 +62,17 @@ class PublicKegiatanController extends BaseController
         return view('publics/kegiatan/index', $data);
     }
 
-    public function show($id)
+    /**
+     * Menampilkan detail kegiatan berdasarkan slug.
+     *
+     * @param string $slug Slug dari kegiatan
+     */
+    public function show($slug)
     {
-        $kegiatan = $this->kegiatanModel->find($id);
+        $kegiatan = $this->kegiatanModel->where('slug', $slug)->first();
 
         if (!$kegiatan) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Kegiatan tidak ditemukan: ' . $id);
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Kegiatan tidak ditemukan: ' . $slug);
         }
 
         $data = [

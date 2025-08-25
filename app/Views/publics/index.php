@@ -1,169 +1,204 @@
 <?= $this->extend('layout/main') ?>
 <?= $this->section('content') ?>
-<!-- ====== PAGE WRAPPER ====== -->
-<div class="min-h-screen">
-    <!-- ========= HERO / CAROUSEL ========= -->
-    <section id="hero-slider" class="relative w-full overflow-hidden mb-12 rounded-md">
-        <div class="relative h-[560px]">
-            <!-- overlay gradasi modern -->
-            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/40 via-slate-900/20 to-transparent z-10"></div>
-            <div class="flex transition-all duration-600 ease-in-out" id="slider-container">
-                <!-- slide 1 -->
-                <div class="min-w-full h-[560px] bg-cover bg-center" style="background-image: url('<?= base_url('images/image1.jpg') ?>');">
-                    <div class="flex items-center justify-center h-full text-white relative z-20">
-                        
-                    </div>
+
+<!-- Full width container tanpa padding -->
+<div class="w-full">
+    <!-- ========= HERO SECTION ========= -->
+    <section id="hero-slider" class="relative w-full overflow-hidden">
+        <div class="relative h-[65vh] min-h-[500px] max-h-[700px]">
+            <!-- Clean overlay -->
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-800/50 to-slate-700/30 z-10"></div>
+
+            <!-- Slider container -->
+            <div class="flex transition-all duration-1000 ease-in-out h-full" id="slider-container">
+                <!-- Slide 1 -->
+                <div class="min-w-full h-540 bg-cover bg-center relative" style="background-image: url('<?= base_url('images/image1.jpg') ?>');">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
                 </div>
-                <!-- slide 2 -->
-                <div class="min-w-full h-[560px] bg-cover bg-center" style="background-image: url('<?= base_url('images/image2.jpg') ?>');">
-                    <div class="flex items-center justify-center h-full text-white relative z-20">
-                        
-                    </div>
+                <!-- Slide 2 -->
+                <div class="min-w-full h-540 bg-cover bg-center relative" style="background-image: url('<?= base_url('images/image2.jpg') ?>');">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
                 </div>
-                <!-- slide 3 -->
-                <div class="min-w-full h-[560px] bg-cover bg-center" style="background-image: url('<?= base_url('images/image3.jpg') ?>');">
-                    <div class="flex items-center justify-center h-full text-white relative z-20">
-                       
-                    </div>
+                <!-- Slide 3 -->
+                <div class="min-w-full h-540 bg-cover bg-center relative" style="background-image: url('<?= base_url('images/image3.jpg') ?>');">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
                 </div>
             </div>
-            <!-- dots -->
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-30" id="hero-dots">
-                <button class="w-2.5 h-2.5 rounded-sm bg-white/50 hover:bg-white transition" data-slide="0"></button>
-                <button class="w-2.5 h-2.5 rounded-sm bg-white/50 hover:bg-white transition" data-slide="1"></button>
-                <button class="w-2.5 h-2.5 rounded-sm bg-white/50 hover:bg-white transition" data-slide="2"></button>
+
+            <!-- Hero content overlay -->
+            <div class="absolute inset-0 flex items-center justify-center z-20">
+                <div class="text-center text-white px-6 max-w-4xl">
+                    <div class="inline-block p-4 bg-white/15 backdrop-blur-md rounded-xl mb-8 hero-icon">
+                        <i class="fas fa-shield-alt text-4xl text-white"></i>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 hero-title">
+                        Satuan Pengawas Internal
+                    </h1>
+                    <p class="text-xl md:text-2xl text-blue-100 mb-8 font-light leading-relaxed hero-subtitle">
+                        Politeknik Negeri Sriwijaya
+                    </p>
+                    <div class="w-20 h-1 bg-white/50 mx-auto rounded-full hero-line"></div>
+                </div>
+            </div>
+
+            <!-- Minimalist dots -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-30" id="hero-dots">
+                <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="0"></button>
+                <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="1"></button>
+                <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="2"></button>
             </div>
         </div>
     </section>
 
-    <!-- ========= LOGO STRIP ========= -->
-    <section class="mb-12">
-        <div class="bg-white rounded-md p-8">
-            <div class="flex flex-wrap justify-center items-center gap-10">
-                <img src="<?= base_url('images/kemenristek.png') ?>" alt="Kemenristek" class="h-16 w-auto object-contain opacity-70 hover:opacity-100 transition" loading="lazy">
-                <img src="<?= base_url('images/polsri.png') ?>" alt="POLSRI" class="h-16 w-auto object-contain opacity-70 hover:opacity-100 transition" loading="lazy">
-                <img src="<?= base_url('images/blu.png') ?>" alt="BLU" class="h-16 w-auto object-contain opacity-70 hover:opacity-100 transition" loading="lazy">
-                <img src="<?= base_url('images/diktiristek.png') ?>" alt="Ristek" class="h-16 w-auto object-contain opacity-70 hover:opacity-100 transition" loading="lazy">
+    <!-- ========= LOGO PARTNERSHIP ========= -->
+    <section class="bg-gradient-to-br from-blue-50 via-sky-100 to-cyan-50 py-16">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center items-center gap-12 opacity-80">
+                <img src="<?= base_url('images/icons/kemenristek.png') ?>" alt="Kemenristek" class="h-24 w-auto object-contain transition-transform duration-500 hover:opacity-100 hover:scale-110">
+                <img src="<?= base_url('images/icons/polsri.png') ?>" alt="POLSRI" class="h-24 w-auto object-contain transition-transform duration-500 hover:opacity-100 hover:scale-110">
+                <img src="<?= base_url('images/icons/blu.png') ?>" alt="BLU" class="h-24 w-auto object-contain transition-transform duration-500 hover:opacity-100 hover:scale-110">
+                <img src="<?= base_url('images/icons/diktisaintek.png') ?>" alt="Ristek" class="h-24 w-auto object-contain transition-transform duration-500 hover:opacity-100 hover:scale-110">
             </div>
         </div>
     </section>
 
+    <!-- QUOTE -->
     <!-- ========= QUOTE ========= -->
-    <section class="mb-12">
-        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-md p-10">
-            <div class="text-center">
-                <div class="text-6xl text-blue-200 mb-6">"</div>
-                <blockquote class="text-xl md:text-2xl text-white font-medium leading-relaxed mb-4">
-                    Pengawasan Internal adalah kunci untuk memastikan transparansi dan akuntabilitas dalam setiap aspek organisasi.
-                </blockquote>
-                <cite class="block text-blue-100 text-lg font-semibold">— Kepala SPI POLSRI</cite>
+    <section class="bg-gradient-to-tr from-blue-200 via-sky-300 to-cyan-150 py-24 lg:py-32 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 border-2 bg-gradient-to-br from-blue-60 via-sky-100 to-cyan-50 rounded-3xl z-0 pointer-events-none"></div>
+
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-0 right-0 w-72 h-72 bg-blue-300/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-indigo-300/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-12 lg:gap-20">
+
+                <div class="text-center lg:text-left max-w-2xl">
+                    <div class="inline-block p-3 bg-blue-100 backdrop-blur-sm rounded-xl mb-8">
+                        <i class="fas fa-quote-left text-2xl text-blue-500"></i>
+                    </div>
+
+                    <blockquote class="text-2xl lg:text-3xl text-slate-800 font-light leading-relaxed mb-8">
+                        Pengawasan Internal adalah kunci untuk memastikan transparansi dan akuntabilitas dalam setiap aspek organisasi.
+                    </blockquote>
+
+                    <div class="flex items-center justify-center lg:justify-start">
+                        <div class="w-8 h-0.5 bg-blue-300 mr-4"></div>
+                        <cite class="text-slate-600 font-medium">Kepala SPI POLSRI</cite>
+                        <div class="w-8 h-0.5 bg-blue-300 ml-4"></div>
+                    </div>
+                </div>
+
+                <div class="w-52 h-72 sm:w-64 sm:h-80 border-2 border-blue-300 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <img src="<?= base_url('images/kepala-spi.jpg') ?>" alt="Foto Kepala SPI" class="w-full h-full object-cover">
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- ========= KEGIATAN ========= -->
-    <section id="kegiatan-section" class="mb-12">
-        <div class="bg-white rounded-md overflow-hidden">
-            <div class="p-8 border-b border-gray-100">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight mb-2">Kegiatan</h2>
-                <p class="text-slate-500">Sorotan galeri dan daftar kegiatan terbaru</p>
+    <!-- ========= KEGIATAN SECTION ========= -->
+    <section class="bg-gradient-to-br from-indigo-900 via-blue-800 to-slate-800 py-28">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-block p-3 bg-white/10 rounded-xl mb-6">
+                    <i class="fas fa-calendar-alt text-2xl text-blue-300"></i>
+                </div>
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Kegiatan</h2>
+                <div class="w-12 h-1 bg-blue-300 mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
-                <!-- ========== Kolom Kiri: Galeri Slider ========== -->
-                <div>
-                    <h3 class="text-xl font-semibold text-slate-800 mb-4">Galeri Kegiatan</h3>
-                    <div class="relative overflow-hidden rounded-xl group shadow-sm">
-                        <div class="flex transition-transform duration-500 ease-out" id="kegiatan-container">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Featured Gallery -->
+                <div class="space-y-8">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg group">
+                        <div class="flex transition-transform duration-700 ease-out" id="kegiatan-container">
                             <?php if (!empty($kegiatan_terbaru)) : ?>
                                 <?php foreach ($kegiatan_terbaru as $kegiatan) : ?>
                                     <?php
-                                    $konten = json_decode($kegiatan['konten'], true);
+                                    $doc = new DOMDocument();
+                                    @$doc->loadHTML($kegiatan['konten']);
+                                    $tags = $doc->getElementsByTagName('img');
                                     $imageUrl = '';
-                                    if (json_last_error() === JSON_ERROR_NONE && is_array($konten)) {
-                                        foreach ($konten as $block) {
-                                            if (($block['type'] ?? '') === 'image' && !empty($block['content'])) {
-                                                $imageUrl = $block['content'];
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if (empty($imageUrl)) {
-                                        $imageUrl = 'https://placehold.co/1200x700/E3F2FD/1976D2?text=No+Image';
+
+                                    if ($tags->length > 0) {
+                                        $imageUrl = $tags->item(0)->getAttribute('src');
+                                    } else {
+                                        $imageUrl = 'https://placehold.co/800x500/E3F2FD/1976D2?text=Kegiatan+SPI+POLSRI';
                                     }
                                     ?>
                                     <div class="min-w-full relative">
-                                        <img src="<?= esc($imageUrl); ?>" alt="<?= esc($kegiatan['judul']); ?>" class="w-full h-80 md:h-[420px] object-cover">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                                        <div class="absolute bottom-5 left-5 right-5 text-white">
-                                            <a href="<?= base_url('kegiatan/' . $kegiatan['id']); ?>" class="text-xl md:text-2xl font-bold leading-snug hover:text-blue-200 transition line-clamp-2"><?= esc($kegiatan['judul']); ?></a>
-                                            <p class="text-sm mt-1 text-blue-100"><?= esc(date('d F Y', strtotime($kegiatan['created_at']))); ?></p>
+                                        <img src="<?= esc($imageUrl); ?>" alt="<?= esc($kegiatan['judul']); ?>" class="w-full h-80 lg:h-96 object-cover">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+                                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                                            <a href="<?= base_url('kegiatan/' . $kegiatan['slug']); ?>" class="block">
+                                                <h4 class="text-xl lg:text-2xl font-semibold leading-tight mb-2 line-clamp-2">
+                                                    <?= esc($kegiatan['judul']); ?>
+                                                </h4>
+                                                <p class="text-slate-300 text-sm">
+                                                    <?= esc(date('d F Y', strtotime($kegiatan['created_at']))); ?>
+                                                </p>
+                                            </a>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
                             <?php else : ?>
-                                <img src="https://placehold.co/1200x700/E3F2FD/1976D2?text=No+Kegiatan+Found" alt="No Kegiatan Found" class="w-full h-80 md:h-[420px] object-cover">
+                                <div class="min-w-full relative">
+                                    <img src="https://placehold.co/800x500/E3F2FD/1976D2?text=No+Activities+Yet" alt="No Activities" class="w-full h-80 lg:h-96 object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+                                    <div class="absolute bottom-6 left-6 right-6 text-white">
+                                        <h4 class="text-xl lg:text-2xl font-semibold leading-tight mb-2">Belum Ada Kegiatan</h4>
+                                        <p class="text-slate-300 text-sm">Kembali lagi nanti untuk melihat pembaruan.</p>
+                                    </div>
+                                </div>
                             <?php endif; ?>
                         </div>
-                        <!-- tombol navigasi -->
-                        <button id="prevKegiatan" aria-label="Sebelumnya" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/90 hover:bg-white rounded-sm p-2 shadow-sm">
-                            <i class="fas fa-chevron-left text-slate-800"></i>
+
+                        <!-- Navigation buttons -->
+                        <button id="prevKegiatan" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-md transition-all duration-300">
+                            <i class="fas fa-chevron-left text-slate-600"></i>
                         </button>
-                        <button id="nextKegiatan" aria-label="Berikutnya" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/90 hover:bg-white rounded-sm p-2 shadow-sm">
-                            <i class="fas fa-chevron-right text-slate-800"></i>
+                        <button id="nextKegiatan" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-md transition-all duration-300">
+                            <i class="fas fa-chevron-right text-slate-600"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- ========== Kolom Kanan: Daftar Kegiatan ========== -->
-                <div>
-                    <h3 class="text-xl font-semibold text-slate-800 mb-4">Kegiatan Terbaru</h3>
-                    <div class="space-y-4">
+                <!-- Activity List -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-semibold text-white">Kegiatan Terbaru</h3>
+                    <div class="space-y-3">
                         <?php if (!empty($kegiatan_terbaru)) : ?>
-                            <?php foreach ($kegiatan_terbaru as $index => $kegiatan) : ?>
-                                <?php
-                                // ambil thumbnail pertama
-                                $konten = json_decode($kegiatan['konten'], true);
-                                $thumb = '';
-                                if (json_last_error() === JSON_ERROR_NONE && is_array($konten)) {
-                                    foreach ($konten as $block) {
-                                        if (($block['type'] ?? '') === 'image' && !empty($block['content'])) {
-                                            $thumb = $block['content'];
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (empty($thumb)) {
-                                    $thumb = 'https://placehold.co/400x240/E3F2FD/1976D2?text=No+Image';
-                                }
-                                ?>
-                                <a href="<?= base_url('kegiatan/' . $kegiatan['id']); ?>" class="kegiatan-item group flex bg-slate-50 hover:bg-slate-100 rounded-xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
-                                    <img src="<?= esc($thumb) ?>" alt="<?= esc($kegiatan['judul']) ?>" class="w-32 h-24 object-cover">
-                                    <div class="p-4 flex-1">
-                                        <h4 class="text-base md:text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition line-clamp-2">
+                            <?php foreach (array_slice($kegiatan_terbaru, 0, 5) as $kegiatan) : ?>
+                                <a href="<?= base_url('kegiatan/' . $kegiatan['id']); ?>" class="group flex bg-white/5 rounded-xl p-4 shadow-sm border border-white/5 hover:shadow-md hover:border-blue-500 transition-all duration-300">
+                                    <div class="flex-1 min-w-0">
+                                        <h5 class="font-semibold text-white group-hover:text-blue-300 transition-colors duration-300 line-clamp-2">
                                             <?= esc($kegiatan['judul']); ?>
-                                        </h4>
-                                        <div class="flex items-center text-xs md:text-sm text-slate-500 mt-1">
-                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                            </svg>
+                                        </h5>
+                                        <p class="text-sm text-slate-300 mt-1">
                                             <?= esc(date('d F Y', strtotime($kegiatan['created_at']))); ?>
-                                        </div>
+                                        </p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <i class="fas fa-arrow-right text-slate-400 group-hover:text-blue-300 transition-colors duration-300"></i>
                                     </div>
                                 </a>
                             <?php endforeach; ?>
                         <?php else : ?>
-                            <div class="p-6 bg-slate-50 rounded-xl text-center shadow-sm">
-                                <p class="text-slate-600">Belum ada kegiatan terbaru.</p>
+                            <div class="bg-white/5 rounded-xl p-8 text-center border border-white/5">
+                                <i class="fas fa-calendar-times text-3xl text-slate-300 mb-4"></i>
+                                <p class="text-slate-300">Belum ada kegiatan tersedia</p>
                             </div>
                         <?php endif; ?>
                     </div>
-                    <div class="mt-6">
-                        <a href="/kegiatan" class="inline-flex items-center px-5 py-3 rounded-sm bg-blue-600 text-white font-medium hover:bg-blue-700 transition shadow-md hover:shadow-lg">
+
+                    <div class="pt-4">
+                        <a href="/kegiatan" class="inline-flex items-center justify-center w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-md">
                             <span class="mr-2">Lihat Semua Kegiatan</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
+                            <i class="fas fa-arrow-right text-sm"></i>
                         </a>
                     </div>
                 </div>
@@ -171,111 +206,158 @@
         </div>
     </section>
 
-    <!-- ========= DOKUMEN ========= -->
-    <section id="dokumen-section" class="mb-12">
-        <div class="bg-white rounded-md verflow-hidden">
-            <div class="p-8 border-b border-gray-100">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2">Dokumen & Publikasi</h2>
-                <p class="text-slate-500">Akses dokumen resmi dan publikasi SPI POLSRI</p>
+    <!-- ========= DOKUMEN SECTION ========= -->
+    <section class="bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 py-28">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-block p-3 bg-blue-600/10 rounded-xl mb-6">
+                    <i class="fas fa-file-alt text-2xl text-blue-600"></i>
+                </div>
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">Dokumen & Publikasi</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Akses dokumen resmi dan publikasi SPI POLSRI</p>
+                <div class="w-12 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
             </div>
 
-            <div class="p-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Publik -->
-                    <div class="dokumen-card group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-green-100">
-                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-sm text-xs font-semibold">Publik</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-green-600 transition">Laporan Tahunan 2024</h4>
-                            <p class="text-slate-600 mb-5 leading-relaxed">Ringkasan komprehensif laporan tahunan SPI untuk tahun 2024 dengan analisis mendalam.</p>
-                            <a href="#" class="inline-flex items-center text-green-600 font-medium hover:underline">
-                                <span class="mr-2">Unduh Dokumen</span>
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                            </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Public Document -->
+                <div class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-blue-100/80 rounded-xl">
+                            <i class="fas fa-check-circle text-xl text-blue-600"></i>
                         </div>
+                        <span class="px-3 py-1 bg-blue-100/80 text-blue-700 rounded-lg text-xs font-medium">Publik</span>
                     </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
+                        Laporan Tahunan 2024
+                    </h3>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                        Ringkasan komprehensif laporan tahunan SPI untuk tahun 2024 dengan analisis mendalam.
+                    </p>
+                    <a href="#" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors">
+                        <i class="fas fa-download text-sm mr-2"></i>
+                        <span>Unduh Dokumen</span>
+                    </a>
+                </div>
 
-                    <!-- Terkunci -->
-                    <div class="dokumen-card group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-amber-100">
-                                    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                    </svg>
-                                </div>
-                                <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-sm text-xs font-semibold">Terkunci</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-slate-800 mb-2">Hasil Audit Keuangan Internal</h4>
-                            <p class="text-slate-600 mb-5 leading-relaxed">Hanya dapat diakses oleh pengguna dengan izin khusus.</p>
-                            <button class="inline-flex items-center text-amber-700 font-medium cursor-not-allowed opacity-70">
-                                <span class="mr-2">Akses Terbatas</span>
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                </svg>
-                            </button>
+                <!-- Restricted Document -->
+                <div class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-red-100/80 rounded-xl">
+                            <i class="fas fa-lock text-xl text-red-600"></i>
                         </div>
+                        <span class="px-3 py-1 bg-red-100/80 text-red-700 rounded-lg text-xs font-medium">Terbatas</span>
                     </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-red-600 transition-colors">
+                        Hasil Audit Internal
+                    </h3>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                        Dokumen khusus yang hanya dapat diakses oleh pengguna dengan otorisasi.
+                    </p>
+                    <button class="inline-flex items-center text-red-600 font-medium cursor-not-allowed opacity-75">
+                        <i class="fas fa-lock text-sm mr-2"></i>
+                        <span>Akses Terbatas</span>
+                    </button>
+                </div>
 
-                    <!-- SOP -->
-                    <div class="dokumen-card group bg-white rounded-xl overflow-hidden transition-all duration-300 border border-gray-100">
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-blue-100">
-                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                </div>
-                                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-sm text-xs font-semibold">Publik</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition">Panduan SOP Audit</h4>
-                            <p class="text-slate-600 mb-5 leading-relaxed">Standard Operating Procedure untuk proses audit internal dan panduan pelaksanaan.</p>
-                            <a href="#" class="inline-flex items-center text-blue-600 font-medium hover:underline">
-                                <span class="mr-2">Unduh Panduan</span>
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                            </a>
+                <!-- SOP Document -->
+                <div class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-cyan-100/80 rounded-xl">
+                            <i class="fas fa-clipboard-list text-xl text-cyan-600"></i>
                         </div>
+                        <span class="px-3 py-1 bg-cyan-100/80 text-cyan-700 rounded-lg text-xs font-medium">Publik</span>
                     </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-cyan-600 transition-colors">
+                        Panduan SOP Audit
+                    </h3>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                        Standard Operating Procedure untuk proses audit internal dan panduan pelaksanaan.
+                    </p>
+                    <a href="#" class="inline-flex items-center text-cyan-600 font-medium hover:text-cyan-700 transition-colors">
+                        <i class="fas fa-download text-sm mr-2"></i>
+                        <span>Unduh Panduan</span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========= UPG ========= -->
-    <section id="upg-section" class="mb-12">
-        <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-md overflow-hidden">
-            <div class="p-10 text-center">
-                <div class="p-4 bg-white/10 rounded-sm w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-                    </svg>
+    <!-- ========= UPG SECTION ========= -->
+    <section class="bg-gradient-to-br from-indigo-900 via-blue-800 to-slate-800 py-28 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                <!-- Content -->
+                <div class="flex-1 text-center lg:text-left">
+                    <div class="inline-flex items-center mb-8">
+                        <div class="p-4 bg-white/10 backdrop-blur-sm rounded-xl mr-4">
+                            <i class="fas fa-exclamation-triangle text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-2">Unit Pengawasan Gratifikasi</h2>
+                            <div class="w-16 h-1 bg-blue-300 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-lg text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Laporkan setiap pelanggaran atau gratifikasi yang Anda ketahui. Mari bersama-sama menjaga integritas dan menciptakan lingkungan kerja yang bersih.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-6 text-blue-100 text-sm mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-secret text-green-300 mr-2"></i>
+                            Laporan Anonim
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-shield-alt text-yellow-300 mr-2"></i>
+                            Terjamin Kerahasiaan
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-bolt text-blue-300 mr-2"></i>
+                            Proses Cepat
+                        </div>
+                    </div>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Unit Pengawasan Gratifikasi</h2>
-                <p class="text-lg md:text-xl text-red-100 mb-8 leading-relaxed max-w-3xl mx-auto">Laporkan setiap pelanggaran atau gratifikasi yang Anda ketahui. Mari bersama-sama menjaga integritas dan menciptakan lingkungan kerja yang bersih.</p>
-                <a href="/laporan" class="inline-flex items-center bg-white text-red-600 px-7 py-3 rounded-sm text-base md:text-lg font-bold hover:bg-red-50 transition shadow-lg hover:shadow-xl">
-                    <span class="mr-3">Buat Laporan</span>
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
+
+                <!-- Action Card -->
+                <div class="flex-shrink-0">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 text-center min-w-[300px]">
+                        <div class="inline-block p-4 bg-white/10 rounded-full mb-6">
+                            <i class="fas fa-edit text-3xl text-blue-200"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Buat Laporan Sekarang</h3>
+                        <p class="text-blue-100 mb-8 text-sm">Sistem pelaporan yang aman dan terpercaya tersedia 24/7</p>
+
+                        <a href="/laporan" class="inline-flex items-center justify-center w-full bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl group">
+                            <i class="fas fa-plus mr-3 group-hover:scale-110 transition-transform"></i>
+                            <span>Buat Laporan</span>
+                        </a>
+
+                        <div class="mt-6 flex justify-center space-x-6 text-xs text-blue-200">
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                                24/7 Available
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></div>
+                                Fast Response
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 </div>
 
-<!-- ========= STYLES ========= -->
+<!-- ========= MINIMALIST STYLES ========= -->
 <style>
-    /* Animations */
+    /* Smooth animations */
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -288,118 +370,232 @@
         }
     }
 
-    .animate-fade-in-up {
-        animation: fadeInUp 0.8s ease-out;
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-8px);
+        }
     }
 
+    /* Hero animations */
+    .hero-icon {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-title {
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-subtitle {
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .hero-line {
+        animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    /* Line clamp */
     .line-clamp-2 {
         display: -webkit-box;
-        line-clamp: 2;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
 
-    /* Smooth transitions untuk elemen interaktif */
-    .dokumen-card,
-    .kegiatan-item {
-        transition: all 0.3s ease;
+    /* Smooth transitions */
+    * {
+        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
     }
 
-    .dokumen-card:hover,
-    .kegiatan-item:hover {
-        transform: translateY(-4px);
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
     }
 </style>
 
-<!-- ========= SCRIPTS ========= -->
+<!-- ========= ENHANCED SCRIPTS ========= -->
+<script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        /* ==== HERO SLIDER ==== */
-        const heroSlider = document.getElementById('slider-container');
-        const heroSlides = heroSlider.children.length;
-        const heroDots = document.querySelectorAll('#hero-dots button');
-        let heroCurrentSlide = 0;
-        let heroInterval;
+        // Hero Slider
+        class HeroSlider {
+            constructor() {
+                this.slider = document.getElementById('slider-container');
+                this.slides = this.slider?.children.length || 0;
+                this.dots = document.querySelectorAll('#hero-dots button');
+                this.currentSlide = 0;
 
-        function updateHeroDots() {
-            heroDots.forEach((dot, index) => {
-                dot.classList.toggle('bg-white', index === heroCurrentSlide);
-                dot.classList.toggle('bg-white/50', index !== heroCurrentSlide);
-                dot.classList.toggle('w-3', index === heroCurrentSlide);
-                dot.classList.toggle('w-2.5', index !== heroCurrentSlide);
-            });
+                if (this.slides > 0) {
+                    this.init();
+                }
+            }
+
+            init() {
+                this.updateDots();
+                this.startAutoSlide();
+                this.addEventListeners();
+            }
+
+            updateDots() {
+                this.dots.forEach((dot, index) => {
+                    const isActive = index === this.currentSlide;
+                    dot.classList.toggle('bg-white', isActive);
+                    dot.classList.toggle('bg-white/50', !isActive);
+                    dot.classList.toggle('w-6', isActive);
+                    dot.classList.toggle('w-2', !isActive);
+                });
+            }
+
+            slideToIndex(targetSlide) {
+                this.currentSlide = (targetSlide + this.slides) % this.slides;
+                this.slider.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+                this.updateDots();
+            }
+
+            addEventListeners() {
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        this.slideToIndex(index);
+                    });
+                });
+            }
+
+            startAutoSlide() {
+                if (this.slides <= 1) return;
+                setInterval(() => {
+                    this.slideToIndex(this.currentSlide + 1);
+                }, 5000);
+            }
         }
 
-        function slideHero(targetSlide = null) {
-            heroCurrentSlide = (targetSlide !== null) ? targetSlide : (heroCurrentSlide + 1) % heroSlides;
-            heroSlider.style.transform = `translateX(-${heroCurrentSlide * 100}%)`;
-            updateHeroDots();
+        // Activity Slider
+        class ActivitySlider {
+            constructor() {
+                this.slider = document.getElementById('kegiatan-container');
+                this.slides = this.slider?.children.length || 0;
+                this.currentSlide = 0;
+                this.prevBtn = document.getElementById('prevKegiatan');
+                this.nextBtn = document.getElementById('nextKegiatan');
+
+                if (this.slides > 1) {
+                    this.init();
+                }
+            }
+
+            init() {
+                this.addEventListeners();
+                this.startAutoSlide();
+            }
+
+            slideToIndex(targetSlide) {
+                this.currentSlide = (targetSlide + this.slides) % this.slides;
+                this.slider.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+            }
+
+            addEventListeners() {
+                this.prevBtn?.addEventListener('click', () => {
+                    this.slideToIndex(this.currentSlide - 1);
+                });
+
+                this.nextBtn?.addEventListener('click', () => {
+                    this.slideToIndex(this.currentSlide + 1);
+                });
+            }
+
+            startAutoSlide() {
+                setInterval(() => {
+                    this.slideToIndex(this.currentSlide + 1);
+                }, 7000);
+            }
         }
 
-        function startHeroAutoSlide() {
-            heroInterval = setInterval(() => slideHero(), 6000);
-        }
+        // Smooth scroll enhancements
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('a[href^="#"]')) {
+                e.preventDefault();
+                const target = document.querySelector(e.target.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-        heroDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                clearInterval(heroInterval);
-                slideHero(index);
-                startHeroAutoSlide();
-            });
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
         });
 
-        updateHeroDots();
-        startHeroAutoSlide();
+        // Initialize components
+        new HeroSlider();
+        new ActivitySlider();
 
-        /* ==== KEGIATAN SLIDER (kolom kiri) ==== */
-        const kegiatanSlider = document.getElementById('kegiatan-container');
-        const kegiatanSlides = kegiatanSlider ? kegiatanSlider.children.length : 0;
-        let kegiatanCurrentSlide = 0;
+        // Intersection Observer for animations
+        const observerOptions = {
+            rootMargin: '50px 0px',
+            threshold: 0.1
+        };
 
-        function slideKegiatan(toIndex = null) {
-            if (!kegiatanSlider || kegiatanSlides <= 1) return;
-            if (toIndex !== null) {
-                kegiatanCurrentSlide = (toIndex + kegiatanSlides) % kegiatanSlides;
-            } else {
-                kegiatanCurrentSlide = (kegiatanCurrentSlide + 1) % kegiatanSlides;
-            }
-            kegiatanSlider.style.transform = `translateX(-${kegiatanCurrentSlide * 100}%)`;
-        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-        const prevBtn = document.getElementById('prevKegiatan');
-        const nextBtn = document.getElementById('nextKegiatan');
+        // Observe sections for scroll animations
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
 
-        if (prevBtn && nextBtn) {
-            prevBtn.addEventListener('click', () => slideKegiatan(kegiatanCurrentSlide - 1));
-            nextBtn.addEventListener('click', () => slideKegiatan(kegiatanCurrentSlide + 1));
-        }
-
-        if (kegiatanSlides > 1) setInterval(slideKegiatan, 8000);
-
-        /* ==== Parallax halus untuk hero ==== */
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const heroSection = document.getElementById('hero-slider');
-            if (heroSection) {
-                heroSection.style.transform = `translateY(${scrolled * 0.12}px)`;
-            }
-        }, {
-            passive: true
+        // Add loading states for buttons
+        const buttons = document.querySelectorAll('button, a[href^="/"]');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.disabled && !e.defaultPrevented) {
+                    this.style.opacity = '0.7';
+                    setTimeout(() => {
+                        this.style.opacity = '';
+                    }, 1500);
+                }
+            });
         });
     });
 </script>
 
-<!-- ========= STRUCTURED DATA ========= -->
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "SPI POLSRI",
-        "description": "Satuan Pengawas Internal Politeknik Negeri Sriwijaya",
-        "url": "<?= base_url() ?>",
-        "logo": "<?= base_url('images/polsri.png') ?>",
-        "sameAs": ["https://www.polsri.ac.id"]
-    }
-</script>
 <?= $this->endSection() ?>

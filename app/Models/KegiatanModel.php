@@ -14,6 +14,7 @@ class KegiatanModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'judul',
+        'slug',
         'kategori',
         'sub_kategori',
         'konten'

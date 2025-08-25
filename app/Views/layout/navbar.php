@@ -43,7 +43,7 @@
 
         /* Active link */
         .active {
-            color:rgb(27, 63, 61) !important;
+            color: rgb(27, 63, 61) !important;
             font-weight: 600;
         }
 
@@ -94,7 +94,7 @@
 <body>
     <nav class="sticky top-0 z-50 transition-all duration-300">
         <!-- Bagian Atas -->
-        <div class="bg-gradient-polsri-reverse py-3 lg:py-4">
+        <div class="bg-gradient-to-r from-blue-800 to-blue-600 py-3 lg:py-4">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-10">
                     <!-- Logo -->
@@ -127,14 +127,13 @@
         </div>
 
         <!-- Desktop Menu -->
-        <div class="hidden lg:block bg-gradient-polsri backdrop-blur-md shadow-soft border-b border-gray-300">
+        <div class="hidden lg:block bg-gradient-to-r from-blue-600 to-blue-800 backdrop-blur-md shadow-soft">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-14">
                     <div class="flex items-center space-x-6">
                         <a href="/" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-white hover:text-[#e0f2f1]">Beranda
                             <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-white rounded-full transition-all"></div>
                         </a>
-                        <!-- Dropdown Profil -->
                         <div class="relative group">
                             <button
                                 class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-white hover:text-[#e0f2f1]">
@@ -174,8 +173,9 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="lg:hidden bg-gray-200 border-t border-gray-300 p-4 z-40">
-            <div class="relative w-full mb-4">
+        <div id="mobile-menu"
+            class="lg:hidden absolute top-16 left-0 w-full bg-gray-200 border-t border-gray-300 shadow-md max-h-0 overflow-hidden transition-all duration-300">
+            <div class="relative w-full">
                 <input type="text" id="search-input-mobile" placeholder="Cari..."
                     class="w-full pl-4 pr-10 py-2 rounded-full border border-gray-400 bg-gray-100 text-gray-800 text-sm">
                 <button id="search-button-mobile" aria-label="Cari"

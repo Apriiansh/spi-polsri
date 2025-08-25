@@ -4,17 +4,17 @@
 <div class="container mx-auto max-w-xl p-6 pb-16">
     <div class="bg-white shadow-xl rounded-2xl px-8 py-10">
 
-        <h1 class="text-2xl font-bold text-gray-800 mb-8 text-center">Profil Saya</h1>
+        <h1 class="text-2xl font-bold text-gray-800 mb-8 text-center"><i class="fas fa-user-circle mr-2"></i> Profil Saya</h1>
 
         <?php if (session()->getFlashdata('success')): ?>
             <div class="mb-4 px-4 py-3 rounded bg-green-100 border border-green-300 text-green-800 text-center">
-                <?= session()->getFlashdata('success') ?>
+                <i class="fas fa-check-circle mr-1"></i> <?= session()->getFlashdata('success') ?>
             </div>
         <?php endif; ?>
 
         <?php if (session()->getFlashdata('pw_success')): ?>
             <div class="mb-4 px-4 py-3 rounded bg-green-100 border border-green-300 text-green-800 text-center">
-                <?= session()->getFlashdata('pw_success') ?>
+                <i class="fas fa-lock mr-1"></i> <?= session()->getFlashdata('pw_success') ?>
             </div>
         <?php endif; ?>
 
@@ -26,18 +26,22 @@
                 </div>
                 <div>
                     <div class="font-semibold text-lg text-gray-800"><?= esc($user['username']) ?></div>
-                    <div class="text-slate-500"><?= esc($user['email']) ?></div>
+                    <div class="text-slate-500"><i class="fas fa-envelope mr-1"></i> <?= esc($user['email']) ?></div>
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
-                <button type="button" onclick="toggleEditProfil(true)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition w-full sm:w-auto">Edit Profil</button>
-                <button type="button" onclick="toggleEditPassword(true)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg shadow transition w-full sm:w-auto">Ganti Password</button>
+                <button type="button" onclick="toggleEditProfil(true)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition w-full sm:w-auto">
+                    <i class="fas fa-edit mr-1"></i> Edit Profil
+                </button>
+                <button type="button" onclick="toggleEditPassword(true)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg shadow transition w-full sm:w-auto">
+                    <i class="fas fa-key mr-1"></i> Ganti Password
+                </button>
             </div>
         </div>
 
         <!-- Form Edit Profil (hidden by default) -->
         <div id="profil-edit" style="display: none;">
-            <h2 class="text-lg font-semibold mb-4 text-indigo-700 mt-8">Edit Profil</h2>
+            <h2 class="text-lg font-semibold mb-4 text-indigo-700 mt-8"><i class="fas fa-user-edit mr-1"></i> Edit Profil</h2>
             <form action="<?= site_url('/user/profile/update') ?>" method="post" class="space-y-4">
                 <?= csrf_field() ?>
                 <div>
@@ -46,7 +50,7 @@
                         class="form-control block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         value="<?= old('username', $user['username'] ?? '') ?>" required autocomplete="off">
                     <?php if (session('errors.username')): ?>
-                        <p class="text-red-500 text-xs mt-1"><?= session('errors.username') ?></p>
+                        <p class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i> <?= session('errors.username') ?></p>
                     <?php endif; ?>
                 </div>
                 <div>
@@ -55,21 +59,25 @@
                         class="form-control block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         value="<?= old('email', $user['email'] ?? '') ?>" required autocomplete="off">
                     <?php if (session('errors.email')): ?>
-                        <p class="text-red-500 text-xs mt-1"><?= session('errors.email') ?></p>
+                        <p class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i> <?= session('errors.email') ?></p>
                     <?php endif; ?>
                 </div>
                 <div class="flex gap-3 pt-1">
                     <button type="submit"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">Simpan</button>
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">
+                        <i class="fas fa-save mr-1"></i> Simpan
+                    </button>
                     <button type="button" onclick="toggleEditProfil(false)"
-                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg shadow transition">Batal</button>
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg shadow transition">
+                        <i class="fas fa-times mr-1"></i> Batal
+                    </button>
                 </div>
             </form>
         </div>
 
         <!-- Form Ganti Password (hidden by default) -->
         <div id="profil-password" style="display: none;">
-            <h2 class="text-lg font-semibold mb-4 text-indigo-700 mt-8">Ganti Password</h2>
+            <h2 class="text-lg font-semibold mb-4 text-indigo-700 mt-8"><i class="fas fa-key mr-1"></i> Ganti Password</h2>
             <form action="<?= site_url('/user/profile/updatePassword') ?>" method="post" class="space-y-4">
                 <?= csrf_field() ?>
                 <div>
@@ -78,7 +86,7 @@
                         class="form-control block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         required>
                     <?php if (session('pw_errors.old_password')): ?>
-                        <p class="text-red-500 text-xs mt-1"><?= session('pw_errors.old_password') ?></p>
+                        <p class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i> <?= session('pw_errors.old_password') ?></p>
                     <?php endif; ?>
                 </div>
                 <div>
@@ -87,7 +95,7 @@
                         class="form-control block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         required>
                     <?php if (session('pw_errors.new_password')): ?>
-                        <p class="text-red-500 text-xs mt-1"><?= session('pw_errors.new_password') ?></p>
+                        <p class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i> <?= session('pw_errors.new_password') ?></p>
                     <?php endif; ?>
                 </div>
                 <div>
@@ -96,14 +104,18 @@
                         class="form-control block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         required>
                     <?php if (session('pw_errors.confirm_new_password')): ?>
-                        <p class="text-red-500 text-xs mt-1"><?= session('pw_errors.confirm_new_password') ?></p>
+                        <p class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i> <?= session('pw_errors.confirm_new_password') ?></p>
                     <?php endif; ?>
                 </div>
                 <div class="flex gap-3 pt-1">
                     <button type="submit"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">Ganti Password</button>
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">
+                        <i class="fas fa-key mr-1"></i> Ganti Password
+                    </button>
                     <button type="button" onclick="toggleEditPassword(false)"
-                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg shadow transition">Batal</button>
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg shadow transition">
+                        <i class="fas fa-times mr-1"></i> Batal
+                    </button>
                 </div>
             </form>
         </div>

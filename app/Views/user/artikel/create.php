@@ -3,12 +3,16 @@
 
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
-<div class="container mx-auto max-w-2xl p-6 pb-16">
-    <div class="bg-white shadow-xl rounded-2xl px-8 py-10">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6"><?= esc($title) ?></h1>
+<div class="p-6 max-w-3xl mx-auto">
+    <div class="bg-white shadow-lg rounded-xl p-6">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <i class="fas fa-pen-nib mr-2 text-indigo-600"></i> <?= esc($title) ?>
+        </h1>
 
         <?php if (session()->getFlashdata('error')) : ?>
-            <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                <?= session()->getFlashdata('error'); ?>
+            </div>
         <?php endif; ?>
 
         <form action="<?= base_url('user/artikel/store') ?>" method="post" onsubmit="return submitForm(event);">
@@ -17,21 +21,25 @@
             <div class="mb-4">
                 <label for="title" class="block mb-1 text-sm font-medium text-gray-700">Judul Artikel</label>
                 <input type="text" id="title" name="title"
-                    class="form-control block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                    class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                     value="<?= old('title') ?>" required>
                 <?= $validation?->showError('title', 'error-msg') ?>
             </div>
 
             <div class="mb-4">
                 <label class="block mb-1 text-sm font-medium text-gray-700">Konten Artikel</label>
-                <div id="editor" style="height: 300px;" class="mb-2 bg-white"></div>
+                <div id="editor" style="height: 300px;" class="mb-2 bg-white border border-gray-300 rounded-md"></div>
                 <input type="hidden" name="content" id="content-json">
                 <?= $validation?->showError('content', 'error-msg') ?>
             </div>
 
-            <div class="flex justify-end gap-2 pt-2">
-                <a href="<?= base_url('user/artikel') ?>" class="btn btn-secondary">Batal</a>
-                <button type="submit" class="btn btn-primary">Kirim Artikel</button>
+            <div class="flex justify-end gap-3 pt-4">
+                <a href="<?= base_url('user/artikel') ?>" class="px-4 py-2 rounded-lg border text-gray-700 hover:bg-gray-100 flex items-center">
+                    <i class="fas fa-times mr-2"></i> Batal
+                </a>
+                <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 flex items-center">
+                    <i class="fas fa-paper-plane mr-2"></i> Kirim Artikel
+                </button>
             </div>
         </form>
     </div>
@@ -93,4 +101,5 @@
         } catch (e) {}
     <?php endif; ?>
 </script>
+
 <?= $this->endSection() ?>

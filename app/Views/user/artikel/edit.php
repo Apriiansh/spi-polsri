@@ -8,7 +8,9 @@
         <h1 class="text-2xl font-bold text-gray-800 mb-6"><?= esc($title) ?></h1>
 
         <?php if (session()->getFlashdata('error')) : ?>
-            <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                <?= session()->getFlashdata('error'); ?>
+            </div>
         <?php endif; ?>
 
         <form action="<?= base_url('user/artikel/update/' . $article['id']) ?>" method="post" onsubmit="return submitForm(event);">
@@ -17,7 +19,7 @@
             <div class="mb-4">
                 <label for="title" class="block mb-1 text-sm font-medium text-gray-700">Judul Artikel</label>
                 <input type="text" id="title" name="title"
-                    class="form-control block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                    class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                     value="<?= old('title', $article['title']) ?>" required>
                 <?= $validation?->showError('title', 'error-msg') ?>
             </div>
@@ -30,8 +32,8 @@
             </div>
 
             <div class="flex justify-end gap-2 pt-2">
-                <a href="<?= base_url('user/artikel') ?>" class="btn btn-secondary">Batal</a>
-                <button type="submit" class="btn btn-primary">Update Artikel</button>
+                <a href="<?= base_url('user/artikel') ?>" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">Batal</a>
+                <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Update Artikel</button>
             </div>
         </form>
     </div>

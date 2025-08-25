@@ -2,6 +2,7 @@
 
 <?= $this->section('content'); ?>
 <style>
+    /* Styling Anda yang sudah ada */
     .preview-container {
         max-width: 800px;
         margin: 2rem auto;
@@ -104,43 +105,23 @@
     </div>
 
     <div class="preview-content">
-        <?php 
-        $konten = json_decode($kegiatan['konten'], true);
-        if (json_last_error() === JSON_ERROR_NONE && is_array($konten)):
-            foreach ($konten as $block):
-                switch ($block['type']) {
-                    case 'paragraph':
-                        echo "<p>" . nl2br(esc($block['content'])) . "</p>";
-                        break;
-                    case 'image':
-                        echo "<img src=\"" . esc($block['content']) . "\" alt='Gambar Konten'>";
-                        break;
-                    case 'list':
-                        $listItems = [];
-                        if (is_array($block['content'])) {
-                            $listItems = $block['content'];
-                        } elseif (is_string($block['content'])) {
-                            $listItems = explode("\n", trim($block['content']));
-                        }
-
-                        if (!empty($listItems)) {
-                            echo "<ul>";
-                            foreach ($listItems as $item) {
-                                $trimmedItem = trim($item);
-                                if (!empty($trimmedItem)) {
-                                    echo "<li>" . esc($trimmedItem) . "</li>";
-                                }
-                            }
-                            echo "</ul>";
-                        }
-                        break;
+        <div class="prose max-w-none">
+            <style>
+                .prose ul,
+                .prose ol {
+                    list-style-type: decimal;
+                    margin-top: 1rem;
+                    padding-left: 1.5rem;
                 }
-            endforeach;
-        else:
-            echo "<p>Konten tidak dapat ditampilkan.</p>";
-        endif;
-        ?>
-    </div>
-</div>
 
-<?= $this->endSection(); ?>
+                .prose li {
+                    margin-bottom: 0.5rem;
+                }
+            </style>
+            <?= $kegiatan['konten']; ?>
+        </div>
+    </div>
+
+    <a href="<?= base_url('admin/kegiatan'); ?>" class="back-link">Kembali ke Daftar Kegiatan</a>
+
+    <?= $this->endSection(); ?>
