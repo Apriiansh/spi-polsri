@@ -247,6 +247,12 @@
             <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada artikel</h3>
         </div>
     <?php endif; ?>
+
+
+</div>
+
+<div class="flex justify-center mt-10 bg-gray-100 p-4 rounded-lg">
+    <?= $pager->links('default', 'default_full') ?>
 </div>
 
 <?= $this->endSection(); ?>

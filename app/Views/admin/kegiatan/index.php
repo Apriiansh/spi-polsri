@@ -1,7 +1,7 @@
 <?= $this->extend('layout/admin_main') ?>
 
 <?= $this->section('content'); ?>
-<!-- Header dengan Tombol Tambah Kegiatan -->
+
 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
     <div>
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Manajemen Kegiatan</h1>
@@ -78,7 +78,7 @@
                     <?php else: ?>
                         <?php foreach ($kegiatan as $keg): ?>
                             <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                <td class="px-6 py-4 text-sm text-gray-900">#<?= $i++; ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-900"><?= $i++; ?></td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900"><?= esc($keg['judul']); ?></td>
                                 <td class="px-6 py-4 text-sm text-gray-500"><?= esc($keg['kategori']); ?></td>
                                 <td class="px-6 py-4 text-sm text-gray-500"><?= esc($keg['sub_kategori']); ?></td>
@@ -137,11 +137,11 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+</div>
 
-    <!-- Pagination -->
-    <div class="flex justify-center p-4">
-        <?= $pager->links('default', 'default_full') ?>
-    </div>
+<!-- Pagination -->
+<div class="flex justify-center mt-10 bg-gray-100 p-4 rounded-lg">
+    <?= $pager->links('default', 'default_full') ?>
 </div>
 
 <!-- Floating Action Button Mobile -->

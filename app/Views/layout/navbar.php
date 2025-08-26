@@ -161,6 +161,8 @@
                         </div>
                         <a href="/kegiatan"
                             class="nav-link relative px-4 py-2 text-sm font-medium text-white hover:text-[#e0f2f1]">Kegiatan</a>
+                        <a href="/artikel"
+                            class="nav-link relative px-4 py-2 text-sm font-medium text-white hover:text-[#e0f2f1]">Artikel</a>
                         <a href="/laporan/create"
                             class="nav-link relative px-4 py-2 text-sm font-medium text-white hover:text-[#e0f2f1]">Pelaporan</a>
                     </div>
@@ -205,6 +207,8 @@
 
             <a href="/kegiatan"
                 class="block px-3 py-2 text-base text-gray-700 hover:text-[#537b91] hover:bg-gray-300">Kegiatan</a>
+            <a href="/artikel"
+                class="block px-3 py-2 text-base text-gray-700 hover:text-[#537b91] hover:bg-gray-300">Artikel</a>
             <a href="/laporan/create"
                 class="block px-3 py-2 text-base text-gray-700 hover:text-[#537b91] hover:bg-gray-300">Pelaporan</a>
 
@@ -243,6 +247,10 @@
                 {
                     title: 'Kegiatan',
                     url: '/kegiatan'
+                },
+                {
+                    title: 'Artikel',
+                    url: '/artikel'
                 },
                 {
                     title: 'Pelaporan',

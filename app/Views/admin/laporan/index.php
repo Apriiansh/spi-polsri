@@ -25,11 +25,13 @@
         <div class="p-4 overflow-x-auto">
             <table class="w-full text-left table-auto">
                 <thead>
-                    <tr class="bg-gray-100 border-b border-gray-200">
+                    <tr class="bg-gray-100 border-b border-gray-200 text-sm">
                         <th class="py-3 px-4 font-semibold text-gray-600">No</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Judul</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Kategori</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Tanggal Kejadian</th>
+                        <th class="py-3 px-4 font-semibold text-gray-600">Lokasi Kejadian</th>
+                        <th class="py-3 px-4 font-semibold text-gray-600">Unit Kerja</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Status</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Aksi</th>
                     </tr>
@@ -43,7 +45,9 @@
                                 <td class="py-3 px-4 text-sm text-gray-700"><?= esc($item['judul']); ?></td>
                                 <td class="py-3 px-4 text-sm text-gray-700"><?= esc($item['kategori_laporan']); ?></td>
                                 <td class="py-3 px-4 text-sm text-gray-700"><?= esc(date('d M Y', strtotime($item['tgl_kejadian']))); ?></td>
-                                <td class="py-3 px-4 text-sm text-gray-700">
+                                <td class="py-3 px-4 text-sm text-gray-700"><?= esc($item['lok_kejadian']); ?></td>
+                                <td class="py-3 px-4 text-sm text-gray-700"><?= esc($item['unit_kerja']); ?></td>
+                                <td class="py-3 px-4 text-sm">
                                     <span class="px-2 py-1 rounded-full text-xs font-semibold 
                                         <?php if ($item['status_laporan'] == 'pending'): ?>
                                             bg-yellow-100 text-yellow-800
@@ -56,7 +60,7 @@
                                         <?= esc(ucfirst($item['status_laporan'])); ?>
                                     </span>
                                 </td>
-                                <td class="py-3 px-4 text-sm text-gray-700 flex items-center space-x-3">
+                                <td class="py-3 px-4 text-sm flex items-center space-x-3">
                                     <a href="<?= base_url('admin/laporan/show/' . $item['id']); ?>" class="text-blue-600 hover:text-blue-800"><i class="fas fa-eye"></i></a>
                                     <form action="<?= base_url('admin/laporan/delete/' . $item['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');">
                                         <?= csrf_field(); ?>
@@ -67,7 +71,7 @@
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="py-3 px-4 text-center text-gray-500">Tidak ada laporan yang ditemukan.</td>
+                            <td colspan="8" class="py-6 px-4 text-center text-gray-500">Tidak ada laporan yang ditemukan.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -80,7 +84,7 @@
         <?php if (!empty($laporan)): ?>
             <?php $i = 1 + (10 * ($pager->getCurrentPage() - 1)); ?>
             <?php foreach ($laporan as $item): ?>
-                <div class="bg-white shadow-md rounded-lg p-4 space-y-2">
+                <div class="bg-white shadow-md rounded-lg p-5 space-y-2">
                     <div class="flex justify-between items-center">
                         <h3 class="text-base font-semibold text-gray-800">#<?= $i++; ?> <?= esc($item['judul']); ?></h3>
                         <span class="px-2 py-1 rounded-full text-xs font-semibold 
@@ -97,6 +101,8 @@
                     </div>
                     <p class="text-sm text-gray-600"><span class="font-medium">Kategori:</span> <?= esc($item['kategori_laporan']); ?></p>
                     <p class="text-sm text-gray-600"><span class="font-medium">Tanggal:</span> <?= esc(date('d M Y', strtotime($item['tgl_kejadian']))); ?></p>
+                    <p class="text-sm text-gray-600"><span class="font-medium">Lokasi:</span> <?= esc($item['lok_kejadian']); ?></p>
+                    <p class="text-sm text-gray-600"><span class="font-medium">Unit Kerja:</span> <?= esc($item['unit_kerja']); ?></p>
                     <div class="flex space-x-3 pt-2">
                         <a href="<?= base_url('admin/laporan/show/' . $item['id']); ?>" class="text-blue-600 hover:text-blue-800"><i class="fas fa-eye"></i></a>
                         <form action="<?= base_url('admin/laporan/delete/' . $item['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');">
@@ -111,7 +117,8 @@
         <?php endif; ?>
     </div>
 
-    <div class="flex justify-center py-6">
+    <!-- Pager -->
+    <div class="flex justify-center mt-10 mb-4 bg-gray-100 p-4 rounded-lg">
         <?= $pager->links('default', 'default_full') ?>
     </div>
 </div>

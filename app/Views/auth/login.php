@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
         tailwind.config = {
@@ -47,9 +48,8 @@
 <body class="bg-gray-50 font-sans antialiased text-gray-800">
     <div class="flex flex-col md:flex-row min-h-screen">
 
+        <!-- Kolom Kiri: Gambar Latar Belakang -->
         <div class="relative w-full md:w-1/2 bg-cover bg-center hidden md:block" style="background-image: url('/images/image3.jpg');">
-
-
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-10">
                 <div class="text-white">
                     <h2 class="text-4xl font-bold drop-shadow-lg">SPI POLSRI</h2>
@@ -60,11 +60,18 @@
         </div>
 
         <!-- Kolom Kanan: Formulir Login -->
-        <div class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 lg:p-16">
+        <div class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 lg:p-16 relative">
+        
+            <a href="/" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition duration-150">
+                <svg class="w-8 h-8 md:w-10 md:h-10 p-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </a>
+
             <div class="w-full max-w-lg bg-white rounded-2xl md:shadow-lg p-8 sm:p-10 transition-transform-opacity hover:scale-105">
                 <div class="text-center mb-8">
                     <img src="<?= base_url('images/spi.png') ?>" alt="Logo SPI" class="mx-auto h-20 w-auto mb-4">
-                    <h1 class="text-4xl font-extrabold text-primary-blue">Login</h1>
+                    <h1 class="text-4xl font-extrabold text-primary-blue">LOGIN</h1>
                     <p class="text-gray-500 mt-2">Masukkan kredensial Anda untuk melanjutkan.</p>
                 </div>
 

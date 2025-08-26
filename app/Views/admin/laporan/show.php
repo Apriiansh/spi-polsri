@@ -1,64 +1,82 @@
 <?= $this->extend('layout/admin_main') ?>
 
 <?= $this->section('content'); ?>
-<div class="p-6">
-    <div class="flex justify-between items-center mb-6">
+<div class="p-6 space-y-6">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between md:items-center gap-3">
         <h1 class="text-2xl font-bold text-gray-800"><?= esc($title); ?></h1>
-        <a href="<?= base_url('admin/laporan'); ?>" class="btn-secondary">Kembali ke Daftar Laporan</a>
+        <a href="<?= base_url('admin/laporan'); ?>"
+            class="px-4 py-2 text-sm font-medium bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
+            ← Kembali
+        </a>
     </div>
 
+    <!-- Flash Messages -->
     <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success">
+        <div class="p-3 text-sm text-green-700 bg-green-50 rounded-lg">
             <?= session()->getFlashdata('success'); ?>
         </div>
     <?php endif; ?>
     <?php if (session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger">
+        <div class="p-3 text-sm text-red-700 bg-red-50 rounded-lg">
             <?= session()->getFlashdata('error'); ?>
         </div>
     <?php endif; ?>
 
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Detail Laporan</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <p class="text-gray-600"><strong>ID Laporan:</strong> <?= esc($laporan['id']); ?></p>
-                <p class="text-gray-600"><strong>Kategori:</strong> <?= esc($laporan['kategori_laporan']); ?></p>
-                <p class="text-gray-600"><strong>Judul:</strong> <?= esc($laporan['judul']); ?></p>
-                <p class="text-gray-600"><strong>Tanggal Kejadian:</strong> <?= esc(date('d F Y', strtotime($laporan['tgl_kejadian']))); ?></p>
-                <p class="text-gray-600"><strong>Lokasi Kejadian:</strong> <?= esc($laporan['lok_kejadian']); ?></p>
-                <p class="text-gray-600"><strong>Dibuat pada:</strong> <?= esc(date('d F Y H:i', strtotime($laporan['created_at']))); ?></p>
-                <p class="text-gray-600"><strong>Terakhir Diperbarui:</strong> <?= esc(date('d F Y H:i', strtotime($laporan['updated_at']))); ?></p>
+    <!-- Detail Laporan -->
+    <div class="bg-white shadow-sm rounded-xl p-6 space-y-6">
+        <h2 class="text-lg font-semibold text-gray-700 border-b pb-2">Detail Laporan</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div class="space-y-2">
+                <p><span class="font-medium text-black-600">ID Laporan:</span> <?= esc($laporan['id']); ?></p>
+                <p><span class="font-medium text-black-600">Kategori:</span> <?= esc($laporan['kategori_laporan']); ?></p>
+                <p><span class="font-medium text-black-600">Judul:</span> <?= esc($laporan['judul']); ?></p>
+                <p><span class="font-medium text-black-600">Tanggal Kejadian:</span> <?= esc(date('d F Y', strtotime($laporan['tgl_kejadian']))); ?></p>
+                <p><span class="font-medium text-black-600">Lokasi Kejadian:</span> <?= esc($laporan['lok_kejadian']); ?></p>
+                <p><span class="font-medium text-black-600">Dibuat:</span> <?= esc(date('d F Y H:i', strtotime($laporan['created_at']))); ?></p>
+                <p><span class="font-medium text-black-600">Terakhir Update:</span> <?= esc(date('d F Y H:i', strtotime($laporan['updated_at']))); ?></p>
             </div>
             <div>
-                <p class="text-gray-600"><strong>Isi Laporan:</strong></p>
-                <p class="text-gray-800 bg-gray-50 p-3 rounded-md"><?= nl2br(esc($laporan['isi'])); ?></p>
+                <p class="font-medium text-gray-600 mb-1">Isi Laporan:</p>
+                <div class="bg-gray-50 p-3 rounded-lg text-gray-800 leading-relaxed">
+                    <?= nl2br(esc($laporan['isi'])); ?>
+                </div>
             </div>
         </div>
 
-        <div class="mt-6">
-            <p class="text-gray-600"><strong>Gambar Bukti:</strong></p>
+        <!-- Gambar Bukti -->
+        <div>
+            <p class="font-medium text-gray-600 mb-2">Gambar Bukti:</p>
             <?php if (!empty($laporan['gambar_bukti'])): ?>
-                <img src="<?= base_url('uploads/bukti/' . $laporan['gambar_bukti']); ?>" alt="Gambar Bukti" class="max-w-xs h-auto rounded-lg shadow-md mt-2">
+                <img src="<?= base_url('uploads/bukti/' . $laporan['gambar_bukti']); ?>"
+                    alt="Gambar Bukti"
+                    class="w-full max-w-md rounded-lg shadow-md">
             <?php else: ?>
-                <p class="text-gray-500">Tidak ada gambar bukti.</p>
+                <p class="text-gray-500 text-sm">Tidak ada gambar bukti.</p>
             <?php endif; ?>
         </div>
     </div>
 
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden p-6">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Perbarui Status Laporan</h2>
-        <form action="<?= base_url('admin/laporan/update-status/' . $laporan['id']); ?>" method="post">
+    <!-- Form Update Status -->
+    <div class="bg-white shadow-sm rounded-xl p-6">
+        <h2 class="text-lg font-semibold text-gray-700 border-b pb-2 mb-4">Perbarui Status</h2>
+        <form action="<?= base_url('admin/laporan/update-status/' . $laporan['id']); ?>" method="post" class="space-y-4">
             <?= csrf_field(); ?>
-            <div class="mb-4">
-                <label for="status_laporan" class="block text-sm font-medium text-gray-700">Status:</label>
-                <select name="status_laporan" id="status_laporan" class="mt-1 block w-full md:w-1/2 border rounded-lg px-3 py-2 text-sm">
+            <div>
+                <label for="status_laporan" class="block text-sm font-medium text-gray-700 mb-1">Status:</label>
+                <select name="status_laporan" id="status_laporan"
+                    class="w-full md:w-1/3 border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     <option value="pending" <?= ($laporan['status_laporan'] == 'pending') ? 'selected' : ''; ?>>Pending</option>
                     <option value="in_progress" <?= ($laporan['status_laporan'] == 'in_progress') ? 'selected' : ''; ?>>In Progress</option>
                     <option value="completed" <?= ($laporan['status_laporan'] == 'completed') ? 'selected' : ''; ?>>Completed</option>
                 </select>
             </div>
-            <button type="submit" class="btn-primary">Perbarui Status</button>
+            <button type="submit"
+                class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm text-sm font-medium transition">
+                Perbarui Status
+            </button>
         </form>
     </div>
 </div>

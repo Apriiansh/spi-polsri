@@ -24,6 +24,9 @@ $routes->group('', function ($routes) {
     // Halaman Kegiatan & Laporan
     $routes->get('kegiatan', 'PublicKegiatanController::index');
     $routes->get('kegiatan/(:any)', 'PublicKegiatanController::show/$1');
+    
+    $routes->get('artikel', 'PublicArtikelController::index');
+    $routes->get('artikel/(:any)', 'PublicArtikelController::show/$1');
 
     $routes->get('laporan/create', 'LaporanController::create');
     $routes->post('laporan/store', 'LaporanController::store');
@@ -33,7 +36,7 @@ $routes->group('', function ($routes) {
 $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 
     // Dashboard
-    $routes->get('dashboard', 'AdminController::dashboard');
+    $routes->get('dashboard', 'Admin\Dashboard::index');
 
     // User Management Routes
     $routes->group('users', function ($routes) {
@@ -75,7 +78,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 
 // User Routes
 $routes->group('user', ['filter' => 'auth'], function ($routes) {
-    $routes->get('dashboard', 'UserController::dashboard');
+    $routes->get('dashboard', 'User\Dashboard::index');
 
     $routes->get('profile', 'User\ProfilController::index');
     $routes->post('profile/update', 'User\ProfilController::update');
@@ -86,9 +89,11 @@ $routes->group('user', ['filter' => 'auth'], function ($routes) {
         $routes->get('/', 'User\ArtikelController::index');
         $routes->get('create', 'User\ArtikelController::create');
         $routes->post('store', 'User\ArtikelController::store');
+
         $routes->get('edit/(:num)', 'User\ArtikelController::edit/$1');
         $routes->post('update/(:num)', 'User\ArtikelController::update/$1');
         $routes->post('delete/(:num)', 'User\ArtikelController::delete/$1');
-        $routes->get('show/(:num)', 'User\ArtikelController::show/$1');
+
+        $routes->get('show/(:segment)', 'User\ArtikelController::show/$1');
     });
 });

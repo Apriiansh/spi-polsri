@@ -34,7 +34,7 @@
                 <tbody>
                     <?php foreach ($users as $user): ?>
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <td class="py-3 px-4 text-sm text-gray-700"><?= $user['id']; ?></td>
+                            <td class="py-3 px-4 text-sm text-gray-700">#<?= $user['id']; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700"><?= $user['username']; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700"><?= $user['email']; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700"><?= $user['role']; ?></td>
@@ -76,6 +76,10 @@
                 <?php endforeach; ?>
             </div>
         </div>
+    </div>
+
+    <div class="flex justify-center mt-10 bg-gray-100 p-4 rounded-lg">
+        <?= $pager->links('default', 'default_full') ?>
     </div>
 </div>
 <?= $this->endSection(); ?>

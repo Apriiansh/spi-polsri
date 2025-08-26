@@ -79,30 +79,30 @@
 
                 <!-- Navigation -->
                 <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-                    <a href="/admin/dashboard" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                    <a href="<?= site_url('admin/dashboard') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fas fa-home w-5"></i>
                         <span>Dashboard</span>
                     </a>
-                    <a href="/admin/users" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                    <a href="<?= site_url('admin/users') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fas fa-users w-5"></i>
                         <span>Manajemen User</span>
                     </a>
-                    <a href="/admin/artikel" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                    <a href="<?= site_url('admin/artikel') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fas fa-newspaper w-5"></i>
                         <span>Artikel</span>
                     </a>
-                    <a href="/admin/laporan" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                    <a href="<?= site_url('admin/laporan') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fas fa-chart-line w-5"></i>
                         <span>Laporan</span>
                     </a>
-                    <a href="/admin/kegiatan" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                    <a href="<?= site_url('admin/kegiatan') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fas fa-calendar-alt w-5"></i>
                         <span>Kegiatan</span>
                     </a>
 
                     <!-- Logout -->
                     <div class="pt-4 mt-4 border-t border-slate-700/50">
-                        <a href="/logout" class="flex items-center space-x-3 p-3 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-600/30 smooth-transition">
+                        <a href="<?= site_url('logout') ?>" class="flex items-center space-x-3 p-3 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-600/30 smooth-transition">
                             <i class="fas fa-sign-out-alt w-5"></i>
                             <span>Logout</span>
                         </a>

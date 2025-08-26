@@ -1,159 +1,211 @@
 <?= $this->extend('layout/admin_main') ?>
 
 <?= $this->section('content') ?>
-<div class="space-y-10">
-    <!-- Header Selamat Datang -->
-    <div class="text-center space-y-4">
-        <h1 class="text-4xl font-bold bg-gradient-to-r from-slate-800 via-slate-700 to-slate-600 bg-clip-text text-transparent">
-            Selamat Datang, Admin!
-        </h1>
-        <p class="text-slate-600 text-lg max-w-2xl mx-auto">
-            Kelola sistem dengan mudah melalui dashboard yang telah disediakan
-        </p>
+<div class="container mx-auto px-4 space-y-10">
+    <!-- Header -->
+    <div class="text-center space-y-2">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Dashboard Admin</h1>
+        <p class="text-gray-600 text-base md:text-lg">Kelola sistem dengan mudah</p>
     </div>
 
     <!-- Kartu Statistik -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Kartu Total Pengguna -->
-        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 border border-blue-200/50">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-blue-600 text-sm font-medium uppercase tracking-wider">Total Users</p>
-                    <p class="text-3xl font-bold text-blue-900">1,234</p>
-                </div>
-                <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                    </svg>
-                </div>
+        <!-- Total Users -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">Total Users</p>
+                <p class="text-2xl font-bold text-gray-900"><?= $totalUsers ?? 0 ?></p>
+            </div>
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                </svg>
             </div>
         </div>
 
-        <!-- Kartu Laporan -->
-        <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-6 border border-emerald-200/50">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-emerald-600 text-sm font-medium uppercase tracking-wider">Laporan</p>
-                    <p class="text-3xl font-bold text-emerald-900">56</p>
-                </div>
-                <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                </div>
+        <!-- Laporan -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">Laporan</p>
+                <p class="text-2xl font-bold text-gray-900"><?= $totalReports ?? 0 ?></p>
+            </div>
+            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
             </div>
         </div>
 
-        <!-- Kartu Artikel -->
-        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 border border-purple-200/50">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-purple-600 text-sm font-medium uppercase tracking-wider">Artikel</p>
-                    <p class="text-3xl font-bold text-purple-900">89</p>
-                </div>
-                <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-                    </svg>
-                </div>
+        <!-- Artikel -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">Artikel</p>
+                <p class="text-2xl font-bold text-gray-900"><?= $totalArticles ?? 0 ?></p>
+            </div>
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
             </div>
         </div>
 
-        <!-- Kartu Kegiatan -->
-        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 border border-orange-200/50">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-orange-600 text-sm font-medium uppercase tracking-wider">Kegiatan</p>
-                    <p class="text-3xl font-bold text-orange-900">23</p>
-                </div>
-                <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                </div>
+        <!-- Kegiatan -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">Kegiatan</p>
+                <p class="text-2xl font-bold text-gray-900"><?= $totalEvents ?? 0 ?></p>
+            </div>
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
             </div>
         </div>
     </div>
 
-    <!-- Kartu Aksi Utama -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Manajemen Pengguna -->
-        <div class="card-hover bg-white rounded-2xl shadow-lg border border-slate-200/50 p-8 group">
-            <div class="flex items-start space-x-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 smooth-transition">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <!-- Chart -->
+    <div class="bg-white rounded-xl shadow-sm border p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Statistik Aktivitas (6 Bulan Terakhir)</h3>
+        <div class="overflow-x-auto">
+            <div class="min-w-[300px] h-80">
+                <canvas id="statsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Kelola Users -->
+        <div class="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
                     </svg>
                 </div>
                 <div class="flex-1">
-                    <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 smooth-transition">
-                        Manajemen Pengguna
-                    </h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Kelola semua akun pengguna terdaftar, verifikasi akun, dan atur hak akses dengan mudah.
-                    </p>
-                    <a href="<?= site_url('admin/users') ?>"
-                        class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 smooth-transition shadow-lg hover:shadow-xl">
-                        <span>Lihat Pengguna</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
+                    <h4 class="font-semibold text-gray-900">Kelola Users</h4>
+                    <p class="text-sm text-gray-600">Manajemen pengguna sistem</p>
                 </div>
+                <a href="<?= site_url('admin/users') ?>" class="inline-flex items-center px-3 py-2 rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 text-sm font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
         </div>
 
         <!-- Kelola Laporan -->
-        <div class="card-hover bg-white rounded-2xl shadow-lg border border-slate-200/50 p-8 group">
-            <div class="flex items-start space-x-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center group-hover:scale-110 smooth-transition">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        <div class="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
                     </svg>
                 </div>
                 <div class="flex-1">
-                    <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-emerald-600 smooth-transition">
-                        Kelola Laporan
-                    </h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Verifikasi dan tangani laporan dari pengguna dengan sistem tracking yang terintegrasi.
-                    </p>
-                    <a href="<?= site_url('admin/laporan') ?>"
-                        class="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-6 py-3 rounded-xl font-medium hover:from-emerald-700 hover:to-emerald-800 smooth-transition shadow-lg hover:shadow-xl">
-                        <span>Lihat Laporan</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
+                    <h4 class="font-semibold text-gray-900">Kelola Laporan</h4>
+                    <p class="text-sm text-gray-600">Review dan tindak lanjut laporan</p>
                 </div>
+                <a href="<?= site_url('admin/laporan') ?>" class="inline-flex items-center px-3 py-2 rounded-md text-red-700 bg-red-100 hover:bg-red-200 text-sm font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
         </div>
 
-        <!-- Kelola Konten -->
-        <div class="card-hover bg-white rounded-2xl shadow-lg border border-slate-200/50 p-8 group">
-            <div class="flex items-start space-x-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 smooth-transition">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+        <!-- Kelola Artikel -->
+        <div class="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
                 </div>
                 <div class="flex-1">
-                    <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-purple-600 smooth-transition">
-                        Kelola Konten
-                    </h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Tambahkan, edit, atau hapus artikel dan berita dengan editor yang mudah digunakan.
-                    </p>
-                    <a href="<?= site_url('admin/articles') ?>"
-                        class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-3 rounded-xl font-medium hover:from-purple-700 hover:to-purple-800 smooth-transition shadow-lg hover:shadow-xl">
-                        <span>Kelola Artikel</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
+                    <h4 class="font-semibold text-gray-900">Kelola Artikel</h4>
+                    <p class="text-sm text-gray-600">Manajemen konten artikel</p>
                 </div>
+                <a href="<?= site_url('admin/artikel') ?>" class="inline-flex items-center px-3 py-2 rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 text-sm font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('statsChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?= json_encode($chartLabels ?? ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun']) ?>,
+                datasets: [{
+                    label: 'Laporan Masuk',
+                    data: <?= json_encode($chartReports ?? [0, 0, 0, 0, 0, 0]) ?>,
+                    borderColor: '#EF4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Artikel Dibuat',
+                    data: <?= json_encode($chartArticles ?? [0, 0, 0, 0, 0, 0]) ?>,
+                    borderColor: '#8B5CF6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Kegiatan Dibuat',
+                    data: <?= json_encode($chartEvents ?? [0, 0, 0, 0, 0, 0]) ?>,
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 16
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                elements: {
+                    point: {
+                        radius: 4,
+                        hoverRadius: 8
+                    },
+                    line: {
+                        borderWidth: 2
+                    }
+                }
+            }
+        });
+    });
+</script>
+
 <?= $this->endSection() ?>

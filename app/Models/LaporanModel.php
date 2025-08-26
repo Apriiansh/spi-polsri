@@ -18,6 +18,7 @@ class LaporanModel extends Model
         'isi',
         'tgl_kejadian',
         'lok_kejadian',
+        'unit_kerja',
         'gambar_bukti',
         'status_laporan'
     ];

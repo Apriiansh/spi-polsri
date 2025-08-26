@@ -14,6 +14,18 @@ class ArtikelController extends BaseController
         $this->articleModel = new ArticleModel();
     }
 
+    /**
+     * Helper function untuk membuat slug dari judul.
+     */
+    private function to_slug($string)
+    {
+        $string = strtolower($string); // Ubah ke huruf kecil
+        $string = preg_replace('/[^a-z0-9\s\-]/', '', $string); // Hapus karakter non-alphanumeric
+        $string = str_replace(' ', '-', $string); // Ganti spasi dengan strip
+        $string = preg_replace('/-+/', '-', $string); // Hapus strip ganda
+        return trim($string, '-');
+    }
+
     public function index()
     {
         $userId = session()->get('user_id');
@@ -49,14 +61,18 @@ class ArtikelController extends BaseController
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
 
+        $title   = $this->request->getPost('title');
+        $slug    = $this->to_slug($title);
         $content = $this->request->getPost('content');
+
         if (json_decode($content) === null) {
             return redirect()->back()->withInput()->with('error', 'Format konten tidak valid.');
         }
 
         $data = [
             'user_id' => $userId,
-            'title'   => $this->request->getPost('title'),
+            'title'   => $title,
+            'slug'    => $slug,
             'content' => $content,
             'status'  => 'pending'
         ];
@@ -124,13 +140,17 @@ class ArtikelController extends BaseController
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
 
+        $title   = $this->request->getPost('title');
+        $slug    = $this->to_slug($title);
         $content = $this->request->getPost('content');
+
         if (json_decode($content) === null) {
             return redirect()->back()->withInput()->with('error', 'Format konten tidak valid.');
         }
 
         $data = [
-            'title' => $this->request->getPost('title'),
+            'title'   => $title,
+            'slug'    => $slug,
             'content' => $content,
         ];
 

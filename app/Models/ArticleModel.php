@@ -15,6 +15,7 @@ class ArticleModel extends Model
     protected $allowedFields    = [
         'user_id',
         'title',
+        'slug',
         'content',
         'status'
     ];
@@ -25,6 +26,14 @@ class ArticleModel extends Model
             ->join('users', 'users.id = articles.user_id')
             ->orderBy('articles.created_at', 'DESC')
             ->findAll();
+    }
+
+    public function getArticleBySlugWithUser($slug)
+    {
+        return $this->select('articles.*, users.username')
+            ->join('users', 'users.id = articles.user_id')
+            ->where('articles.slug', $slug)
+            ->first();
     }
 
     protected bool $allowEmptyInserts = false;

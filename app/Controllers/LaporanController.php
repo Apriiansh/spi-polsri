@@ -9,7 +9,10 @@ class LaporanController extends BaseController
 {
     public function create()
     {
-        return view('publics/laporan/create');
+        $data = [
+            'title' => 'Buat Laporan Baru',
+        ];
+        return view('publics/laporan/create', $data);
     }
 
     public function store()
@@ -23,6 +26,7 @@ class LaporanController extends BaseController
             'isi'              => 'required',
             'tgl_kejadian'     => 'required|valid_date',
             'lok_kejadian'     => 'required',
+            'unit_kerja'       => 'required',
             'gambar_bukti'     => 'uploaded[gambar_bukti]|max_size[gambar_bukti,2048]|is_image[gambar_bukti]',
         ];
 
@@ -45,6 +49,7 @@ class LaporanController extends BaseController
             'isi'              => $this->request->getVar('isi'),
             'tgl_kejadian'     => $this->request->getVar('tgl_kejadian'),
             'lok_kejadian'     => $this->request->getVar('lok_kejadian'),
+            'unit_kerja'       => $this->request->getVar('unit_kerja'),
             'gambar_bukti'     => $namaGambar,
             'status_laporan'   => 'pending'
         ];

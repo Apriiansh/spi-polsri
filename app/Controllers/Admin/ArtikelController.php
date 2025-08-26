@@ -18,7 +18,11 @@ class ArtikelController extends BaseController
     {
         $data = [
             'title' => 'Manajemen Artikel',
-            'articles' => $this->articleModel->getArticlesWithUser()
+            'articles' => $this->articleModel
+                ->select('articles.*, users.username') 
+                ->join('users', 'users.id = articles.user_id')
+                ->paginate(10, 'default'),
+            'pager' => $this->articleModel->pager,
         ];
         
         return view('admin/artikel/index', $data);
