@@ -19,7 +19,7 @@ function get_all_images($html)
 }
 ?>
 
-<div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden mb-12">
+<div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden pt-5 mb-12">
     <div class="absolute inset-0 bg-black/10"></div>
 
     <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
@@ -42,7 +42,7 @@ function get_all_images($html)
         <div class="bg-gradient-to-r from-slate-50 to-blue-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
             <div class="flex items-center">
                 <div class="p-2 bg-blue-100 rounded-lg mr-3">
-                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"></path>
                     </svg>
                 </div>
@@ -62,9 +62,9 @@ function get_all_images($html)
         <div id="filter-content" class="hidden md:block transition-all duration-300 ease-out">
             <div class="p-6">
                 <form action="<?= base_url('kegiatan'); ?>" method="get" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Search Input -->
-                        <div class="lg:col-span-2">
+                        <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Pencarian</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -81,28 +81,13 @@ function get_all_images($html)
                         <!-- Category Filter -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
-                            <select name="kategori" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
-                                <option value="">Semua Kategori</option>
-                                <?php foreach (array_keys($kategoriData) as $kategori_nama) : ?>
-                                    <option value="<?= esc($kategori_nama); ?>" <?= ($kategori_filter == $kategori_nama) ? 'selected' : ''; ?>>
+                            <select name="kategori" class="text-gray-400 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                                <option class="text-gray-800" value="">Semua Kategori</option>
+                                <?php foreach ($kategoriData as $kategori_nama) : ?>
+                                    <option class="text-gray-800"  value="<?= esc($kategori_nama); ?>" <?= ($kategori_filter == $kategori_nama) ? 'selected' : ''; ?>>
                                         <?= esc($kategori_nama); ?>
                                     </option>
                                 <?php endforeach; ?>
-                            </select>
-                        </div>
-
-                        <!-- Sub Category Filter -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Sub Kategori</label>
-                            <select id="sub_kategori_filter" name="subkategori" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
-                                <option value="">Semua Sub Kategori</option>
-                                <?php
-                                if (!empty($kategori_filter) && isset($kategoriData[$kategori_filter])) {
-                                    foreach ($kategoriData[$kategori_filter] as $sub_nama) {
-                                        echo '<option value="' . esc($sub_nama) . '" ' . (($subkategori_filter == $sub_nama) ? 'selected' : '') . '>' . esc($sub_nama) . '</option>';
-                                    }
-                                }
-                                ?>
                             </select>
                         </div>
                     </div>
@@ -180,13 +165,6 @@ function get_all_images($html)
                                 <button class="dot-btn w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors duration-300 <?= ($index === 0) ? '!bg-white' : '' ?>" data-index="<?= $index; ?>"></button>
                             <?php endforeach; ?>
                         </div>
-
-                        <!-- Overlay Badge -->
-                        <!-- <div class="absolute top-4 left-4">
-                            <span class="inline-block bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-full text-xs font-semibold shadow-md">
-                                <?= esc($item['kategori']); ?>
-                            </span>
-                        </div> -->
                     </div>
 
                     <!-- Content -->
@@ -201,11 +179,6 @@ function get_all_images($html)
                                 <span class="inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded-lg text-xs font-medium border border-blue-200">
                                     <?= esc($item['kategori']); ?>
                                 </span>
-                                <?php if (!empty($item['sub_kategori'])) : ?>
-                                    <span class="inline-block bg-green-50 text-green-700 px-3 py-1 rounded-lg text-xs font-medium border border-green-200">
-                                        <?= esc($item['sub_kategori']); ?>
-                                    </span>
-                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -250,16 +223,15 @@ function get_all_images($html)
     </div>
 
     <!-- Pagination -->
-    <div class="flex justify-center mb-2">
-        <div class="p-2">
+    <div class="flex justify-center mb-8">
+        <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-full shadow-lg p-2 md:p-4 border border-gray-100" aria-label="Pagination">
             <?= $pager->links('default', 'default_full') ?>
-        </div>
+        </nav>
     </div>
 </div>
 
 <!-- Styles -->
 <style>
-    /* Reset and general styles */
     .line-clamp-2 {
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -296,106 +268,41 @@ function get_all_images($html)
         left: 100%;
     }
 
-    /* Updated Custom pagination styles */
-    .pagination {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
-        align-items: center;
+    /* Custom Pager Styling */
+    .pagination li a,
+    .pagination li span {
+        @apply block px-4 py-2 text-sm md:text-base font-medium transition-all duration-200 rounded-full;
     }
 
-    .pagination a,
-    .pagination span {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.75rem 1rem;
-        border-radius: 0.75rem;
-        font-weight: 500;
-        transition: all 0.2s ease-in-out;
-        border: 1px solid transparent;
+    .pagination li a {
+        @apply text-gray-700 hover:bg-blue-100 hover:text-blue-600;
     }
 
-    .pagination a {
-        color: #4B5563;
-        /* Gray-600 */
-        background-color: #F9FAFB;
-        /* Gray-50 */
-        border-color: #E5E7EB;
-        /* Gray-200 */
-        text-decoration: none;
+    .pagination li.active a,
+    .pagination li.active span {
+        @apply bg-blue-600 text-white shadow-md;
     }
 
-    .pagination a:hover {
-        background-color: #DBEAFE;
-        /* Blue-100 */
-        border-color: #93C5FD;
-        /* Blue-300 */
-        color: #1E40AF;
-        /* Blue-800 */
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    .pagination li.disabled a {
+        @apply text-gray-400 cursor-not-allowed pointer-events-none;
     }
 
-    .pagination a:focus {
-        outline: 2px solid #3B82F6;
-        /* Blue-500 */
-        outline-offset: 2px;
+    .pagination li a.pager-arrow {
+        @apply p-2 md:p-3 bg-transparent hover:bg-blue-100 text-gray-600 hover:text-blue-600 flex items-center justify-center;
     }
 
-    .pagination .active {
-        background-color: #2563EB;
-        /* Blue-600 */
-        color: white;
-        border-color: #2563EB;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        transform: translateY(-2px);
-    }
-
-    .pagination .active:hover {
-        background-color: #1E40AF;
-        /* Blue-800 */
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    .pagination li a.pager-arrow:not(.disabled) {
+        @apply hover:bg-blue-100;
     }
 </style>
 
 <!-- Scripts -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const kategoriData = <?= json_encode($kategoriData); ?>;
-        const kategoriSelect = document.querySelector('select[name="kategori"]');
-        const subKategoriSelect = document.getElementById('sub_kategori_filter');
-        const currentKategori = kategoriSelect.value;
-        const currentSubKategori = "<?= esc($subkategori_filter ?? ''); ?>";
         const filterToggleBtn = document.getElementById('filter-toggle');
         const filterContent = document.getElementById('filter-content');
         const chevronDown = document.getElementById('chevron-down');
         const chevronUp = document.getElementById('chevron-up');
-
-        function populateSubKategori(selectedKategori, selectedSub) {
-            subKategoriSelect.innerHTML = '<option value="">Semua Sub Kategori</option>';
-            if (selectedKategori && kategoriData[selectedKategori]) {
-                kategoriData[selectedKategori].forEach(sub => {
-                    const option = document.createElement('option');
-                    option.value = sub;
-                    option.textContent = sub;
-                    if (sub === selectedSub) {
-                        option.selected = true;
-                    }
-                    subKategoriSelect.appendChild(option);
-                });
-            }
-        }
-
-        kategoriSelect.addEventListener('change', function() {
-            populateSubKategori(this.value, null);
-        });
-
-        // Initial population on page load
-        if (currentKategori) {
-            populateSubKategori(currentKategori, currentSubKategori);
-        }
 
         // Toggle filter section visibility on mobile
         if (filterToggleBtn && filterContent) {
@@ -451,7 +358,6 @@ function get_all_images($html)
     // ===============================================
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Find all the image slider containers on the page
         const sliders = document.querySelectorAll('.kegiatan-card');
 
         sliders.forEach(slider => {
@@ -463,74 +369,62 @@ function get_all_images($html)
             let currentSlide = 0;
             let slideInterval;
 
-            // Function to show a specific slide
             const showSlide = (index) => {
-                // Hide all slides
                 sliderItems.forEach(item => item.classList.remove('opacity-100', 'z-10'));
                 sliderItems.forEach(item => item.classList.add('opacity-0', 'z-0'));
 
-                // Show the selected slide
                 sliderItems[index].classList.remove('opacity-0', 'z-0');
                 sliderItems[index].classList.add('opacity-100', 'z-10');
 
-                // Update the active dot
                 dotBtns.forEach(dot => dot.classList.remove('!bg-white'));
                 dotBtns[index].classList.add('!bg-white');
             };
 
-            // Function to move to the next slide
             const nextSlide = () => {
                 currentSlide = (currentSlide + 1) % sliderItems.length;
                 showSlide(currentSlide);
             };
 
-            // Function to move to the previous slide
             const prevSlide = () => {
                 currentSlide = (currentSlide - 1 + sliderItems.length) % sliderItems.length;
                 showSlide(currentSlide);
             };
 
-            // Start the automatic slide show
             const startSlider = () => {
-                // Clear any existing interval to prevent multiple timers
                 clearInterval(slideInterval);
-                slideInterval = setInterval(nextSlide, 5000); // Change image every 5 seconds
+                slideInterval = setInterval(nextSlide, 5000);
             };
 
-            // Add event listeners for navigation buttons
             if (prevBtn) {
                 prevBtn.addEventListener('click', () => {
                     prevSlide();
-                    startSlider(); // Restart timer after manual navigation
+                    startSlider();
                 });
             }
 
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => {
                     nextSlide();
-                    startSlider(); // Restart timer after manual navigation
+                    startSlider();
                 });
             }
 
-            // Add event listeners for dots navigation
             if (dotsContainer) {
                 dotsContainer.addEventListener('click', (e) => {
                     if (e.target.classList.contains('dot-btn')) {
                         const index = parseInt(e.target.dataset.index);
                         showSlide(index);
                         currentSlide = index;
-                        startSlider(); // Restart timer after manual navigation
+                        startSlider();
                     }
                 });
             }
 
-            // Hide navigation buttons and dots if there is only one image
             if (sliderItems.length <= 1) {
                 if (prevBtn) prevBtn.style.display = 'none';
                 if (nextBtn) nextBtn.style.display = 'none';
                 if (dotsContainer) dotsContainer.style.display = 'none';
             } else {
-                // Initialize the slider and start the timer
                 showSlide(currentSlide);
                 startSlider();
             }

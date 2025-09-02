@@ -26,6 +26,26 @@ class Dashboard extends BaseController
         // Data untuk chart - 6 bulan terakhir
         $chartData = $this->getChartData($laporanModel, $articleModel, $kegiatanModel);
 
+        // Data untuk chart status laporan
+        $reportStatusData = $laporanModel->getReportStatusCounts();
+
+        $statusLabels = [];
+        $statusCounts = [];
+        $statusColors = [];
+
+        $colorMap = [
+            'pending'        => '#F59E0B', // amber-500
+            'in_progress'    => '#3B82F6', // blue-500
+            'completed'      => '#10B981', // emerald-500
+            'not_actionable' => '#6B7280', // gray-500
+        ];
+
+        foreach ($reportStatusData as $row) {
+            $statusLabels[] = ucfirst(str_replace('_', ' ', $row['status_laporan']));
+            $statusCounts[] = (int)$row['count'];
+            $statusColors[] = $colorMap[$row['status_laporan']] ?? '#9CA3AF'; // gray-400 for default
+        }
+
         $data = [
             'totalUsers'    => $totalUsers,
             'totalReports'  => $totalReports,
@@ -35,6 +55,9 @@ class Dashboard extends BaseController
             'chartReports'  => $chartData['reports'],
             'chartArticles' => $chartData['articles'],
             'chartEvents'   => $chartData['events'],
+            'reportStatusLabels' => $statusLabels,
+            'reportStatusCounts' => $statusCounts,
+            'reportStatusColors' => $statusColors,
         ];
 
         // if ($totalUsers === 0 && $totalReports === 0 && $totalArticles === 0 && $totalEvents === 0) {

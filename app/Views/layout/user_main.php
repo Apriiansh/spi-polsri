@@ -96,11 +96,11 @@
                     </a>
                     <a href="/user/artikel" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fa-regular fa-file-lines text-slate-400"></i>
-                        <span>Artikel Saya</span>
+                        <span>Artikel</span>
                     </a>
-                    <a href="/user/artikel/create" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                    <a href="/user/kegiatan" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fa-solid fa-pen-to-square text-slate-400"></i>
-                        <span>Tulis Artikel</span>
+                        <span>Kegiatan</span>
                     </a>
                     <a href="/user/profile" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fa-solid fa-user text-slate-400"></i>

@@ -90,7 +90,7 @@
                                     #<?= esc($article['id']) ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900 max-w-xs truncate" title="<?= esc($article['title']) ?>">
+                                    <div class="text-sm font-medium text-gray-900 max-w-[200px] truncate" title="<?= esc($article['title']) ?>">
                                         <?= esc($article['title']) ?>
                                     </div>
                                 </td>
@@ -156,9 +156,9 @@
     <!-- Tampilan Card untuk Tablet & Mobile -->
     <div class="lg:hidden">
         <div class="p-4">
-            <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <?php if (empty($articles)): ?>
-                    <div class="text-center py-4 text-gray-500">
+                    <div class="text-center py-4 text-gray-500 col-span-1 md:col-span-2">
                         Tidak ada artikel yang tersedia.
                     </div>
                 <?php else: ?>
@@ -199,7 +199,7 @@
                             </div>
 
                             <!-- Info Details -->
-                            <div class="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-4">
+                            <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-600 mb-4">
                                 <div>
                                     <span class="font-medium">Penulis:</span> <?= esc($article['username']) ?>
                                 </div>
@@ -222,7 +222,7 @@
                                 </form>
 
                                 <!-- Action Buttons -->
-                                <div class="grid grid-cols-2 gap-2">
+                                <div class="flex flex-wrap gap-2">
                                     <a href="<?= base_url('admin/artikel/show/' . $article['id']); ?>" class="flex items-center justify-center px-3 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 text-sm">
                                         <i class="fas fa-eye mr-1"></i> Lihat
                                     </a>
@@ -251,8 +251,10 @@
 
 </div>
 
-<div class="flex justify-center mt-10 bg-gray-100 p-4 rounded-lg">
-    <?= $pager->links('default', 'default_full') ?>
+<div class="flex justify-center my-8">
+    <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-lg shadow-lg p-2 md:p-4 border border-gray-300" aria-label="Pagination">
+        <?= $pager->links('default', 'default_full') ?>
+    </nav>
 </div>
 
 <?= $this->endSection(); ?>

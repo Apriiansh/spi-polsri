@@ -64,4 +64,19 @@ class ArtikelController extends BaseController
             'article' => $article
         ]);
     }
+
+    public function delete($id)
+    {
+        $article = $this->articleModel->find($id);
+
+        if (!$article) {
+            return redirect()->to('/admin/artikel')->with('error', 'Artikel tidak ditemukan.');
+        }
+
+        if ($this->articleModel->delete($id)) {
+            return redirect()->to('/admin/artikel')->with('success', 'Artikel berhasil dihapus.');
+        } else {
+            return redirect()->to('/admin/artikel')->with('error', 'Gagal menghapus artikel.');
+        }
+    }
 }

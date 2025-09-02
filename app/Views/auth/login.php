@@ -70,7 +70,7 @@
 
             <div class="w-full max-w-lg bg-white rounded-2xl md:shadow-lg p-8 sm:p-10 transition-transform-opacity hover:scale-105">
                 <div class="text-center mb-8">
-                    <img src="<?= base_url('images/spi.png') ?>" alt="Logo SPI" class="mx-auto h-20 w-auto mb-4">
+                    <img src="<?= base_url('images/spi.svg') ?>" alt="Logo SPI" class="mx-auto h-28 w-auto mb-4">
                     <h1 class="text-4xl font-extrabold text-primary-blue">LOGIN</h1>
                     <p class="text-gray-500 mt-2">Masukkan kredensial Anda untuk melanjutkan.</p>
                 </div>
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="text-center mt-6 text-sm text-gray-500">
-                    <p>Lupa kata sandi? <a href="#" class="text-secondary-blue hover:underline">Reset di sini.</a></p>
+                    <p>Lupa kata sandi? <a href="/forgot-password" class="text-secondary-blue hover:underline">Reset di sini.</a></p>
                 </div>
             </div>
         </div>

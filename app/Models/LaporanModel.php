@@ -36,4 +36,11 @@ class LaporanModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+
+    public function getReportStatusCounts()
+    {
+        return $this->select('status_laporan, COUNT(*) as count')
+            ->groupBy('status_laporan')
+            ->findAll();
+    }
 }

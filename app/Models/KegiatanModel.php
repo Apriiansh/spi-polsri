@@ -13,11 +13,12 @@ class KegiatanModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'user_id',
         'judul',
         'slug',
         'kategori',
-        'sub_kategori',
-        'konten'
+        'konten',
+        'status'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -33,4 +34,11 @@ class KegiatanModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+
+    public function search($keyword)
+    {
+        return $this->like('judul', $keyword)
+            ->orLike('konten', $keyword)
+            ->findAll();
+    }
 }

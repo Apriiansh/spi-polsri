@@ -15,27 +15,29 @@ class PublicKegiatanController extends BaseController
     }
 
     /**
-     * Data dummy kategori dan subkategori.
-     * Dalam aplikasi nyata, data ini biasanya diambil dari database.
+     * Data kategori kegiatan.
      */
     private function getKategoriData()
     {
         return [
-            'Asurans' => ['Audit', 'Reviu'],
-            'Konsultasi' => ['Analisis dan Evaluasi', 'Pelatihan'],
+            'Akuntansi/Keuangan',
+            'Hukum',
+            'Manajemen SDM',
+            'Manajemen Aset',
+            'Ketatalaksanaan'
         ];
     }
 
     /**
      * Menampilkan daftar kegiatan dengan fitur pencarian dan filter.
+     * Hanya menampilkan kegiatan dengan status 'verified'.
      */
     public function index()
     {
         $search = $this->request->getVar('search');
         $kategori_filter = $this->request->getVar('kategori');
-        $subkategori_filter = $this->request->getVar('subkategori');
 
-        $kegiatan = $this->kegiatanModel;
+        $kegiatan = $this->kegiatanModel->where('status', 'verified');
 
         if ($search) {
             $kegiatan = $kegiatan->like('judul', $search);
@@ -45,17 +47,12 @@ class PublicKegiatanController extends BaseController
             $kegiatan = $kegiatan->where('kategori', $kategori_filter);
         }
 
-        if ($subkategori_filter) {
-            $kegiatan = $kegiatan->where('sub_kategori', $subkategori_filter);
-        }
-
         $data = [
             'title' => 'Daftar Kegiatan',
             'kegiatan' => $kegiatan->orderBy('created_at', 'DESC')->paginate(10),
             'pager' => $this->kegiatanModel->pager,
             'search' => $search,
             'kategori_filter' => $kategori_filter,
-            'subkategori_filter' => $subkategori_filter,
             'kategoriData' => $this->getKategoriData(),
         ];
 
@@ -64,12 +61,18 @@ class PublicKegiatanController extends BaseController
 
     /**
      * Menampilkan detail kegiatan berdasarkan slug.
+     * Hanya menampilkan kegiatan dengan status 'verified'.
      *
      * @param string $slug Slug dari kegiatan
      */
     public function show($slug)
     {
-        $kegiatan = $this->kegiatanModel->where('slug', $slug)->first();
+        $kegiatan = $this->kegiatanModel
+            ->select("kegiatan.*, COALESCE(users.username, 'Admin') as username")
+            ->join('users', 'users.id = kegiatan.user_id', 'left')
+            ->where('kegiatan.slug', $slug)
+            ->where('kegiatan.status', 'verified')
+            ->first();
 
         if (!$kegiatan) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Kegiatan tidak ditemukan: ' . $slug);

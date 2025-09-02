@@ -1,4 +1,4 @@
-<?= $this->extend('layout/admin_main'); ?>
+<?= $this->extend('layout/user_main'); ?>
 
 <?= $this->section('content'); ?>
 <style>
@@ -121,6 +121,6 @@
         </div>
     </div>
 
-    <a href="<?= base_url('admin/kegiatan'); ?>" class="back-link">Kembali ke Daftar Kegiatan</a>
+    <a href="<?= base_url('user/kegiatan'); ?>" class="back-link">Kembali ke Daftar Kegiatan</a>
 
     <?= $this->endSection(); ?>

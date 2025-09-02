@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden mb-12">
+<div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden pt-5 mb-12">
     <div class="absolute inset-0 bg-black/10"></div>
 
     <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
@@ -24,7 +24,7 @@
 
     <div class="container mx-auto px-6 -mt-6 relative z-10">
 
-        <div class="prose max-w-none text-justify">
+        <div class="prose max-w-none text-justify text-gray-800">
             <p class="mb-4">
                 Pembentukan Satuan Pengawas Internal (SPI) di lingkungan Politeknik Negeri Sriwijaya (Polsri) tidak terlepas dari landasan hukum yang kuat, yaitu <strong>Peraturan Pemerintah Republik Indonesia Nomor 60 Tahun 2008</strong> tentang Sistem Pengendalian Intern Pemerintah.
             </p>

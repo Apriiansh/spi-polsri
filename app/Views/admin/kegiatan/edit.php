@@ -103,54 +103,46 @@
 </style>
 
 <div class="container">
-        <h2><?= esc($title); ?></h2>
+    <h2><?= esc($title); ?></h2>
 
-        <?php if (session()->getFlashdata('error')) : ?>
-                <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
-            <?php endif; ?>
+    <?php if (session()->getFlashdata('error')) : ?>
+        <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
+    <?php endif; ?>
 
-        <form action="<?= base_url('admin/kegiatan/update/' . $kegiatan['id']); ?>" method="post" onsubmit="return submitQuillForm();">
-                <?= csrf_field(); ?>
+    <form action="<?= base_url('admin/kegiatan/update/' . $kegiatan['id']); ?>" method="post" onsubmit="return submitQuillForm();">
+        <?= csrf_field(); ?>
 
-                <div class="form-group mb-3">
-                        <label for="judul">Judul Kegiatan</label>
-                        <input type="text" id="judul" name="judul" class="form-control" value="<?= old('judul', $kegiatan['judul']); ?>">
-                        <?= $validation?->showError('judul', 'error-msg') ?>
-                    </div>
+        <div class="form-group mb-3">
+            <label for="judul">Judul Kegiatan</label>
+            <input type="text" id="judul" name="judul" class="form-control" value="<?= old('judul', $kegiatan['judul']); ?>">
+            <?= $validation?->showError('judul', 'error-msg') ?>
+        </div>
 
-                <div class="form-group mb-3">
-                        <label for="kategori">Kategori</label>
-                        <select id="kategori" name="kategori" class="form-select">
-                                <option value="">Pilih Kategori</option>
-                                <?php foreach (array_keys($kategoriData) as $kategori_nama) : ?>
-                                        <option value="<?= esc($kategori_nama); ?>" <?= (old('kategori', $kegiatan['kategori']) == $kategori_nama) ? 'selected' : ''; ?>>
-                                                <?= esc($kategori_nama); ?>
-                                            </option>
-                                    <?php endforeach; ?>
-                            </select>
-                        <?= $validation?->showError('kategori', 'error-msg') ?>
-                    </div>
+        <div class="form-group mb-3">
+            <label for="kategori">Kategori</label>
+            <select id="kategori" name="kategori" class="form-select">
+                <option value="">Pilih Kategori</option>
+                <?php foreach ($kategoriData as $kategori_nama) : ?>
+                    <option value="<?= esc($kategori_nama); ?>" <?= (old('kategori', $kegiatan['kategori']) == $kategori_nama) ? 'selected' : ''; ?>>
+                        <?= esc($kategori_nama); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <?= $validation?->showError('kategori', 'error-msg') ?>
+        </div>
 
-                <div class="form-group mb-3">
-                        <label for="sub_kategori">Sub Kategori</label>
-                        <select id="sub_kategori" name="sub_kategori" class="form-select">
-                                <option value="">Pilih Sub Kategori</option>
-                            </select>
-                        <?= $validation?->showError('sub_kategori', 'error-msg') ?>
-                    </div>
+        <div class="form-group mb-3">
+            <label class="block mb-1 text-sm font-medium text-gray-700">Konten Kegiatan</label>
+            <div id="editor"></div>
+            <input type="hidden" name="konten" id="konten-html">
+            <?= $validation?->showError('konten', 'error-msg') ?>
+        </div>
 
-                <div class="form-group mb-3">
-                        <label class="block mb-1 text-sm font-medium text-gray-700">Konten Kegiatan</label>
-                        <div id="editor"></div>
-                        <input type="hidden" name="konten" id="konten-html">
-                        <?= $validation?->showError('konten', 'error-msg') ?>
-                    </div>
-
-                <div class="d-flex justify-content-end gap-2">
-                        <a href="<?= base_url('admin/kegiatan'); ?>" class="btn btn-secondary">Batal</a>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                    </div>
-            </form>
+        <div class="d-flex justify-content-end gap-2">
+            <a href="<?= base_url('admin/kegiatan'); ?>" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        </div>
+    </form>
 </div>
 
 <?= $this->endSection(); ?>
@@ -161,99 +153,57 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const kategoriData = <?= json_encode($kategoriData); ?>;
-        const kategoriSelect = document.getElementById('kategori');
-        const subKategoriSelect = document.getElementById('sub_kategori');
-        const oldKategori = "<?= old('kategori', $kegiatan['kategori']); ?>";
-        const oldSubKategori = "<?= old('sub_kategori', $kegiatan['sub_kategori']); ?>";
-
-        function populateSubKategori(selectedKategori, selectedSub) {
-            subKategoriSelect.innerHTML = '<option value="">Pilih Sub Kategori</option>';
-            if (selectedKategori && kategoriData[selectedKategori]) {
-                kategoriData[selectedKategori].forEach(sub => {
-                    const option = document.createElement('option');
-                    option.value = sub;
-                    option.textContent = sub;
-                    if (sub === selectedSub) {
-                        option.selected = true;
-                    }
-                    subKategoriSelect.appendChild(option);
-                });
-            }
-        }
-
-        kategoriSelect.addEventListener('change', function() {
-            populateSubKategori(this.value, null);
-        });
-
-        if (oldKategori) {
-            populateSubKategori(oldKategori, oldSubKategori);
-        }
-
-        // --- JavaScript untuk Quill.js ---
+        // --- Quill init ---
         var quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
-                toolbar: {
-                    container: [
-                        [{
-                            'header': [1, 2, false]
-                        }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        ['blockquote', 'code-block'],
-                        [{
-                            'list': 'ordered'
-                        }],
-                        [{
-                            'script': 'sub'
-                        }, {
-                            'script': 'super'
-                        }],
-                        [{
-                            'indent': '-1'
-                        }, {
-                            'indent': '+1'
-                        }],
-                        [{
-                            'direction': 'rtl'
-                        }],
-                        [{
-                            'color': []
-                        }, {
-                            'background': []
-                        }],
-                        [{
-                            'align': []
-                        }],
-                        ['link', 'image'],
-                        ['clean']
-                    ],
-                    handlers: {
-                        // Menggunakan fungsi kustom untuk menangani gambar
-                        'image': handleImageUpload
-                    }
-                }
+                toolbar: [
+                    [{
+                        'header': [1, 2, false]
+                    }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['blockquote', 'code-block'],
+                    [{
+                        'list': 'ordered'
+                    }],
+                    [{
+                        'script': 'sub'
+                    }, {
+                        'script': 'super'
+                    }],
+                    [{
+                        'indent': '-1'
+                    }, {
+                        'indent': '+1'
+                    }],
+                    [{
+                        'direction': 'rtl'
+                    }],
+                    [{
+                        'align': []
+                    }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
             }
         });
 
-        // Memuat konten yang sudah ada ke editor
+        // Load konten lama
         var existingContent = `<?= $kegiatan['konten']; ?>`;
-        try {
-            quill.root.innerHTML = existingContent;
-        } catch (e) {
-            console.error("Failed to load existing content:", e);
-        }
+        quill.root.innerHTML = existingContent;
 
-        function handleImageUpload() {
+        // Upload gambar custom
+        quill.getModule('toolbar').addHandler('image', function() {
             const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
+            input.type = 'file';
+            input.accept = 'image/*';
             input.click();
 
             input.onchange = async () => {
                 const file = input.files[0];
                 const formData = new FormData();
                 formData.append('image', file);
+
                 try {
                     const response = await fetch('<?= base_url('admin/kegiatan/uploadImage'); ?>', {
                         method: 'POST',
@@ -275,12 +225,11 @@
                     alert('Gagal mengunggah gambar.');
                 }
             };
-        }
+        });
 
-        // Fungsi yang dipanggil saat formulir disubmit
+        // Submit form
         window.submitQuillForm = function() {
-            var konten = quill.root.innerHTML;
-            document.getElementById('konten-html').value = konten;
+            document.getElementById('konten-html').value = quill.root.innerHTML;
             return true;
         }
     });

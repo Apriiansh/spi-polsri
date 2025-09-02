@@ -77,9 +77,11 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="flex justify-center mt-10 bg-gray-100 p-4 rounded-lg">
+<div class="flex justify-center my-8">
+    <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-lg shadow-lg p-2 md:p-4 border border-gray-300" aria-label="Pagination">
         <?= $pager->links('default', 'default_full') ?>
-    </div>
+    </nav>
 </div>
 <?= $this->endSection(); ?>

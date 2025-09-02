@@ -1,4 +1,6 @@
-<?= $this->extend('layout/admin_main'); ?>
+<!-- create -->
+
+<?= $this->extend('layout/user_main'); ?>
 <?= $this->section('content'); ?>
 
 <!-- Quill.js CSS -->
@@ -109,7 +111,7 @@
         <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
     <?php endif; ?>
 
-    <form action="<?= base_url('admin/kegiatan/store'); ?>" method="post" onsubmit="return submitQuillForm();">
+    <form action="<?= base_url('user/kegiatan/store'); ?>" method="post" onsubmit="return submitQuillForm();">
         <?= csrf_field(); ?>
 
         <div class="form-group mb-3">
@@ -123,11 +125,12 @@
             <select id="kategori" name="kategori" class="form-select">
                 <option value="">Pilih Kategori</option>
                 <?php foreach ($kategoriData as $kategori_nama) : ?>
-                    <option value="<?= esc($kategori_nama); ?>" <?= (old('kategori') == $kategori_nama) ? 'selected' : ''; ?>>
+                    <option value="<?= esc((string)$kategori_nama); ?>" <?= (old('kategori') == $kategori_nama) ? 'selected' : ''; ?>>
                         <?= esc($kategori_nama); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
+
             <?= $validation?->showError('kategori', 'error-msg') ?>
         </div>
 
@@ -139,7 +142,7 @@
         </div>
 
         <div class="d-flex justify-content-end gap-2">
-            <a href="<?= base_url('admin/kegiatan'); ?>" class="btn btn-secondary">Batal</a>
+            <a href="<?= base_url('user/kegiatan'); ?>" class="btn btn-secondary">Batal</a>
             <button type="submit" class="btn btn-primary">Tambah Kegiatan</button>
         </div>
     </form>
@@ -205,7 +208,7 @@
                 formData.append('image', file);
 
                 try {
-                    const response = await fetch('<?= base_url('admin/kegiatan/uploadImage'); ?>', {
+                    const response = await fetch('<?= base_url('user/kegiatan/uploadImage'); ?>', {
                         method: 'POST',
                         body: formData,
                         headers: {
@@ -227,7 +230,6 @@
             };
         }
 
-        // Fungsi yang dipanggil saat formulir disubmit
         window.submitQuillForm = function() {
             var konten = quill.root.innerHTML;
             document.getElementById('konten-html').value = konten;

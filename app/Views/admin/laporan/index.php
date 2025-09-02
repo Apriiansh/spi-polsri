@@ -55,6 +55,8 @@
                                             bg-blue-100 text-blue-800
                                         <?php elseif ($item['status_laporan'] == 'completed'): ?>
                                             bg-green-100 text-green-800
+                                        <?php elseif ($item['status_laporan'] == 'not_actionable'): ?>
+                                            bg-gray-300 text-yellow-800
                                         <?php endif; ?>
                                     ">
                                         <?= esc(ucfirst($item['status_laporan'])); ?>
@@ -116,10 +118,11 @@
             <div class="text-center text-gray-500">Tidak ada laporan yang ditemukan.</div>
         <?php endif; ?>
     </div>
+</div>
 
-    <!-- Pager -->
-    <div class="flex justify-center mt-10 mb-4 bg-gray-100 p-4 rounded-lg">
+<div class="flex justify-center my-8">
+    <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-lg shadow-lg p-2 md:p-4 border border-gray-300" aria-label="Pagination">
         <?= $pager->links('default', 'default_full') ?>
-    </div>
+    </nav>
 </div>
 <?= $this->endSection(); ?>

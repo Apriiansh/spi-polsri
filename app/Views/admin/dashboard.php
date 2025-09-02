@@ -63,75 +63,25 @@
         </div>
     </div>
 
-    <!-- Chart -->
-    <div class="bg-white rounded-xl shadow-sm border p-6">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">Statistik Aktivitas (6 Bulan Terakhir)</h3>
-        <div class="overflow-x-auto">
-            <div class="min-w-[300px] h-80">
-                <canvas id="statsChart"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Kelola Users -->
-        <div class="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                    </svg>
+    <!-- Charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Chart Aktivitas -->
+        <div class="bg-white rounded-xl shadow-sm border p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Statistik Aktivitas (6 Bulan Terakhir)</h3>
+            <div class="overflow-x-auto">
+                <div class="min-w-[300px] h-80">
+                    <canvas id="statsChart"></canvas>
                 </div>
-                <div class="flex-1">
-                    <h4 class="font-semibold text-gray-900">Kelola Users</h4>
-                    <p class="text-sm text-gray-600">Manajemen pengguna sistem</p>
-                </div>
-                <a href="<?= site_url('admin/users') ?>" class="inline-flex items-center px-3 py-2 rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 text-sm font-medium">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
             </div>
         </div>
 
-        <!-- Kelola Laporan -->
-        <div class="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-                    </svg>
+        <!-- Chart Status Laporan -->
+        <div class="bg-white rounded-xl shadow-sm border p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Distribusi Status Laporan</h3>
+            <div class="overflow-x-auto">
+                <div class="min-w-[300px] h-80 flex items-center justify-center">
+                    <canvas id="reportStatusChart"></canvas>
                 </div>
-                <div class="flex-1">
-                    <h4 class="font-semibold text-gray-900">Kelola Laporan</h4>
-                    <p class="text-sm text-gray-600">Review dan tindak lanjut laporan</p>
-                </div>
-                <a href="<?= site_url('admin/laporan') ?>" class="inline-flex items-center px-3 py-2 rounded-md text-red-700 bg-red-100 hover:bg-red-200 text-sm font-medium">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- Kelola Artikel -->
-        <div class="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                </div>
-                <div class="flex-1">
-                    <h4 class="font-semibold text-gray-900">Kelola Artikel</h4>
-                    <p class="text-sm text-gray-600">Manajemen konten artikel</p>
-                </div>
-                <a href="<?= site_url('admin/artikel') ?>" class="inline-flex items-center px-3 py-2 rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 text-sm font-medium">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
             </div>
         </div>
     </div>
@@ -140,8 +90,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Chart Aktivitas
         const ctx = document.getElementById('statsChart').getContext('2d');
-
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -201,6 +151,30 @@
                     },
                     line: {
                         borderWidth: 2
+                    }
+                }
+            }
+        });
+
+        // Chart Status Laporan
+        const reportCtx = document.getElementById('reportStatusChart').getContext('2d');
+        new Chart(reportCtx, {
+            type: 'pie',
+            data: {
+                labels: <?= json_encode($reportStatusLabels ?? []) ?>,
+                datasets: [{
+                    label: 'Status Laporan',
+                    data: <?= json_encode($reportStatusCounts ?? []) ?>,
+                    backgroundColor: <?= json_encode($reportStatusColors ?? []) ?>,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
                     }
                 }
             }

@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden mb-12">
+<div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden pt-5 mb-12">
     <div class="absolute inset-0 bg-black/10"></div>
 
     <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
@@ -21,7 +21,7 @@
 
 <div class="container mx-auto px-6 pt-12 pb-40">
     <div class="container mx-auto px-6 -mt-6 relative z-10">
-        <div class="prose max-w-none text-justify">
+        <div class="prose max-w-none text-justify text-gray-800">
             <h2 class="text-3xl font-bold mb-4">Visi SPI</h2>
             <p class="mb-4">
                 SPI Politeknik Negeri Sriwijaya sebagai auditor internal yang profesional dan independen dalam melaksanakan tugas, fungsi, dan tanggung jawab dalam penguatan tata kelola, akuntabilitas, dan citra publik pendidikan untuk mewujudkan <b>Good Governance</b> atas penyelenggaraan kegiatan Politeknik Negeri Sriwijaya.
@@ -36,4 +36,4 @@
         </div>
     </div>
 </div>
-    <?= $this->endSection() ?>
+<?= $this->endSection() ?>

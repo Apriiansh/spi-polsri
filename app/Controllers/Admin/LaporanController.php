@@ -52,7 +52,7 @@ class LaporanController extends BaseController
             return redirect()->back();
         }
 
-        if (!in_array($newStatus, ['pending', 'in_progress', 'completed'])) {
+        if (!in_array($newStatus, ['pending', 'in_progress', 'completed', 'not_actionable'])) {
             $session->setFlashdata('error', 'Status tidak valid.');
             return redirect()->back();
         }

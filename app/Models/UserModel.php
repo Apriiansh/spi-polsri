@@ -17,7 +17,9 @@ class UserModel extends Model
         'email',
         'password',
         'role',
-        'is_active'
+        'is_active',
+        'reset_token',
+        'reset_expires'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -44,4 +46,26 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function findByEmail($email)
+    {
+        return $this->where('email', $email)->first();
+    }
+
+    public function updateResetToken($id, $token, $expires)
+    {
+        return $this->update($id, [
+            'reset_token'   => $token,
+            'reset_expires' => $expires,
+        ]);
+    }
+
+    public function updatePassword($id, $password)
+    {
+        return $this->update($id, [
+            'password'      => password_hash($password, PASSWORD_DEFAULT),
+            'reset_token'   => null,
+            'reset_expires' => null,
+        ]);
+    }
 }

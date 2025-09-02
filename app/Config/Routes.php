@@ -7,7 +7,6 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 $routes->get('/', 'Home::index');
-$routes->get('search', 'Search::index');
 
 // Login Routes
 $routes->get('login', 'AuthController::index');
@@ -15,11 +14,24 @@ $routes->post('login', 'AuthController::login');
 
 $routes->get('logout', 'AuthController::logout');
 
+// Password Reset Routes
+$routes->get('forgot-password', 'AuthController::forgotPassword');
+$routes->post('send-reset-link', 'AuthController::sendResetLink');
+$routes->get('reset-password/(:any)', 'AuthController::resetPassword/$1');
+$routes->post('update-password', 'AuthController::updatePassword');
+
 $routes->group('', function ($routes) {
     // Halaman Profil
     $routes->get('profil/sejarah', 'Home::sejarah');
     $routes->get('profil/struktur', 'Home::struktur');
     $routes->get('profil/visimisi', 'Home::visimisi');
+
+    // Halaman Peraturan (Rute Statis)
+    $routes->get('peraturan/akuntansi-keuangan', 'Home::peraturan_akuntansi_keuangan');
+    $routes->get('peraturan/hukum', 'Home::peraturan_hukum');
+    $routes->get('peraturan/manajemen-sdm', 'Home::peraturan_manajemen_sdm');
+    $routes->get('peraturan/manajemen-aset', 'Home::peraturan_manajemen_aset');
+    $routes->get('peraturan/ketatalaksanaan', 'Home::peraturan_ketatalaksanaan');
 
     // Halaman Kegiatan & Laporan
     $routes->get('kegiatan', 'PublicKegiatanController::index');
@@ -30,6 +42,9 @@ $routes->group('', function ($routes) {
 
     $routes->get('laporan/create', 'LaporanController::create');
     $routes->post('laporan/store', 'LaporanController::store');
+    
+    // Search Route
+    $routes->get('search', 'SearchController::index');
 });
 
 // Admin Routes
@@ -52,13 +67,13 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     // Kegiatan Management Routes
     $routes->group('kegiatan', function ($routes) {
         $routes->get('/', 'Admin\KegiatanController::index');
+        $routes->post('update-status/(:num)', 'Admin\KegiatanController::updateStatus/$1');
         $routes->get('create', 'Admin\KegiatanController::create');
         $routes->post('store', 'Admin\KegiatanController::store');
         $routes->get('show/(:segment)', 'Admin\KegiatanController::show/$1');
         $routes->get('edit/(:num)', 'Admin\KegiatanController::edit/$1');
         $routes->post('update/(:num)', 'Admin\KegiatanController::update/$1');
         $routes->delete('delete/(:num)', 'Admin\KegiatanController::delete/$1');
-
 
         $routes->post('uploadImage', 'Admin\KegiatanController::uploadImage');
     });
@@ -67,6 +82,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
         $routes->get('/', 'Admin\ArtikelController::index');
         $routes->post('update-status/(:num)', 'Admin\ArtikelController::updateStatus/$1');
         $routes->get('show/(:num)', 'Admin\ArtikelController::show/$1');
+        $routes->get('delete/(:num)', 'Admin\ArtikelController::delete/$1');
     });
 
     // Laporan Management Routes
@@ -95,5 +111,18 @@ $routes->group('user', ['filter' => 'auth'], function ($routes) {
         $routes->post('delete/(:num)', 'User\ArtikelController::delete/$1');
 
         $routes->get('show/(:segment)', 'User\ArtikelController::show/$1');
+    });
+
+    // Kegiatan Management Routes
+    $routes->group('kegiatan', function ($routes) {
+        $routes->get('/', 'User\KegiatanController::index');
+        $routes->get('create', 'User\KegiatanController::create');
+        $routes->post('store', 'User\KegiatanController::store');
+        $routes->get('show/(:segment)', 'User\KegiatanController::show/$1');
+        $routes->get('edit/(:num)', 'User\KegiatanController::edit/$1');
+        $routes->post('update/(:num)', 'User\KegiatanController::update/$1');
+        $routes->delete('delete/(:num)', 'User\KegiatanController::delete/$1');
+
+        $routes->post('uploadImage', 'User\KegiatanController::uploadImage');
     });
 });

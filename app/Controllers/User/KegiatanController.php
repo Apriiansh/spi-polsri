@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Models\KegiatanModel;
@@ -13,6 +13,13 @@ class KegiatanController extends BaseController
     public function __construct()
     {
         $this->kegiatanModel = new KegiatanModel();
+
+        // Pastikan user sudah login
+        if (!session()->has('user_id') || !session()->get('user_id')) {
+            session()->setFlashdata('error', 'Silakan login terlebih dahulu');
+            header('Location: ' . base_url('/login'));
+            exit();
+        }
     }
 
     private function getKategoriData()
@@ -35,18 +42,30 @@ class KegiatanController extends BaseController
         return trim($string, '-');
     }
 
+    // Method untuk mendapatkan user_id yang aman
+    private function getCurrentUserId()
+    {
+        $userId = session()->get('user_id');  // Ubah dari 'id' ke 'user_id'
+
+        if (!$userId) {
+            throw new \Exception('User tidak terautentikasi');
+        }
+
+        return $userId;
+    }
+
     public function index()
     {
         $search = $this->request->getVar('search');
         $kategoriFilter = $this->request->getVar('kategori');
 
-        $kegiatan = $this->kegiatanModel
-            ->select('kegiatan.*, users.username')
-            ->join('users', 'users.id = kegiatan.user_id', 'left');
+        $kegiatan = $this->kegiatanModel->where('user_id', $this->getCurrentUserId());
 
         if ($search) {
-            $kegiatan = $kegiatan->like('judul', $search)
-                ->orLike('kategori', $search);
+            $kegiatan = $kegiatan->groupStart()
+                ->like('judul', $search)
+                ->orLike('kategori', $search)
+                ->groupEnd();
         }
 
         if ($kategoriFilter) {
@@ -62,30 +81,7 @@ class KegiatanController extends BaseController
             'kategoriData' => $this->getKategoriData(),
         ];
 
-        return view('admin/kegiatan/index', $data);
-    }
-
-    public function updateStatus($id)
-    {
-        $rules = [
-            'status' => [
-                'rules' => 'required|in_list[pending,verified,rejected]',
-                'errors' => [
-                    'required' => 'Status harus diisi.',
-                    'in_list' => 'Status tidak valid.'
-                ]
-            ]
-        ];
-
-        if (! $this->validate($rules)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-        }
-
-        $status = $this->request->getPost('status');
-
-        $this->kegiatanModel->update($id, ['status' => $status]);
-
-        return redirect()->back()->with('success', 'Status kegiatan berhasil diperbarui.');
+        return view('user/kegiatan/index', $data);
     }
 
     public function create()
@@ -96,11 +92,21 @@ class KegiatanController extends BaseController
             'validation' => \Config\Services::validation(),
         ];
 
-        return view('admin/kegiatan/create', $data);
+        return view('user/kegiatan/create', $data);
     }
 
     public function store()
     {
+        // Debug session (hapus setelah masalah teratasi)
+        log_message('debug', 'Session data: ' . json_encode(session()->get()));
+        log_message('debug', 'User ID from session: ' . session()->get('user_id'));
+
+        try {
+            $userId = $this->getCurrentUserId();
+        } catch (\Exception $e) {
+            return redirect()->to('/login')->with('error', 'Session expired. Silakan login kembali.');
+        }
+
         $kategoriData = $this->getKategoriData();
 
         $rules = [
@@ -113,21 +119,19 @@ class KegiatanController extends BaseController
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
 
-        $judul  = $this->request->getPost('judul');
-        $slug   = $this->to_slug($judul);
-        $konten = $this->request->getPost('konten');
-
         $data = [
-            'judul'    => $judul,
-            'slug'     => $slug,
+            'user_id'  => $userId, // Menggunakan method getCurrentUserId()
+            'judul'    => $this->request->getPost('judul'),
+            'slug'     => $this->to_slug($this->request->getPost('judul')),
             'kategori' => $this->request->getPost('kategori'),
-            'konten'   => $konten,
-            'user_id'  => session()->get('user_id'),
-            'status'   => 'pending',
+            'konten'   => $this->request->getPost('konten'),
         ];
 
+        // Debug data yang akan disimpan (hapus setelah masalah teratasi)
+        log_message('debug', 'Data to insert: ' . json_encode($data));
+
         if ($this->kegiatanModel->insert($data)) {
-            return redirect()->to('/admin/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan.');
+            return redirect()->to('/user/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan.');
         }
 
         return redirect()->back()->withInput()->with('error', 'Gagal menambahkan kegiatan.');
@@ -136,8 +140,13 @@ class KegiatanController extends BaseController
     public function edit($id)
     {
         $kegiatan = $this->kegiatanModel->find($id);
+
         if (!$kegiatan) {
-            return redirect()->to('/admin/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+            return redirect()->to('/user/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+        }
+
+        if ($kegiatan['user_id'] != $this->getCurrentUserId()) {
+            return redirect()->to('/user/kegiatan')->with('error', 'Anda tidak memiliki izin untuk mengakses sumber daya ini.');
         }
 
         $data = [
@@ -147,14 +156,19 @@ class KegiatanController extends BaseController
             'validation' => \Config\Services::validation(),
         ];
 
-        return view('admin/kegiatan/edit', $data);
+        return view('user/kegiatan/edit', $data);
     }
 
     public function update($id)
     {
         $kegiatan = $this->kegiatanModel->find($id);
+
         if (!$kegiatan) {
-            return redirect()->to('/admin/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+            return redirect()->to('/user/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+        }
+
+        if ($kegiatan['user_id'] != $this->getCurrentUserId()) {
+            return redirect()->to('/user/kegiatan')->with('error', 'Anda tidak memiliki izin untuk mengakses sumber daya ini.');
         }
 
         $kategoriData = $this->getKategoriData();
@@ -173,19 +187,15 @@ class KegiatanController extends BaseController
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
 
-        $judul  = $this->request->getPost('judul');
-        $slug   = $this->to_slug($judul);
-        $konten = $this->request->getPost('konten');
-
         $data = [
-            'judul'    => $judul,
-            'slug'     => $slug,
+            'judul'    => $this->request->getPost('judul'),
+            'slug'     => $this->to_slug($this->request->getPost('judul')),
             'kategori' => $this->request->getPost('kategori'),
-            'konten'   => $konten,
+            'konten'   => $this->request->getPost('konten'),
         ];
 
         if ($this->kegiatanModel->update($id, $data)) {
-            return redirect()->to('/admin/kegiatan')->with('success', 'Kegiatan berhasil diperbarui.');
+            return redirect()->to('/user/kegiatan')->with('success', 'Kegiatan berhasil diperbarui.');
         }
 
         return redirect()->back()->withInput()->with('error', 'Gagal memperbarui kegiatan.');
@@ -194,13 +204,17 @@ class KegiatanController extends BaseController
     public function delete($id)
     {
         $kegiatan = $this->kegiatanModel->find($id);
+
         if (!$kegiatan) {
-            return redirect()->to('/admin/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+            return redirect()->to('/user/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+        }
+
+        if ($kegiatan['user_id'] != $this->getCurrentUserId()) {
+            return redirect()->to('/user/kegiatan')->with('error', 'Anda tidak memiliki izin untuk mengakses sumber daya ini.');
         }
 
         $dom = new DOMDocument();
         @$dom->loadHTML($kegiatan['konten'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
         $images = $dom->getElementsByTagName('img');
         foreach ($images as $img) {
             $src = $img->getAttribute('src');
@@ -214,17 +228,22 @@ class KegiatanController extends BaseController
         }
 
         if ($this->kegiatanModel->delete($id)) {
-            return redirect()->to('/admin/kegiatan')->with('success', 'Kegiatan berhasil dihapus.');
-        } else {
-            return redirect()->to('/admin/kegiatan')->with('error', 'Gagal menghapus kegiatan.');
+            return redirect()->to('/user/kegiatan')->with('success', 'Kegiatan berhasil dihapus.');
         }
+
+        return redirect()->to('/user/kegiatan')->with('error', 'Gagal menghapus kegiatan.');
     }
 
     public function show($slug)
     {
         $kegiatan = $this->kegiatanModel->where('slug', $slug)->first();
+
         if (!$kegiatan) {
-            return redirect()->to('/admin/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+            return redirect()->to('/user/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
+        }
+
+        if ($kegiatan['user_id'] != $this->getCurrentUserId()) {
+            return redirect()->to('/user/kegiatan')->with('error', 'Anda tidak memiliki izin untuk mengakses sumber daya ini.');
         }
 
         $data = [
@@ -232,7 +251,7 @@ class KegiatanController extends BaseController
             'kegiatan' => $kegiatan,
         ];
 
-        return view('admin/kegiatan/show', $data);
+        return view('user/kegiatan/show', $data);
     }
 
     public function uploadImage()
@@ -241,12 +260,6 @@ class KegiatanController extends BaseController
             'image' => [
                 'label' => 'Gambar',
                 'rules' => 'uploaded[image]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/gif]|max_size[image,2048]',
-                'errors' => [
-                    'uploaded' => 'Tidak ada gambar yang diunggah.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'Format gambar tidak didukung.',
-                    'max_size' => 'Ukuran gambar terlalu besar. Maksimal 2MB.'
-                ]
             ]
         ];
 
@@ -258,13 +271,9 @@ class KegiatanController extends BaseController
 
         if ($img && $img->isValid()) {
             $newName = $img->getRandomName();
-            try {
-                $img->move(ROOTPATH . 'public/uploads/kegiatan', $newName);
-                $url = base_url('uploads/kegiatan/' . $newName);
-                return $this->response->setJSON(['url' => $url]);
-            } catch (\Exception $e) {
-                return $this->response->setJSON(['error' => 'Gagal memindahkan file: ' . $e->getMessage()]);
-            }
+            $img->move(ROOTPATH . 'public/uploads/kegiatan', $newName);
+            $url = base_url('uploads/kegiatan/' . $newName);
+            return $this->response->setJSON(['url' => $url]);
         }
 
         return $this->response->setJSON(['error' => 'Gagal mengunggah gambar.']);

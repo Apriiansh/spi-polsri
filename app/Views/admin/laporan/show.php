@@ -68,9 +68,10 @@
                 <label for="status_laporan" class="block text-sm font-medium text-gray-700 mb-1">Status:</label>
                 <select name="status_laporan" id="status_laporan"
                     class="w-full md:w-1/3 border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    <option value="pending" <?= ($laporan['status_laporan'] == 'pending') ? 'selected' : ''; ?>>Pending</option>
-                    <option value="in_progress" <?= ($laporan['status_laporan'] == 'in_progress') ? 'selected' : ''; ?>>In Progress</option>
-                    <option value="completed" <?= ($laporan['status_laporan'] == 'completed') ? 'selected' : ''; ?>>Completed</option>
+                    <option value="pending" <?= ($laporan['status_laporan'] == 'pending') ? 'selected' : ''; ?>>Menunggu</option>
+                    <option value="in_progress" <?= ($laporan['status_laporan'] == 'in_progress') ? 'selected' : ''; ?>>Diproses</option>
+                    <option value="completed" <?= ($laporan['status_laporan'] == 'completed') ? 'selected' : ''; ?>>Selesai</option>
+                    <option value="not_actionable" <?= ($laporan['status_laporan'] == 'not_actionable') ? 'selected' : ''; ?>>Tidak Dapat Ditindaklanjuti</option>
                 </select>
             </div>
             <button type="submit"

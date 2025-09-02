@@ -49,4 +49,11 @@ class ArticleModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+
+    public function search($keyword)
+    {
+        return $this->like('title', $keyword)
+            ->orLike('content', $keyword)
+            ->findAll();
+    }
 }

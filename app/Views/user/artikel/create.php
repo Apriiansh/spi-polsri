@@ -52,7 +52,7 @@
         modules: {
             toolbar: [
                 [{
-                    header: [1, 2, false]
+                    header: [2, 3, false]
                 }],
                 ['bold', 'italic', 'underline', 'strike'],
                 ['blockquote', 'code-block'],

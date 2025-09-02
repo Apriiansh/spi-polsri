@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <!-- Hero Header -->
-<div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden mb-12">
+<div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden pt-5 mb-12">
     <div class="absolute inset-0 bg-black/10"></div>
     <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
     <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
@@ -16,10 +16,19 @@
         </div>
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-4"><?= esc($kegiatan['judul']); ?></h1>
 
-        <div class="mt-4 text-white/80 flex flex-wrap justify-center items-center gap-2">
-            <span class="inline-block bg-blue-300/30 text-white px-3 py-1 rounded-full text-xs font-semibold"><?= esc($kegiatan['kategori']); ?></span>
-            <span class="inline-block bg-green-300/30 text-white px-3 py-1 rounded-full text-xs font-semibold"><?= esc($kegiatan['sub_kategori']); ?></span>
-            <span class="inline-block text-white/80 ml-2">Dibuat pada: <?= esc(date('d F Y', strtotime($kegiatan['created_at']))); ?></span>
+        <div class="mt-4 text-white/80 flex flex-wrap justify-center items-center gap-4">
+            <span class="inline-flex items-center">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <?= esc($kegiatan['username'] ?? 'Admin'); ?>
+            </span>
+            <span class="inline-flex items-center">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <?= esc(date('d F Y', strtotime($kegiatan['created_at']))); ?>
+            </span>
+            <span class="inline-flex items-center bg-blue-300/30 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <?= esc($kegiatan['kategori']); ?>
+            </span>
         </div>
 
         <div class="mt-8 w-24 h-1 bg-blue-200 mx-auto rounded-full"></div>
@@ -29,7 +38,7 @@
 <!-- Main Content -->
 <div class="container mx-auto px-6 -mt-6 relative z-10">
     <div class="overflow-hidden p-8 border border-gray-100">
-        <div class="prose max-w-none">
+        <div class="prose max-w-none text-slate-800">
             <style>
                 .prose ul,
                 .prose ol {
@@ -76,7 +85,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7m11 0l-7 7 7 7"></path>
                 </svg>
-                Kembali ke Daftar Kegiatan
+                back
             </a>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<?= $this->extend('layout/admin_main'); ?>
+<?= $this->extend('layout/user_main'); ?>
 <?= $this->section('content'); ?>
 
 <!-- Quill.js CSS -->
@@ -109,12 +109,12 @@
         <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
     <?php endif; ?>
 
-    <form action="<?= base_url('admin/kegiatan/store'); ?>" method="post" onsubmit="return submitQuillForm();">
+    <form action="<?= base_url('user/kegiatan/update/' . $kegiatan['id']); ?>" method="post" onsubmit="return submitQuillForm();">
         <?= csrf_field(); ?>
 
         <div class="form-group mb-3">
             <label for="judul">Judul Kegiatan</label>
-            <input type="text" id="judul" name="judul" class="form-control" value="<?= old('judul'); ?>">
+            <input type="text" id="judul" name="judul" class="form-control" value="<?= old('judul', $kegiatan['judul']); ?>">
             <?= $validation?->showError('judul', 'error-msg') ?>
         </div>
 
@@ -123,7 +123,7 @@
             <select id="kategori" name="kategori" class="form-select">
                 <option value="">Pilih Kategori</option>
                 <?php foreach ($kategoriData as $kategori_nama) : ?>
-                    <option value="<?= esc($kategori_nama); ?>" <?= (old('kategori') == $kategori_nama) ? 'selected' : ''; ?>>
+                    <option value="<?= esc($kategori_nama); ?>" <?= (old('kategori', $kegiatan['kategori']) == $kategori_nama) ? 'selected' : ''; ?>>
                         <?= esc($kategori_nama); ?>
                     </option>
                 <?php endforeach; ?>
@@ -139,8 +139,8 @@
         </div>
 
         <div class="d-flex justify-content-end gap-2">
-            <a href="<?= base_url('admin/kegiatan'); ?>" class="btn btn-secondary">Batal</a>
-            <button type="submit" class="btn btn-primary">Tambah Kegiatan</button>
+            <a href="<?= base_url('user/kegiatan'); ?>" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         </div>
     </form>
 </div>
@@ -160,7 +160,7 @@
                 toolbar: {
                     container: [
                         [{
-                            'header': [1, 2, false]
+                            "header": [1, 2, false]
                         }],
                         ['bold', 'italic', 'underline', 'strike'],
                         ['blockquote', 'code-block'],
@@ -193,6 +193,16 @@
             }
         });
 
+        // Muat konten lama ke editor dengan proper escaping
+        try {
+            var existingContent = <?= json_encode($kegiatan['konten']); ?>;
+            quill.root.innerHTML = existingContent;
+        } catch (e) {
+            console.error("Failed to load existing content:", e);
+            // Fallback: coba load content secara aman
+            quill.root.innerHTML = '';
+        }
+
         function handleImageUpload() {
             const input = document.createElement('input');
             input.setAttribute('type', 'file');
@@ -201,35 +211,51 @@
 
             input.onchange = async () => {
                 const file = input.files[0];
+                if (!file) return;
+
                 const formData = new FormData();
                 formData.append('image', file);
 
                 try {
-                    const response = await fetch('<?= base_url('admin/kegiatan/uploadImage'); ?>', {
+                    const response = await fetch('<?= base_url('user/kegiatan/uploadImage'); ?>', {
                         method: 'POST',
                         body: formData,
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest'
                         }
                     });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
                     const result = await response.json();
 
                     if (result.url) {
-                        const range = quill.getSelection();
+                        const range = quill.getSelection() || {
+                            index: 0
+                        };
                         quill.insertEmbed(range.index, 'image', result.url);
                     } else {
                         alert('Gagal mengunggah gambar: ' + (result.error || 'Terjadi kesalahan.'));
                     }
                 } catch (error) {
                     console.error('Error:', error);
-                    alert('Gagal mengunggah gambar.');
+                    alert('Gagal mengunggah gambar. Silakan coba lagi.');
                 }
             };
         }
 
-        // Fungsi yang dipanggil saat formulir disubmit
+        // Submit form dengan konten Quill
         window.submitQuillForm = function() {
             var konten = quill.root.innerHTML;
+
+            // Validasi konten tidak kosong
+            if (quill.getText().trim().length === 0) {
+                alert('Konten kegiatan tidak boleh kosong');
+                return false;
+            }
+
             document.getElementById('konten-html').value = konten;
             return true;
         }

@@ -54,9 +54,7 @@ $fullTitle = ($title && $title !== $siteName) ? $title . ' - ' . $siteName : $si
     <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('images/favicon-32x32.png') ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('images/favicon-16x16.png') ?>">
-    <link rel="apple-touch-icon" href="<?= base_url('images/apple-touch-icon.png') ?>">
+    <link rel="icon" type="image/png" size="32x32" href="<?= base_url('images/favicon.ico') ?>">
 
     <!-- Critical CSS -->
     <style>
@@ -74,11 +72,17 @@ $fullTitle = ($title && $title !== $siteName) ? $title . ' - ' . $siteName : $si
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
             margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+            background: linear-gradient(to bottom right, #e0f2fe, #fff7ed, #bae6fd);
             min-height: 100vh;
             line-height: 1.6;
-            color: #1f2937;
+            color: #e0f2fe;
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                padding-top: 100px;
+                /* Padding untuk desktop */
+            }
         }
 
         .skip-link {
@@ -108,8 +112,6 @@ $fullTitle = ($title && $title !== $siteName) ? $title . ' - ' . $siteName : $si
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.6s ease-out 0.1s forwards;
-            margin: 0;
-            padding: 0;
             width: 100%;
             max-width: none;
         }
@@ -120,7 +122,6 @@ $fullTitle = ($title && $title !== $siteName) ? $title . ' - ' . $siteName : $si
         }
 
         @media (min-width: 640px) {
-
             .main-content.with-container {
                 padding: 1rem;
             }
@@ -478,7 +479,6 @@ $fullTitle = ($title && $title !== $siteName) ? $title . ' - ' . $siteName : $si
                 background: white !important;
                 font-size: 12pt;
             }
-
         }
 
         /* High contrast mode support */
