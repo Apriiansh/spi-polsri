@@ -41,7 +41,8 @@ class AuthController extends Controller
                     'username'   => $user['username'],
                     'email'      => $user['email'],
                     'isLoggedIn' => TRUE,
-                    'role'       => $user['role']
+                    'role'       => $user['role'],
+                    'bidang'     => $user['bidang']
                 ];
                 $session->set($ses_data);
 
@@ -68,8 +69,8 @@ class AuthController extends Controller
     public function sendResetLink()
     {
         $session = session();
-        $email = $this->request->getVar('email');
-        $user = $this->userModel->findByEmail($email);
+        $emailAddress = $this->request->getVar('email');
+        $user = $this->userModel->findByEmail($emailAddress);
 
         if ($user) {
             $token = bin2hex(random_bytes(20));
@@ -77,9 +78,13 @@ class AuthController extends Controller
 
             $this->userModel->updateResetToken($user['id'], $token, $expires);
 
-            $this->email->setTo($email);
-            $this->email->setSubject('Reset Password');
-            $this->email->setMessage('Klik link ini untuk mereset password Anda: ' . site_url('reset-password/' . $token));
+            $this->email->setTo($emailAddress);
+            $this->email->setSubject('Reset Password Akun SPI POLSRI');
+            
+            $message = view('email/reset_password_link', [
+                'resetLink' => site_url('reset-password/' . $token)
+            ]);
+            $this->email->setMessage($message);
 
             if ($this->email->send()) {
                 $session->setFlashdata('success', 'Link reset password telah dikirim ke email Anda.');
@@ -87,7 +92,7 @@ class AuthController extends Controller
                 $session->setFlashdata('error', 'Gagal mengirim email. Silakan coba lagi.');
             }
         } else {
-            $session->setFlashdata('error', 'Email tidak ditemukan.');
+            $session->setFlashdata('error', 'Email tidak ditemukan dalam sistem kami.');
         }
 
         return redirect()->to(site_url('forgot-password'));
@@ -110,8 +115,29 @@ class AuthController extends Controller
     public function updatePassword()
     {
         $session = session();
+
+        $rules = [
+            'token' => 'required',
+            'password' => 'required|min_length[8]',
+            'password_confirm' => 'required|matches[password]'
+        ];
+
+        $messages = [
+            'password' => [
+                'min_length' => 'Password minimal harus 8 karakter.'
+            ],
+            'password_confirm' => [
+                'matches' => 'Konfirmasi password tidak cocok dengan password baru.'
+            ]
+        ];
+
+        if (!$this->validate($rules, $messages)) {
+            return redirect()->back()->withInput()->with('error', $this->validator->listErrors());
+        }
+
         $token = $this->request->getVar('token');
         $password = $this->request->getVar('password');
+        
         $user = $this->userModel->where('reset_token', $token)
             ->where('reset_expires >', date('Y-m-d H:i:s'))
             ->first();

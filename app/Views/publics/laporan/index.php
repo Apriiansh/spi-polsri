@@ -7,7 +7,7 @@
         <tr>
             <th class="py-2 px-4 border-b text-left">ID</th>
             <th class="py-2 px-4 border-b text-left">Judul</th>
-            <th class="py-2 px-4 border-b text-left">Kategori</th>
+            <th class="py-2 px-4 border-b text-left">Klasifikasi</th>
             <th class="py-2 px-4 border-b text-left">Status</th>
         </tr>
     </thead>
@@ -16,7 +16,7 @@
             <tr class="hover:bg-gray-50">
                 <td class="py-2 px-4 border-b"><?= $l['id'] ?></td>
                 <td class="py-2 px-4 border-b"><?= $l['judul'] ?></td>
-                <td class="py-2 px-4 border-b"><?= $l['kategori_laporan'] ?></td>
+                <td class="py-2 px-4 border-b"><?= $l['klasifikasi_laporan'] ?></td>
                 <td class="py-2 px-4 border-b"><?= $l['status_laporan'] ?></td>
             </tr>
         <?php endforeach; ?>

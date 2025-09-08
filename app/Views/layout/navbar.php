@@ -17,15 +17,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F3F4F6;
-        }
-
-        .bg-gradient-polsri {
-            background: linear-gradient(50deg, rgb(96, 152, 182) 0%, rgb(46, 111, 146) 100%);
-        }
-
-        .bg-gradient-polsri-reverse {
-            background: linear-gradient(320deg, rgb(96, 152, 182) 0%, rgb(46, 111, 146) 100%);
+            background-color: #F8FAFC;
         }
 
         .shadow-soft {
@@ -114,7 +106,7 @@
 
         /* Active link */
         .active {
-            color: rgb(226, 232, 240) !important;
+            color: #FEF3C7 !important;
             font-weight: 600;
         }
 
@@ -175,12 +167,25 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(254, 243, 199, 0.2), transparent);
             transition: left 0.5s;
         }
 
         .nav-link:hover::before {
             left: 100%;
+        }
+
+        /* Custom gradients */
+        .bg-navbar-gradient {
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+        }
+
+        .bg-navbar-bottom-gradient {
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+        }
+
+        .bg-mobile-gradient {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #1D4ED8 100%);
         }
     </style>
 </head>
@@ -188,47 +193,45 @@
 <body>
     <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <!-- Bagian Atas dengan Animasi -->
-        <div class="relative bg-gradient-to-r from-blue-800 to-blue-600 py-3 lg:py-4">
+        <div class="relative bg-navbar-gradient py-3 lg:py-4">
             <!-- Background animasi abstrak -->
             <div class="absolute inset-0 opacity-15">
                 <!-- Floating shapes -->
-                <div class="absolute top-2 left-10 w-2 h-2 bg-blue-300 rotate-45 float-nav"></div>
+                <div class="absolute top-2 left-10 w-2 h-2 bg-yellow-200 rotate-45 float-nav"></div>
                 <div class="absolute top-4 right-20 w-1.5 h-8 bg-blue-200 slide-nav"></div>
-                <div class="absolute bottom-2 left-1/4 w-2.5 h-2.5 bg-blue-400 rounded-full pulse-nav"></div>
+                <div class="absolute bottom-2 left-1/4 w-2.5 h-2.5 bg-amber-300 rounded-full pulse-nav"></div>
 
                 <!-- Drifting lines -->
-                <div class="absolute top-1/2 right-16 w-12 h-0.5 bg-gradient-to-r from-transparent via-blue-300 to-transparent drift-nav"></div>
+                <div class="absolute top-1/2 right-16 w-12 h-0.5 bg-gradient-to-r from-transparent via-yellow-200 to-transparent drift-nav"></div>
                 <div class="absolute bottom-3 left-1/3 w-10 h-0.5 bg-gradient-to-r from-blue-200 to-transparent float-nav"></div>
 
                 <!-- Small geometric elements -->
-                <div class="absolute top-3 right-1/3 w-1.5 h-1.5 bg-blue-300 drift-nav"></div>
-                <div class="absolute bottom-4 right-10 w-1 h-1 bg-blue-200 rotate-45 float-nav"></div>
+                <div class="absolute top-3 right-1/3 w-1.5 h-1.5 bg-amber-200 drift-nav"></div>
+                <div class="absolute bottom-4 right-10 w-1 h-1 bg-yellow-200 rotate-45 float-nav"></div>
 
                 <!-- Pulsing dots -->
-                <div class="absolute top-6 left-2/3 w-1 h-1 bg-blue-400 rounded-full pulse-nav" style="animation-delay: -1s;"></div>
-                <div class="absolute bottom-1 left-12 w-0.5 h-0.5 bg-blue-300 rounded-full pulse-nav" style="animation-delay: -3s;"></div>
+                <div class="absolute top-6 left-2/3 w-1 h-1 bg-amber-300 rounded-full pulse-nav" style="animation-delay: -1s;"></div>
+                <div class="absolute bottom-1 left-12 w-0.5 h-0.5 bg-yellow-200 rounded-full pulse-nav" style="animation-delay: -3s;"></div>
 
                 <!-- Moving triangles -->
-                <div class="absolute top-1 right-12 w-0 h-0 border-l-1 border-r-1 border-b-2 border-transparent border-b-blue-300 drift-nav" style="animation-delay: -2s;"></div>
+                <div class="absolute top-1 right-12 w-0 h-0 border-l-1 border-r-1 border-b-2 border-transparent border-b-amber-200 drift-nav" style="animation-delay: -2s;"></div>
 
                 <!-- Vertical sliding elements -->
-                <div class="absolute top-0 left-2/3 w-0.5 h-4 bg-gradient-to-b from-transparent via-blue-300 to-transparent slide-nav" style="animation-delay: -1.5s;"></div>
+                <div class="absolute top-0 left-2/3 w-0.5 h-4 bg-gradient-to-b from-transparent via-yellow-200 to-transparent slide-nav" style="animation-delay: -1.5s;"></div>
             </div>
 
             <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-10">
-                    <!-- Logo -->
                     <a href="/" class="flex items-center space-x-3 group">
                         <img src="<?= base_url('images/spi.svg') ?>" alt="Logo SPI POLSRI"
                             class="h-24 w-32 sm:h-28 transition-all duration-300 group-hover:scale-105 drop-shadow-sm">
                     </a>
 
-                    <!-- Search desktop -->
                     <div class="hidden lg:flex items-center relative">
                         <input type="text" id="search-input-desktop" placeholder="Cari..."
-                            class="pl-4 pr-10 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white placeholder-blue-100 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 focus:bg-white/20">
+                            class="pl-4 pr-10 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white placeholder-blue-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200/50 focus:bg-white/20">
                         <button id="search-button-desktop" aria-label="Cari di website"
-                            class="absolute right-0 p-2.5 rounded-full text-white hover:text-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30">
+                            class="absolute right-0 p-2.5 rounded-full text-white hover:text-amber-200 hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-200/30">
                             <i class="fas fa-search"></i>
                         </button>
                         <div id="search-results-desktop"
@@ -239,99 +242,97 @@
 
                     <!-- Mobile button -->
                     <button id="mobile-menu-button" aria-label="Buka menu"
-                        class="lg:hidden relative inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 transition-colors">
+                        class="lg:hidden relative inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/10 hover:text-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-200/30 transition-colors">
                         <i id="mobile-menu-icon" class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Desktop Menu dengan Animasi -->
-        <div class="hidden lg:block relative bg-gradient-to-r from-blue-600 to-blue-800 backdrop-blur-md shadow-soft">
-            <!-- Background animasi untuk menu desktop -->
+        <div class="hidden lg:block relative bg-navbar-bottom-gradient backdrop-blur-md shadow-soft">
             <div class="absolute inset-0 opacity-10">
-                <div class="absolute top-2 left-20 w-1 h-1 bg-blue-200 rounded-full pulse-nav"></div>
-                <div class="absolute top-1 right-1/4 w-8 h-0.5 bg-gradient-to-r from-transparent via-blue-200 to-transparent drift-nav" style="animation-delay: -4s;"></div>
-                <div class="absolute bottom-1 left-1/2 w-1.5 h-1.5 bg-blue-300 rotate-45 float-nav" style="animation-delay: -2s;"></div>
-                <div class="absolute top-3 right-16 w-0.5 h-3 bg-gradient-to-b from-blue-200 to-transparent slide-nav" style="animation-delay: -3s;"></div>
+                <div class="absolute top-2 left-20 w-1 h-1 bg-amber-200 rounded-full pulse-nav"></div>
+                <div class="absolute top-1 right-1/4 w-8 h-0.5 bg-gradient-to-r from-transparent via-yellow-200 to-transparent drift-nav" style="animation-delay: -4s;"></div>
+                <div class="absolute bottom-1 left-1/2 w-1.5 h-1.5 bg-amber-300 rotate-45 float-nav" style="animation-delay: -2s;"></div>
+                <div class="absolute top-3 right-16 w-0.5 h-3 bg-gradient-to-b from-yellow-200 to-transparent slide-nav" style="animation-delay: -3s;"></div>
             </div>
 
             <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-14">
                     <div class="flex items-center space-x-6">
-                        <a href="/" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-white hover:text-blue-100 transition-colors">Beranda
-                            <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300"></div>
+                        <a href="/" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">Beranda
+                            <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 rounded-full transition-all duration-300"></div>
                         </a>
                         <div class="relative group">
                             <button
-                                class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-white hover:text-blue-100 transition-colors">
+                                class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">
                                 Profil
                                 <i class="fas fa-chevron-down ml-1 text-xs transition-transform group-hover:rotate-180"></i>
-                                <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300"></div>
+                                <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 transition-all duration-300"></div>
                             </button>
                             <div
                                 class="dropdown-menu absolute left-0 mt-2 w-56 rounded-2xl shadow-soft-xl bg-white/95 backdrop-blur-sm border border-white/30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
                                 <div class="p-2">
                                     <a href="/profil/sejarah"
-                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-xl transition-colors">
-                                        <i class="fas fa-history w-5 h-5 mr-3 text-blue-600"></i> Sejarah
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-history w-5 h-5 mr-3 text-amber-600"></i> Sejarah
                                     </a>
                                     <a href="/profil/struktur"
-                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-xl transition-colors">
-                                        <i class="fas fa-sitemap w-5 h-5 mr-3 text-blue-600"></i> Struktur
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-sitemap w-5 h-5 mr-3 text-amber-600"></i> Struktur
                                     </a>
                                     <a href="/profil/piagam"
-                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-xl transition-colors">
-                                        <i class="fas fa-sitemap w-5 h-5 mr-3 text-blue-600"></i> Piagam Pengawasan Intern
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-sitemap w-5 h-5 mr-3 text-amber-600"></i> Piagam Pengawasan Intern
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="relative group">
                             <button
-                                class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-white hover:text-blue-100 transition-colors">
+                                class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">
                                 Peraturan
                                 <i class="fas fa-chevron-down ml-1 text-xs transition-transform group-hover:rotate-180"></i>
-                                <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300"></div>
+                                <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 transition-all duration-300"></div>
                             </button>
                             <div
                                 class="dropdown-menu absolute left-0 mt-2 w-64 rounded-2xl shadow-soft-xl bg-white/95 backdrop-blur-sm border border-white/30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
                                 <div class="p-2">
                                     <a href="/peraturan/akuntansi-keuangan"
-                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-xl transition-colors">
-                                        <i class="fas fa-landmark w-5 h-5 mr-3 text-blue-600"></i> Akuntansi/Keuangan
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-landmark w-5 h-5 mr-3 text-amber-600"></i> Akuntansi/Keuangan
                                     </a>
                                     <a href="/peraturan/hukum"
-                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-xl transition-colors">
-                                        <i class="fas fa-gavel w-5 h-5 mr-3 text-blue-600"></i> Hukum
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-gavel w-5 h-5 mr-3 text-amber-600"></i> Hukum
                                     </a>
                                     <a href="/peraturan/manajemen-sdm"
-                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-xl transition-colors">
-                                        <i class="fas fa-users-cog w-5 h-5 mr-3 text-blue-600"></i> Manajemen SDM
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-users-cog w-5 h-5 mr-3 text-amber-600"></i> Manajemen SDM
                                     </a>
                                     <a href="/peraturan/manajemen-aset"
-                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-xl transition-colors">
-                                        <i class="fas fa-building w-5 h-5 mr-3 text-blue-600"></i> Manajemen Aset
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-building w-5 h-5 mr-3 text-amber-600"></i> Manajemen Aset
                                     </a>
                                     <a href="/peraturan/ketatalaksanaan"
-                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-xl transition-colors">
-                                        <i class="fas fa-file-alt w-5 h-5 mr-3 text-blue-600"></i> Ketatalaksanaan
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-file-alt w-5 h-5 mr-3 text-amber-600"></i> Ketatalaksanaan
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <a href="/kegiatan" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-white hover:text-blue-100 transition-colors">Kegiatan
-                            <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300"></div>
+                        <a href="/kegiatan" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">Kegiatan
+                            <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 rounded-full transition-all duration-300"></div>
                         </a>
-                        <a href="/artikel" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-white hover:text-blue-100 transition-colors">Artikel
-                            <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300"></div>
+                        <a href="/artikel" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">Artikel
+                            <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 rounded-full transition-all duration-300"></div>
                         </a>
-                        <a href="/laporan/create" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-white hover:text-blue-100 transition-colors">Lapor SPI
-                            <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300"></div>
+                        <a href="/laporan/create" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">Lapor SPI
+                            <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 rounded-full transition-all duration-300"></div>
                         </a>
                     </div>
                     <a href="/login"
-                        class="bg-white/20 backdrop-blur-sm text-white border border-white/30 px-6 py-2 rounded-full text-sm font-semibold hover:bg-white/30 hover:border-white/50 shadow-lg flex items-center transition-all">
+                        class="bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white border-0 px-6 py-2 rounded-full text-sm font-semibold shadow-lg flex items-center transition-all transform hover:scale-105">
                         <i class="fas fa-sign-in-alt mr-2"></i> Login
                     </a>
                 </div>
@@ -340,13 +341,13 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu"
-            class="lg:hidden absolute top-full left-0 w-full bg-gradient-to-r from-blue-600 to-blue-800 backdrop-blur-md shadow-lg border-t border-white/20 max-h-0 overflow-hidden transition-all duration-300">
+            class="lg:hidden absolute top-full left-0 w-full bg-mobile-gradient backdrop-blur-md shadow-lg border-t border-white/20 max-h-0 overflow-hidden transition-all duration-300">
             <div class="p-4 space-y-3">
                 <div class="relative w-full">
                     <input type="text" id="search-input-mobile" placeholder="Cari..."
-                        class="w-full pl-4 pr-10 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white placeholder-blue-100 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 focus:bg-white/20">
+                        class="w-full pl-4 pr-10 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white placeholder-blue-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200/30 focus:bg-white/20">
                     <button id="search-button-mobile" aria-label="Cari"
-                        class="absolute right-0 p-2.5 rounded-full text-white hover:text-blue-100">
+                        class="absolute right-0 p-2.5 rounded-full text-white hover:text-amber-200">
                         <i class="fas fa-search"></i>
                     </button>
                     <div id="search-results-mobile"
@@ -356,46 +357,46 @@
                 </div>
 
                 <a href="/"
-                    class="block px-3 py-2 rounded-md text-base text-white hover:text-blue-100 hover:bg-white/10 transition-colors">Beranda</a>
+                    class="block px-3 py-2 rounded-md text-base text-white hover:text-amber-200 hover:bg-white/10 transition-colors">Beranda</a>
                 <button id="mobile-profil-button"
-                    class="w-full flex justify-between items-center px-3 py-2 text-base text-white hover:text-blue-100 hover:bg-white/10 rounded-md transition-colors">
+                    class="w-full flex justify-between items-center px-3 py-2 text-base text-white hover:text-amber-200 hover:bg-white/10 rounded-md transition-colors">
                     Profil <i id="mobile-profil-icon" class="fas fa-chevron-down text-sm transition-transform"></i>
                 </button>
-                <div id="mobile-profil-menu" class="pl-4 py-2 space-y-1 border-l-2 border-blue-400 overflow-hidden transition-all">
+                <div id="mobile-profil-menu" class="pl-4 py-2 space-y-1 border-l-2 border-amber-400 overflow-hidden transition-all">
                     <a href="/profil/sejarah"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-white hover:bg-white/10 rounded transition-colors">Sejarah</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Sejarah</a>
                     <a href="/profil/struktur"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-white hover:bg-white/10 rounded transition-colors">Struktur</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Struktur</a>
                     <a href="/profil/piagam"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-white hover:bg-white/10 rounded transition-colors">Piagam Pengawasan Intern</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Piagam Pengawasan Intern</a>
                 </div>
 
                 <button id="mobile-peraturan-button"
-                    class="w-full flex justify-between items-center px-3 py-2 text-base text-white hover:text-blue-100 hover:bg-white/10 rounded-md transition-colors">
+                    class="w-full flex justify-between items-center px-3 py-2 text-base text-white hover:text-amber-200 hover:bg-white/10 rounded-md transition-colors">
                     Peraturan <i id="mobile-peraturan-icon" class="fas fa-chevron-down text-sm transition-transform"></i>
                 </button>
-                <div id="mobile-peraturan-menu" class="pl-4 py-2 space-y-1 border-l-2 border-blue-400 overflow-hidden transition-all">
+                <div id="mobile-peraturan-menu" class="pl-4 py-2 space-y-1 border-l-2 border-amber-400 overflow-hidden transition-all">
                     <a href="/peraturan/akuntansi-keuangan"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-white hover:bg-white/10 rounded transition-colors">Akuntansi/Keuangan</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Akuntansi/Keuangan</a>
                     <a href="/peraturan/hukum"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-white hover:bg-white/10 rounded transition-colors">Hukum</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Hukum</a>
                     <a href="/peraturan/manajemen-sdm"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-white hover:bg-white/10 rounded transition-colors">Manajemen SDM</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Manajemen SDM</a>
                     <a href="/peraturan/manajemen-aset"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-white hover:bg-white/10 rounded transition-colors">Manajemen Aset</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Manajemen Aset</a>
                     <a href="/peraturan/ketatalaksanaan"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-white hover:bg-white/10 rounded transition-colors">Ketatalaksanaan</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Ketatalaksanaan</a>
                 </div>
 
                 <a href="/kegiatan"
-                    class="block px-3 py-2 rounded-md text-base text-white hover:text-blue-100 hover:bg-white/10 transition-colors">Kegiatan</a>
+                    class="block px-3 py-2 rounded-md text-base text-white hover:text-amber-200 hover:bg-white/10 transition-colors">Kegiatan</a>
                 <a href="/artikel"
-                    class="block px-3 py-2 rounded-md text-base text-white hover:text-blue-100 hover:bg-white/10 transition-colors">Artikel</a>
+                    class="block px-3 py-2 rounded-md text-base text-white hover:text-amber-200 hover:bg-white/10 transition-colors">Artikel</a>
                 <a href="/laporan/create"
-                    class="block px-3 py-2 rounded-md text-base text-white hover:text-blue-100 hover:bg-white/10 transition-colors">Lapor SPI</a>
+                    class="block px-3 py-2 rounded-md text-base text-white hover:text-amber-200 hover:bg-white/10 transition-colors">Lapor SPI</a>
 
                 <a href="/login"
-                    class="mt-4 flex items-center justify-center bg-white/20 backdrop-blur-sm text-white border border-white/30 px-4 py-2.5 rounded-full text-base font-semibold shadow-lg hover:bg-white/30 transition-colors">
+                    class="mt-4 flex items-center justify-center bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white border-0 px-4 py-2.5 rounded-full text-base font-semibold shadow-lg transition-colors">
                     <i class="fas fa-sign-in-alt mr-2"></i> Login
                 </a>
             </div>
@@ -474,7 +475,7 @@
                     return [];
                 }
                 try {
-                    const response = await fetch(`<?= base_url('search') ?>?q=${encodeURIComponent(query)}`);
+                    const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
                     if (!response.ok) {
                         console.error('Search request failed');
                         return [];
@@ -507,12 +508,12 @@
 
                     if (staticResults.length > 0) {
                         resultsHtml += '<h3 class="px-3 pt-2 text-xs font-semibold text-gray-500">Halaman</h3>';
-                        resultsHtml += staticResults.map(r => `<a href="${r.url}" class="block p-3 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-colors">${r.title}</a>`).join('');
+                        resultsHtml += staticResults.map(r => `<a href="${r.url}" class="block p-3 rounded-lg text-sm text-gray-700 hover:bg-amber-50 hover:text-blue-700 transition-colors">${r.title}</a>`).join('');
                     }
 
                     if (dynamicResults.length > 0) {
                         resultsHtml += '<h3 class="px-3 pt-2 text-xs font-semibold text-gray-500">Artikel & Kegiatan</h3>';
-                        resultsHtml += dynamicResults.map(r => `<a href="${r.url}" class="block p-3 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-colors"><div class="font-semibold">${r.title}</div><div class="text-xs text-gray-500">${r.type}</div></a>`).join('');
+                        resultsHtml += dynamicResults.map(r => `<a href="${r.url}" class="block p-3 rounded-lg text-sm text-gray-700 hover:bg-amber-50 hover:text-blue-700 transition-colors"><div class="font-semibold">${r.title}</div><div class="text-xs text-gray-500">${r.type}</div></a>`).join('');
                     }
 
                     if (resultsHtml) {
@@ -595,7 +596,7 @@
                 }
 
                 // Close search results
-                const searchDesktopContainer = document.querySelector('.hidden.lg\:flex.items-center.relative');
+                const searchDesktopContainer = document.querySelector('.hidden.lg\\:flex.items-center.relative');
                 if (searchDesktopContainer && !searchDesktopContainer.contains(e.target)) {
                     searchResultsDesktop.classList.add('hidden');
                 }

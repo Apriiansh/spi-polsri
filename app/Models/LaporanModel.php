@@ -13,6 +13,8 @@ class LaporanModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'email_pelapor',
+        'klasifikasi_laporan',
         'kategori_laporan',
         'judul',
         'isi',

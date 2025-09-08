@@ -21,13 +21,15 @@ class LaporanController extends BaseController
 
         // Validasi input
         $validationRules = [
+            'email_pelapor'    => 'required|valid_email',
+            'klasifikasi_laporan' => 'required',
             'kategori_laporan' => 'required',
             'judul'            => 'required',
             'isi'              => 'required',
             'tgl_kejadian'     => 'required|valid_date',
             'lok_kejadian'     => 'required',
             'unit_kerja'       => 'required',
-            'gambar_bukti'     => 'uploaded[gambar_bukti]|max_size[gambar_bukti,2048]|is_image[gambar_bukti]',
+            'gambar_bukti'     => 'max_size[gambar_bukti,2048]|is_image[gambar_bukti]',
         ];
 
         if (!$this->validate($validationRules)) {
@@ -36,7 +38,7 @@ class LaporanController extends BaseController
 
         // Handle upload file
         $gambar = $this->request->getFile('gambar_bukti');
-        $namaGambar = '';
+        $namaGambar = null;
         if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
             $namaGambar = $gambar->getRandomName();
             $gambar->move('uploads/bukti', $namaGambar);
@@ -44,6 +46,8 @@ class LaporanController extends BaseController
 
         // Simpan ke database
         $data = [
+            'email_pelapor'    => $this->request->getPost('email_pelapor'),
+            'klasifikasi_laporan' => $this->request->getVar('klasifikasi_laporan'),
             'kategori_laporan' => $this->request->getVar('kategori_laporan'),
             'judul'            => $this->request->getVar('judul'),
             'isi'              => $this->request->getVar('isi'),

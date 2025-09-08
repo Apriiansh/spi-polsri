@@ -78,6 +78,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
         $routes->post('uploadImage', 'Admin\KegiatanController::uploadImage');
     });
 
+    // Artikel Management Routes
     $routes->group('artikel', function ($routes) {
         $routes->get('/', 'Admin\ArtikelController::index');
         $routes->post('update-status/(:num)', 'Admin\ArtikelController::updateStatus/$1');
@@ -86,10 +87,13 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     });
 
     // Laporan Management Routes
-    $routes->get('laporan', 'Admin\LaporanController::index');
-    $routes->get('laporan/show/(:num)', 'Admin\LaporanController::show/$1');
-    $routes->post('laporan/update-status/(:num)', 'Admin\LaporanController::updateStatus/$1');
-    $routes->post('laporan/delete/(:num)', 'Admin\LaporanController::delete/$1');
+    $routes->group('laporan', function ($routes) {
+        $routes->get('', 'Admin\LaporanController::index');
+        $routes->get('show/(:num)', 'Admin\LaporanController::show/$1');
+        $routes->post('update-status/(:num)', 'Admin\LaporanController::updateStatus/$1');
+        $routes->post('delete/(:num)', 'Admin\LaporanController::delete/$1');
+    });
+   
 });
 
 // User Routes
@@ -124,5 +128,13 @@ $routes->group('user', ['filter' => 'auth'], function ($routes) {
         $routes->delete('delete/(:num)', 'User\KegiatanController::delete/$1');
 
         $routes->post('uploadImage', 'User\KegiatanController::uploadImage');
+    });
+
+    // Laporan Management Routes
+    $routes->group('laporan', function ($routes) {
+        $routes->get('', 'User\LaporanController::index');
+        $routes->get('show/(:num)', 'User\LaporanController::show/$1');
+        $routes->post('update-status/(:num)', 'User\LaporanController::updateStatus/$1');
+        $routes->post('delete/(:num)', 'User\LaporanController::delete/$1');
     });
 });

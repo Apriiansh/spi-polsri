@@ -1,4 +1,4 @@
-<?= $this->extend('layout/admin_main') ?>
+<?= $this->extend('layout/user_main') ?>
 
 <?= $this->section('content'); ?>
 <div class="p-6 space-y-6">
@@ -31,7 +31,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
             <div class="space-y-2">
                 <p><span class="font-medium text-black-600">ID Laporan:</span> <?= esc($laporan['id']); ?></p>
-                <p><span class="font-medium text-black-600">Email Pelapor:</span> <?= esc($laporan['email_pelapor']); ?></p>
                 <p><span class="font-medium text-black-600">Klasifikasi:</span> <?= esc($laporan['klasifikasi_laporan']); ?></p>
                 <p><span class="font-medium text-black-600">Kategori:</span> <?= esc($laporan['kategori_laporan']); ?></p>
                 <p><span class="font-medium text-black-600">Judul:</span> <?= esc($laporan['judul']); ?></p>

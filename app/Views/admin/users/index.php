@@ -27,7 +27,7 @@
                         <th class="py-3 px-4 font-semibold text-gray-600">ID</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Username</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Email</th>
-                        <th class="py-3 px-4 font-semibold text-gray-600">Role</th>
+                        <th class="py-3 px-4 font-semibold text-gray-600">Bidang</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Aksi</th>
                     </tr>
                 </thead>
@@ -37,7 +37,7 @@
                             <td class="py-3 px-4 text-sm text-gray-700">#<?= $user['id']; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700"><?= $user['username']; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700"><?= $user['email']; ?></td>
-                            <td class="py-3 px-4 text-sm text-gray-700"><?= $user['role']; ?></td>
+                            <td class="py-3 px-4 text-sm text-gray-700"><?= $user['bidang']; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700 flex items-center space-x-2">
                                 <a href="<?= base_url('admin/users/edit/' . $user['id']); ?>" class="text-blue-600 hover:text-blue-800">
                                     <i class="fas fa-edit"></i>

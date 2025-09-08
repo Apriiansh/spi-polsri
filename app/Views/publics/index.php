@@ -36,9 +36,9 @@
             <!-- Hero content overlay -->
             <div class="absolute inset-0 flex items-center justify-center z-20">
                 <div class="text-center text-white px-6 max-w-4xl">
-                    <div class="inline-block p-4 bg-white/15 backdrop-blur-md rounded-xl mb-8">
+                    <!-- <div class="inline-block p-4 bg-white/15 backdrop-blur-md rounded-xl mb-8">
                         <i class="fas fa-bullseye text-4xl text-white"></i>
-                    </div>
+                    </div> -->
                     <h1 class="text-4xl md:text-6xl font-bold p-2 mb-6 hero-title bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
                         Satuan Pengawas Internal
                     </h1>

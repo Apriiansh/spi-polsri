@@ -17,6 +17,7 @@ class UserModel extends Model
         'email',
         'password',
         'role',
+        'bidang',
         'is_active',
         'reset_token',
         'reset_expires'

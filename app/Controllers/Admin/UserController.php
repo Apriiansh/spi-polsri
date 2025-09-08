@@ -13,7 +13,7 @@ class UserController extends BaseController
 
     public function __construct() {
         $this->userModel = new UserModel();
-    } 
+    }
 
     public function index()
     {
@@ -23,8 +23,10 @@ class UserController extends BaseController
 
         $builder = $this->userModel;
 
+        $builder = $builder->where('role !=', 'admin');
+
         // Filters
-        if($search) {
+        if ($search) {
             $builder = $builder
                 ->groupStart()
                 ->like('username', $search)
@@ -32,25 +34,26 @@ class UserController extends BaseController
                 ->groupEnd();
         }
 
-        if($role) {
-            $builder  =$builder->where('role', $role);
+        if ($role) {
+            $builder = $builder->where('role', $role);
         }
 
-        if($status != null && $status != '') {
-            $builder  =$builder->where('status', $status);
+        if ($status !== null && $status !== '') {
+            $builder = $builder->where('status', $status);
         }
 
         $data = [
-            'title' => 'Manajemen User',
-            'users' => $builder->orderBy('created_at', 'DESC')->paginate(10),
-            'pager' => $this->userModel->pager, 
+            'title'  => 'Manajemen User',
+            'users'  => $builder->orderBy('created_at', 'DESC')->paginate(10),
+            'pager'  => $this->userModel->pager,
             'search' => $search,
-            'role' => $role,
+            'role'   => $role,
             'status' => $status,
         ];
 
         return view('admin/users/index', $data);
     }
+
 
     public function create()
     {
@@ -68,19 +71,20 @@ class UserController extends BaseController
             'username' => 'required|min_length[3]|max_length[50]|is_unique[users.username]',
             'email' => 'required|valid_email|is_unique[users.email]',
             'password' => 'required|min_length[6]',
-            'role' => 'required|in_list[admin,user]',
+            'bidang' => 'required|in_list[Akuntansi/Keuangan,Hukum,Manajemen SDM,Manajemen Aset,Ketatalaksanaan]',
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
         $data = [
             'username' => $this->request->getPost('username'),
             'email' => $this->request->getPost('email'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'role' => $this->request->getPost('role'),
-            'is_active' => $this->request->getPost('is_active') ? 1 : 0,
+            'role' => 'user',
+            'bidang' => $this->request->getPost('bidang'),
+            'is_active' => 1,
         ];
 
         if ($this->userModel->insert($data)) {
@@ -118,7 +122,7 @@ class UserController extends BaseController
         $rules = [
             'username' => "required|min_length[3]|max_length[50]|is_unique[users.username,id,$id]",
             'email' => "required|valid_email|is_unique[users.email,id,$id]",
-            'role' => 'required|in_list[admin,user]',
+            'bidang' => 'required|in_list[Akuntansi/Keuangan,Hukum,Manajemen SDM,Manajemen Aset,Ketatalaksanaan]',
         ];
 
         if ($this->request->getPost('password')) {
@@ -126,13 +130,13 @@ class UserController extends BaseController
         }
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
         $data = [
             'username' => $this->request->getPost('username'),
             'email' => $this->request->getPost('email'),
-            'role' => $this->request->getPost('role'),
+            'bidang' => $this->request->getPost('bidang'),
             'is_active' => $this->request->getPost('is_active') ? 1 : 0,
         ];
 

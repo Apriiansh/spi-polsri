@@ -33,10 +33,13 @@
                     <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value="<?= old('email', $user['email']); ?>" required>
                 </div>
                 <div class="flex flex-col">
-                    <label for="role" class="text-sm font-medium text-gray-700 mb-1">Role</label>
-                    <select id="role" name="role" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-                        <option value="user" <?= old('role', $user['role']) == 'user' ? 'selected' : ''; ?>>User</option>
-                        <option value="admin" <?= old('role', $user['role']) == 'admin' ? 'selected' : ''; ?>>Admin</option>
+                    <label for="bidang" class="text-sm font-medium text-gray-700 mb-1">Bidang</label>
+                    <select id="bidang" name="bidang" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <option value="Akuntansi/Keuangan" <?= old('bidang') == 'Akuntansi/Keuangan' ? 'selected' : ''; ?>>Akuntansi/Keuangan</option>
+                        <option value="Hukum" <?= old('bidang') == 'Hukum' ? 'selected' : ''; ?>>Hukum</option>
+                        <option value="Manajemen SDM" <?= old('bidang') == 'Manajemen SDM' ? 'selected' : ''; ?>>Manajemen SDM</option>
+                        <option value="Manajemen Aset" <?= old('bidang') == 'Manajemen Aset' ? 'selected' : ''; ?>>Manajemen Aset</option>
+                        <option value="Ketatalaksanaan" <?= old('bidang') == 'Ketatalaksanaan' ? 'selected' : ''; ?>>Ketatalaksanaan</option>
                     </select>
                 </div>
             </div>

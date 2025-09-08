@@ -94,6 +94,10 @@
                         <i class="fa-solid fa-house text-slate-400"></i>
                         <span>Dashboard</span>
                     </a>
+                    <a href="/user/laporan" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                        <i class="fa-regular fa-file-lines text-slate-400"></i>
+                        <span>Laporan</span>
+                    </a>
                     <a href="/user/artikel" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fa-regular fa-file-lines text-slate-400"></i>
                         <span>Artikel</span>

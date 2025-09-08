@@ -80,7 +80,7 @@
                             <tr class="hover:bg-gray-50 transition-colors duration-200">
                                 <td class="px-6 py-4 text-sm text-gray-900"><?= $i++; ?></td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900"><?= esc($keg['judul']); ?></td>
-                                <td class="px-6 py-4 text-sm text-gray-500"><?= esc($keg['username'] ?? 'N/A'); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-500"><?= esc($keg['username'] ?? 'Admin'); ?></td>
                                 <td class="px-6 py-4 text-sm text-gray-500"><?= esc($keg['kategori']); ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <?php
@@ -149,7 +149,7 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <h3 class="text-base font-semibold text-gray-900 leading-tight"><?= esc($keg['judul']); ?></h3>
-                            <p class="text-xs text-gray-500 mt-1">Oleh: <?= esc($keg['username'] ?? 'N/A'); ?> | Kategori: <?= esc($keg['kategori']); ?></p>
+                            <p class="text-xs text-gray-500 mt-1">Oleh: <?= esc($keg['username'] ?? 'Admin'); ?> | Kategori: <?= esc($keg['kategori']); ?></p>
                         </div>
                         <?php
                         $status_classes = [

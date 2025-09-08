@@ -27,6 +27,7 @@
                 <div>
                     <div class="font-semibold text-lg text-gray-800"><?= esc($user['username']) ?></div>
                     <div class="text-slate-500"><i class="fas fa-envelope mr-1"></i> <?= esc($user['email']) ?></div>
+                    <div class="text-slate-500 mt-1"><i class="fas fa-briefcase mr-1"></i> <?= esc($user['bidang']) ?></div>
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
@@ -61,6 +62,12 @@
                     <?php if (session('errors.email')): ?>
                         <p class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i> <?= session('errors.email') ?></p>
                     <?php endif; ?>
+                </div>
+                <div>
+                    <label for="bidang" class="block mb-1 text-sm font-medium text-gray-700">Bidang</label>
+                    <input type="text" id="bidang" name="bidang"
+                        class="form-control block w-full rounded-md border-gray-300 shadow-sm bg-gray-100"
+                        value="<?= esc($user['bidang'] ?? '') ?>" disabled>
                 </div>
                 <div class="flex gap-3 pt-1">
                     <button type="submit"

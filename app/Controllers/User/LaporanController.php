@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Models\LaporanModel;
@@ -18,15 +18,24 @@ class LaporanController extends BaseController
     public function index()
     {
         $laporanModel = new LaporanModel();
+        $session = session();
 
+        $userBidang = $session->get('bidang');
+
+        if (!$userBidang) {
+            $session->setFlashdata('error', 'Bidang user tidak ditemukan.');
+            return redirect()->to('login');
+        }
+
+        $laporanModel->where('kategori_laporan', $userBidang);
+
+        // Get filter values
         $status = $this->request->getGet('status');
         $klasifikasi = $this->request->getGet('klasifikasi');
-        $kategori = $this->request->getGet('kategori_laporan'); 
 
         $filters = [
             'status' => $status,
-            'klasifikasi' => $klasifikasi,
-            'kategori' => $kategori
+            'klasifikasi' => $klasifikasi
         ];
 
         if (!empty($status)) {
@@ -35,32 +44,23 @@ class LaporanController extends BaseController
         if (!empty($klasifikasi)) {
             $laporanModel->where('klasifikasi_laporan', $klasifikasi);
         }
-        if (!empty($kategori)) {
-            $laporanModel->where('kategori_laporan', $kategori);
-        }
 
         $klasifikasi_options = (new LaporanModel())
             ->distinct()
+            ->where('kategori_laporan', $userBidang)
             ->where('klasifikasi_laporan IS NOT NULL')
             ->where('klasifikasi_laporan !=', '')
             ->findColumn('klasifikasi_laporan') ?? [];
 
-        $kategori_options = (new LaporanModel())
-            ->distinct()
-            ->where('kategori_laporan IS NOT NULL')
-            ->where('kategori_laporan !=', '')
-            ->findColumn('kategori_laporan') ?? [];
-
         $laporanData = $laporanModel->orderBy('created_at', 'DESC')->paginate(10, 'default');
 
         $pager = $laporanModel->pager;
-        $pager->setPath('admin/laporan');
+        $pager->setPath('user/laporan');
         if (!empty(array_filter($filters))) {
             $pager->only(array_keys(array_filter($filters)));
         }
 
-        // Debug: tambahkan untuk memeriksa data
-        log_message('debug', 'Kategori options: ' . json_encode($kategori_options));
+        log_message('debug', 'User bidang: ' . $userBidang);
         log_message('debug', 'Klasifikasi options: ' . json_encode($klasifikasi_options));
 
         $data = [
@@ -68,37 +68,51 @@ class LaporanController extends BaseController
             'laporan' => $laporanData,
             'pager' => $pager,
             'klasifikasi_options' => $klasifikasi_options,
-            'kategori_options' => $kategori_options,
-            'filters' => $filters
+            'filters' => $filters,
+            'user_bidang' => $userBidang
         ];
 
-        return view('admin/laporan/index', $data);
+        return view('user/laporan/index', $data);
     }
 
     public function show($id)
     {
-        $laporan = $this->laporanModel->find($id);
+        $session = session();
+        $userBidang = $session->get('bidang');
+
+        if (!$userBidang) {
+            $session->setFlashdata('error', 'Bidang user tidak ditemukan.');
+            return redirect()->to('login');
+        }
+
+        $laporan = $this->laporanModel->where('kategori_laporan', $userBidang)->find($id);
 
         if (!$laporan) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Laporan tidak ditemukan.');
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Laporan tidak ditemukan atau tidak dapat diakses.');
         }
 
         $data = [
             'title' => 'Detail Laporan',
             'laporan' => $laporan,
         ];
-        return view('admin/laporan/show', $data);
+        return view('user/laporan/show', $data);
     }
 
     public function updateStatus($id)
     {
         $session = session();
+        $userBidang = $session->get('bidang');
         $newStatus = $this->request->getPost('status_laporan');
 
-        $laporan = $this->laporanModel->find($id);
+        if (!$userBidang) {
+            $session->setFlashdata('error', 'Bidang user tidak ditemukan.');
+            return redirect()->to('login');
+        }
+
+        $laporan = $this->laporanModel->where('kategori_laporan', $userBidang)->find($id);
 
         if (!$laporan) {
-            $session->setFlashdata('error', 'Laporan tidak ditemukan.');
+            $session->setFlashdata('error', 'Laporan tidak ditemukan atau tidak dapat diakses.');
             return redirect()->back();
         }
 
@@ -128,16 +142,23 @@ class LaporanController extends BaseController
             $session->setFlashdata('success', 'Status laporan berhasil diperbarui, tetapi notifikasi email gagal dikirim.');
         }
 
-        return redirect()->to(site_url('admin/laporan/show/' . $id));
+        return redirect()->to(site_url('user/laporan/show/' . $id));
     }
 
     public function delete($id)
     {
         $session = session();
-        $laporan = $this->laporanModel->find($id);
+        $userBidang = $session->get('bidang');
+
+        if (!$userBidang) {
+            $session->setFlashdata('error', 'Bidang user tidak ditemukan.');
+            return redirect()->to('login');
+        }
+
+        $laporan = $this->laporanModel->where('kategori_laporan', $userBidang)->find($id);
 
         if (!$laporan) {
-            $session->setFlashdata('error', 'Laporan tidak ditemukan.');
+            $session->setFlashdata('error', 'Laporan tidak ditemukan atau tidak dapat diakses.');
             return redirect()->back();
         }
 
@@ -151,6 +172,6 @@ class LaporanController extends BaseController
         $this->laporanModel->delete($id);
 
         $session->setFlashdata('success', 'Laporan berhasil dihapus.');
-        return redirect()->to(site_url('admin/laporan'));
+        return redirect()->to(site_url('user/laporan'));
     }
 }

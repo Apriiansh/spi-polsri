@@ -1,11 +1,11 @@
-<?= $this->extend('layout/admin_main') ?>
+<?= $this->extend('layout/user_main') ?>
 
 <?= $this->section('content'); ?>
 <!-- Header -->
 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
     <div>
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Manajemen Laporan</h1>
-        <p class="text-gray-600 mt-1">Kelola laporan dan statusnya.</p>
+        <p class="text-gray-600 mt-1">Kelola laporan bidang <?= esc($user_bidang) ?> dan statusnya.</p>
     </div>
 </div>
 
@@ -40,10 +40,10 @@
     <div class="px-4 py-5 sm:px-6 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-                <h2 class="text-lg font-semibold text-gray-700">Daftar Laporan</h2>
+                <h2 class="text-lg font-semibold text-gray-700">Daftar Laporan - Bidang <?= esc($user_bidang) ?></h2>
                 <p class="text-sm text-gray-500">Total: <?= $pager->getTotal() ?> laporan</p>
             </div>
-            <form action="<?= base_url('admin/laporan') ?>" method="get" class="flex flex-col sm:flex-row sm:items-center sm:space-x-2 space-y-2 sm:space-y-0 w-full sm:w-auto">
+            <form action="<?= base_url('user/laporan') ?>" method="get" class="flex flex-col sm:flex-row sm:items-center sm:space-x-2 space-y-2 sm:space-y-0 w-full sm:w-auto">
                 <select name="status" class="text-sm px-3 py-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full sm:w-auto">
                     <option value="">Semua Status</option>
                     <option value="pending" <?= (isset($filters['status']) && $filters['status'] == 'pending') ? 'selected' : '' ?>>Pending</option>
@@ -61,22 +61,9 @@
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </select>
-                <select name="kategori_laporan" class="text-sm px-3 py-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full sm:w-auto">
-                    <option value="">Semua Kategori</option>
-                    <?php if (!empty($kategori_options)) : ?>
-                        <?php foreach ($kategori_options as $kategori) : ?>
-                            <?php if (!empty($kategori)) : ?>
-                                <option value="<?= esc($kategori) ?>" <?= (isset($filters['kategori']) && $filters['kategori'] == $kategori) ? 'selected' : '' ?>><?= esc(ucfirst($kategori)) ?></option>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php else : ?>
-                        <!-- Debug: tampilkan pesan jika tidak ada data -->
-                        <!-- <option disabled>Tidak ada data kategori</option> -->
-                    <?php endif; ?>
-                </select>
                 <div class="flex items-center space-x-2">
                     <button type="submit" class="w-full sm:w-auto bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm">Filter</button>
-                    <a href="<?= base_url('admin/laporan') ?>" class="w-full sm:w-auto text-center bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 text-sm">Reset</a>
+                    <a href="<?= base_url('user/laporan') ?>" class="w-full sm:w-auto text-center bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 text-sm">Reset</a>
                 </div>
             </form>
         </div>
@@ -92,7 +79,6 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email Pelapor</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Klasifikasi</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Kejadian</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
@@ -101,7 +87,7 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     <?php if (empty($laporan)) : ?>
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">Tidak ada laporan yang ditemukan.</td>
+                            <td colspan="6" class="px-6 py-4 text-center text-gray-500">Tidak ada laporan yang ditemukan untuk bidang <?= esc($user_bidang) ?>.</td>
                         </tr>
                     <?php else : ?>
                         <?php $i = 1 + (10 * ($pager->getCurrentPage() - 1)); ?>
@@ -115,7 +101,6 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= esc($item['email_pelapor']); ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= esc($item['klasifikasi_laporan']); ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= esc($item['kategori_laporan']); ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= esc(date('d M Y', strtotime($item['tgl_kejadian']))); ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <?php
@@ -147,10 +132,10 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center space-x-3">
-                                        <a href="<?= base_url('admin/laporan/show/' . $item['id']); ?>" class="text-blue-600 hover:text-blue-800 p-1 rounded-full transition-colors duration-200" title="Lihat Laporan">
+                                        <a href="<?= base_url('user/laporan/show/' . $item['id']); ?>" class="text-blue-600 hover:text-blue-800 p-1 rounded-full transition-colors duration-200" title="Lihat Laporan">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <form action="<?= base_url('admin/laporan/delete/' . $item['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');" class="inline">
+                                        <form action="<?= base_url('user/laporan/delete/' . $item['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');" class="inline">
                                             <?= csrf_field(); ?>
                                             <button type="submit" class="text-red-600 hover:text-red-800 p-1 rounded-full transition-colors duration-200" title="Hapus Laporan">
                                                 <i class="fas fa-trash-alt"></i>
@@ -172,7 +157,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <?php if (empty($laporan)) : ?>
                     <div class="text-center py-4 text-gray-500 col-span-1 md:col-span-2">
-                        Tidak ada laporan yang ditemukan.
+                        Tidak ada laporan yang ditemukan untuk bidang <?= esc($user_bidang) ?>.
                     </div>
                 <?php else : ?>
                     <?php $i = 1 + (10 * ($pager->getCurrentPage() - 1)); ?>
@@ -213,20 +198,19 @@
                                 </div>
                             </div>
 
-                            <div class="space-y-1 text-sm text-gray-600 mb-4">\
-                                <p><span class="font-medium">Email Pelapor:</span> <?= esc($item['email_pelapor']); ?> </p>
+                            <div class="space-y-1 text-sm text-gray-600 mb-4">
+                                <p><span class="font-medium">Email Pelapor:</span> <?= esc($item['email_pelapor']); ?></p>
                                 <p><span class="font-medium">Klasifikasi:</span> <?= esc($item['klasifikasi_laporan']); ?></p>
-                                <p><span class="font-medium">Kategori:</span> <?= esc($item['kategori_laporan']); ?></p>
                                 <p><span class="font-medium">Tanggal:</span> <?= esc(date('d M Y', strtotime($item['tgl_kejadian']))); ?></p>
                                 <p><span class="font-medium">Lokasi:</span> <?= esc($item['lok_kejadian']); ?></p>
                                 <p><span class="font-medium">Unit Kerja:</span> <?= esc($item['unit_kerja']); ?></p>
                             </div>
 
                             <div class="flex flex-wrap gap-2">
-                                <a href="<?= base_url('admin/laporan/show/' . $item['id']); ?>" class="flex items-center justify-center px-3 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 text-sm">
+                                <a href="<?= base_url('user/laporan/show/' . $item['id']); ?>" class="flex items-center justify-center px-3 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 text-sm">
                                     <i class="fas fa-eye mr-1"></i> Lihat
                                 </a>
-                                <form action="<?= base_url('admin/laporan/delete/' . $item['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');" class="inline">
+                                <form action="<?= base_url('user/laporan/delete/' . $item['id']); ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');" class="inline">
                                     <?= csrf_field(); ?>
                                     <button type="submit" class="flex items-center justify-center px-3 py-2 text-red-600 border border-red-600 rounded-md hover:bg-red-600 hover:text-white transition-colors duration-200 text-sm">
                                         <i class="fas fa-trash-alt mr-1"></i> Hapus
@@ -247,7 +231,7 @@
                 <i class="fas fa-file-alt text-3xl text-gray-400"></i>
             </div>
             <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada laporan</h3>
-            <p class="text-sm text-gray-500">Saat ini tidak ada laporan yang tersedia untuk ditampilkan.</p>
+            <p class="text-sm text-gray-500">Saat ini tidak ada laporan yang tersedia untuk bidang <?= esc($user_bidang) ?>.</p>
         </div>
     <?php endif; ?>
 </div>

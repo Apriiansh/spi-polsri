@@ -3,9 +3,17 @@
 <?= $this->section('content') ?>
 
 <?php
-$kategori_list = [
+$klasifikasi_list = [
     'Pengaduan',
     'Aspirasi'
+];
+
+$kategori_list = [
+    'Akuntansi / Keuangan',
+    'Hukum',
+    'Manajemen SDM',
+    'Manajemen Aset',
+    'Ketatalaksanaan'
 ];
 
 $unit_non_akademik_list = [
@@ -67,19 +75,26 @@ $unit_akademik_list = [
         <form action="<?= site_url('/laporan/store') ?>" method="post" enctype="multipart/form-data" class="space-y-6">
             <?= csrf_field() ?>
 
-            <!-- Kategori Laporan -->
+            <!-- Klasifikasi Laporan -->
             <div>
-                <label class="block mb-3 text-sm font-semibold text-gray-800">Kategori Laporan</label>
-                <div class="flex flex-wrap gap-4">
-                    <?php foreach ($kategori_list as $kategori): ?>
+                <label class="block mb-3 text-sm font-semibold text-gray-800">Klasifikasi Laporan</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <?php foreach ($klasifikasi_list as $klasifikasi): ?>
                         <label class="flex items-center gap-2 px-4 py-2 rounded-sm border border-gray-300 cursor-pointer hover:bg-blue-50 transition">
-                            <input type="radio" name="kategori_laporan" value="<?= esc($kategori) ?>" required
+                            <input type="radio" name="klasifikasi_laporan" value="<?= esc($klasifikasi) ?>" required
                                 class="text-blue-600 focus:ring-blue-500"
-                                <?= old('kategori_laporan') == $kategori ? 'checked' : '' ?>>
-                            <span class="text-gray-800"><?= esc($kategori) ?></span>
+                                <?= old('klasifikasi_laporan') == $klasifikasi ? 'checked' : '' ?>>
+                            <span class="text-gray-800"><?= esc($klasifikasi) ?></span>
                         </label>
                     <?php endforeach; ?>
                 </div>
+            </div>
+
+            <div>
+                <label for="email_pelapor" class="block mb-2 text-sm font-semibold text-gray-800">Email</label>
+                <input type="email" id="email_pelapor" name="email_pelapor"
+                    class="w-full rounded-sm border-gray-400 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition p-3"
+                    value="<?= old('email_pelapor') ?>" required autocomplete="off">
             </div>
 
             <!-- Judul -->
@@ -134,6 +149,18 @@ $unit_akademik_list = [
                 <label for="unit_kerja" class="block mb-2 text-sm font-semibold text-gray-800">Pilih Unit Kerja/Jurusan Terkait</label>
                 <select id="unit_kerja" name="unit_kerja"
                     class="w-full text-sm text-gray-900 rounded-sm border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition p-3">
+                </select>
+            </div>
+
+            <!-- Kategori Laporan -->
+            <div>
+                <label for="kategori_laporan" class="block mb-2 text-sm font-semibold text-gray-800">Kategori Laporan</label>
+                <select id="kategori_laporan" name="kategori_laporan" required
+                    class="w-full text-sm text-gray-900 rounded-sm border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition p-3">
+                    <option value="" disabled selected>Pilih kategori laporan</option>
+                    <?php foreach ($kategori_list as $kategori): ?>
+                        <option value="<?= esc($kategori) ?>" <?= old('kategori_laporan') == $kategori ? 'selected' : '' ?>><?= esc($kategori) ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
