@@ -117,7 +117,7 @@
                 <div class="photo-frame">
                     <div class="w-40 h-56 sm:w-52 sm:h-72 md:w-64 md:h-80 border-2 border-gradient-to-br from-indigo-300 to-blue-300 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-indigo-200/50 hover:scale-105 relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-blue-600/10 z-10"></div>
-                        <img src="<?= base_url('images/profil.png') ?>" alt="Foto Kepala SPI" class="w-full h-full object-fit relative z-0">
+                        <img src="<?= base_url('images/pakedwin.jpg') ?>" alt="Foto Kepala SPI" class="w-full h-full object-fit relative z-0">
                     </div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Gallery -->
                 <div class="space-y-8">
-                    <div class="relative overflow-hidden rounded-xl shadow-2xl group gallery-container">
+                    <div class="relative overflow-hidden rounded-xl group gallery-container">
                         <div class="flex transition-transform duration-700 ease-out" id="kegiatan-container">
                             <?php if (!empty($kegiatan_terbaru)) : ?>
                                 <?php foreach ($kegiatan_terbaru as $kegiatan) : ?>
@@ -232,149 +232,6 @@
             </div>
         </div>
     </section>
-
-
-    <!-- ========= DOKUMEN SECTION ========= -->
-    <section class="py-28 relative overflow-hidden">
-        <!-- Animated background -->
-        <div class="absolute inset-0 opacity-30">
-            <div class="absolute top-20 left-1/4 w-40 h-40 bg-gradient-to-br from-indigo-200 to-blue-200 rounded-full blur-2xl document-float"></div>
-            <div class="absolute bottom-20 right-1/4 w-32 h-32 bg-gradient-to-br from-blue-200 to-slate-200 rounded-full blur-xl document-float-reverse"></div>
-        </div>
-
-        <div class="container mx-auto px-6 relative z-10">
-            <!-- Section Header -->
-            <div class="text-center mb-16">
-                <div class="inline-block p-3 bg-gradient-to-br from-slate-100 to-blue-100 rounded-xl mb-6">
-                    <i class="fas fa-file-alt text-2xl text-blue-600"></i>
-                </div>
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Dokumen & Publikasi</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">Akses dokumen resmi dan publikasi SPI POLSRI</p>
-                <div class="w-12 h-1 bg-gradient-to-r from-indigo-500 to-blue-500 mx-auto mt-6 rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Public Document -->
-                <div class="document-card group bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl">
-                            <i class="fas fa-check-circle text-xl text-blue-600"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 rounded-lg text-xs font-medium">Publik</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
-                        Laporan Tahunan 2024
-                    </h3>
-                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
-                        Ringkasan komprehensif laporan tahunan SPI untuk tahun 2024 dengan analisis mendalam.
-                    </p>
-                    <a href="#" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors group">
-                        <i class="fas fa-download text-sm mr-2 transition-transform group-hover:scale-110"></i>
-                        <span>Unduh Dokumen</span>
-                    </a>
-                </div>
-
-
-                <!-- Restricted Document -->
-                <div class="document-card group bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-indigo-300">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="p-3 bg-gradient-to-br from-slate-100 to-blue-100 rounded-xl">
-                            <i class="fas fa-lock text-xl text-slate-600"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-gradient-to-r from-slate-100 to-blue-100 text-slate-700 rounded-lg text-xs font-medium">Terbatas</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-slate-600 transition-colors">
-                        Hasil Audit Internal
-                    </h3>
-                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
-                        Dokumen khusus yang hanya dapat diakses oleh pengguna dengan otorisasi.
-                    </p>
-                    <button class="inline-flex items-center text-slate-600 font-medium cursor-not-allowed opacity-75 group">
-                        <i class="fas fa-lock text-sm mr-2"></i>
-                        <span>Akses Terbatas</span>
-                    </button>
-                </div>
-
-                <!-- SOP Document -->
-                <div class="document-card group bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-indigo-300">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl">
-                            <i class="fas fa-clipboard-list text-xl text-indigo-600"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-indigo-100 text-indigo-700 rounded-lg text-xs font-medium">Publik</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors">
-                        Panduan SOP Audit
-                    </h3>
-                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
-                        Standard Operating Procedure untuk proses audit internal dan panduan pelaksanaan.
-                    </p>
-                    <a href="#" class="inline-flex items-center text-indigo-600 font-medium hover:text-indigo-700 transition-colors group">
-                        <i class="fas fa-download text-sm mr-2 transition-transform group-hover:scale-110"></i>
-                        <span>Unduh Panduan</span>
-                    </a>
-                </div>
-
-                <div class="document-card group bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl">
-                            <i class="fas fa-check-circle text-xl text-blue-600"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 rounded-lg text-xs font-medium">Publik</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
-                        Laporan Tahunan 2024
-                    </h3>
-                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
-                        Ringkasan komprehensif laporan tahunan SPI untuk tahun 2024 dengan analisis mendalam.
-                    </p>
-                    <a href="#" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors group">
-                        <i class="fas fa-download text-sm mr-2 transition-transform group-hover:scale-110"></i>
-                        <span>Unduh Dokumen</span>
-                    </a>
-                </div>
-
-                <div class="document-card group bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl">
-                            <i class="fas fa-check-circle text-xl text-blue-600"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 rounded-lg text-xs font-medium">Publik</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
-                        Laporan Tahunan 2024
-                    </h3>
-                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
-                        Ringkasan komprehensif laporan tahunan SPI untuk tahun 2024 dengan analisis mendalam.
-                    </p>
-                    <a href="#" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors group">
-                        <i class="fas fa-download text-sm mr-2 transition-transform group-hover:scale-110"></i>
-                        <span>Unduh Dokumen</span>
-                    </a>
-                </div>
-
-                <div class="document-card group bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl">
-                            <i class="fas fa-check-circle text-xl text-blue-600"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 rounded-lg text-xs font-medium">Publik</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
-                        Laporan Tahunan 2024
-                    </h3>
-                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
-                        Ringkasan komprehensif laporan tahunan SPI untuk tahun 2024 dengan analisis mendalam.
-                    </p>
-                    <a href="#" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors group">
-                        <i class="fas fa-download text-sm mr-2 transition-transform group-hover:scale-110"></i>
-                        <span>Unduh Dokumen</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
     <!-- LAPOR -->
     <section class="py-24 relative overflow-hidden">
