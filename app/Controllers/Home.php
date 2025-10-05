@@ -46,6 +46,14 @@ class Home extends BaseController
         return view('publics/visimisi', $data);
     }
 
+    public function piagam(): string
+    {
+        $data = [
+            'title' => 'Piagam Penghargaan Intern - SPI POLSRI'
+        ];
+        return view('publics/piagam', $data);
+    }
+
     /**
      * Helper function untuk mengambil data peraturan berdasarkan kategori
      * agar tidak terjadi duplikasi kode.

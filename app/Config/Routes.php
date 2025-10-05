@@ -25,6 +25,7 @@ $routes->group('', function ($routes) {
     $routes->get('profil/sejarah', 'Home::sejarah');
     $routes->get('profil/struktur', 'Home::struktur');
     $routes->get('profil/visimisi', 'Home::visimisi');
+    $routes->get('profil/piagam', 'Home::piagam');
 
     // Halaman Peraturan (Rute Statis)
     $routes->get('peraturan/akuntansi-keuangan', 'Home::peraturan_akuntansi_keuangan');

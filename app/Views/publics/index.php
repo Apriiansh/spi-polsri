@@ -20,15 +20,15 @@
             <!-- Slider container -->
             <div class="flex transition-all duration-1000 ease-in-out h-full" id="slider-container">
                 <!-- Slide 1 -->
-                <div class="min-w-full h-540 bg-cover bg-center relative hero-slide" style="background-image: url('<?= base_url('images/image1.jpg') ?>');">
+                <div class="min-w-full h-560 bg-cover bg-center relative hero-slide" style="background-image: url('<?= base_url('images/image1.jpg') ?>');">
                     <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/50 to-transparent"></div>
                 </div>
                 <!-- Slide 2 -->
-                <div class="min-w-full h-540 bg-cover bg-center relative hero-slide" style="background-image: url('<?= base_url('images/image2.jpg') ?>');">
+                <div class="min-w-full h-560 bg-cover bg-center relative hero-slide" style="background-image: url('<?= base_url('images/image2.jpg') ?>');">
                     <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
                 </div>
                 <!-- Slide 3 -->
-                <div class="min-w-full h-540 bg-cover bg-center relative hero-slide" style="background-image: url('<?= base_url('images/image3.jpg') ?>');">
+                <div class="min-w-full h-560 bg-cover bg-center relative hero-slide" style="background-image: url('<?= base_url('images/image3.jpg') ?>');">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         <i class="fas fa-bullseye text-4xl text-white"></i>
                     </div> -->
                     <h1 class="text-4xl md:text-6xl font-bold p-2 mb-6 hero-title bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
-                        Satuan Pengawas Internal
+                        Satuan Pengawasan Internal
                     </h1>
                     <p class="text-xl md:text-2xl text-blue-100 mb-8 font-light leading-relaxed hero-subtitle">
                         Politeknik Negeri Sriwijaya
@@ -103,7 +103,7 @@
                     </div>
 
                     <blockquote class="text-lg sm:text-xl lg:text-3xl text-gray-800 font-light leading-relaxed mb-6 sm:mb-8 quote-text break-words">
-                        Pengawasan Internal adalah kunci untuk memastikan transparansi dan akuntabilitas dalam setiap aspek organisasi.
+                    SPI telah bertransformasi tidak hanya sebagai Pengawas Kepatuhan <span class="italic">(Watchdog)</span>, tapi memastikan perannya sebagai Mitra Strategis  <span class="italic">(Strategic Partner)</span> manajemen dalam mencapai visi sebagai institusi pendidikan tinggi vokasi yang unggul dan terkemuka.    
                     </blockquote>
 
                     <div class="flex flex-wrap items-center justify-center lg:justify-start quote-author gap-2 sm:gap-4">
@@ -250,49 +250,44 @@
                     </div>
 
                     <p class="text-lg text-slate-700 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        Laporkan setiap pelanggaran atau gratifikasi yang Anda ketahui. Mari bersama-sama menjaga integritas dan menciptakan lingkungan kerja yang bersih.
+                        Laporkan setiap pelanggaran atau gratifikasi yang Anda ketahui. Mari bersama-sama menjaga menciptakan lingkungan kerja berintegritas.
                     </p>
 
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-6 text-slate-800 text-sm mb-8">
+                    <div class="grid grid-cols-2 gap-2 text-slate-800 text-sm mb-8">
+                        <div class="flex items-center feature-badge">
+                            <i class="fas fa-circle-dot text-blue-800 mr-2"></i>
+                            Pasti Ditindaklanjuti
+                        </div>
                         <div class="flex items-center feature-badge">
                             <i class="fas fa-user-secret text-blue-800 mr-2"></i>
-                            Laporan Anonim
+                            Perlindungan Pelapor
                         </div>
                         <div class="flex items-center feature-badge">
                             <i class="fas fa-shield-alt text-blue-800 mr-2"></i>
                             Terjamin Kerahasiaan
                         </div>
                         <div class="flex items-center feature-badge">
-                            <i class="fas fa-bolt text-blue-800 mr-2"></i>
-                            Proses Cepat
+                            <i class="fas fa-eye-low-vision text-blue-800 mr-2"></i>
+                            Proses Transparan
                         </div>
+                        
                     </div>
                 </div>
 
                 <!-- Action Card -->
                 <div class="flex-1 max-w-lg w-full">
-                    <div class="upg-card bg-gradient-to-br from-slate-800/70 to-slate-700/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-600 text-center shadow-2xl">
-                        <div class="inline-block p-4 bg-gradient-to-br from-slate-700/50 to-slate-600/30 rounded-full mb-6">
-                            <i class="fas fa-edit text-3xl text-slate-300"></i>
+                    <div class="upg-card rounded-2xl p-12 border border-slate-600 text-center shadow-2xl bg-cover bg-center relative" style="background-image: url('<?= base_url('images/upg-bg.png') ?>');">
+                        <div class="absolute inset-0 bg-slate-900/70 z-0 rounded-2xl"></div>
+
+                        <div class="inline-block w-full px-2 py-2 mb-3 rounded-lg" style="background:rgba(30,41,59,0.7);backdrop-filter:blur(2px);">
+                            <h3 class="text-xl font-semibold text-yellow-300 drop-shadow mb-1">Buat Laporan Sekarang</h3>
+                            <p class="text-blue-100 mb-2 text-sm drop-shadow">Sistem pelaporan yang aman dan terpercaya</p>
                         </div>
-                        <h3 class="text-xl font-semibold text-white mb-3">Buat Laporan Sekarang</h3>
-                        <p class="text-slate-100 mb-8 text-sm">Sistem pelaporan yang aman dan terpercaya tersedia 24/7</p>
 
                         <a href="/laporan/create" class="cta-button inline-flex items-center justify-center w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group hover:from-indigo-100 hover:to-blue-100 hover:text-slate-800">
                             <i class="fas fa-plus mr-3 group-hover:scale-110 transition-transform"></i>
                             <span>Buat Laporan</span>
                         </a>
-
-                        <div class="mt-6 flex justify-center space-x-6 text-xs text-gray-100">
-                            <div class="flex items-center status-indicator">
-                                <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                                24/7 Available
-                            </div>
-                            <div class="flex items-center status-indicator">
-                                <div class="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></div>
-                                Fast Response
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

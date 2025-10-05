@@ -24,14 +24,17 @@
         <div class="prose max-w-none text-justify text-gray-800">
             <h2 class="text-3xl font-bold mb-4">Visi SPI</h2>
             <p class="mb-4">
-                SPI Politeknik Negeri Sriwijaya sebagai auditor internal yang profesional dan independen dalam melaksanakan tugas, fungsi, dan tanggung jawab dalam penguatan tata kelola, akuntabilitas, dan citra publik pendidikan untuk mewujudkan <b>Good Governance</b> atas penyelenggaraan kegiatan Politeknik Negeri Sriwijaya.
+                Menjadi SPI yang independen, objektif dan berintegritas dalam mengawal terciptanya Good and Clean Governance (GCG) di Politeknik Negeri Sriwijaya yang Unggul dan Terkemuka.
             </p>
 
             <h2 class="text-3xl font-bold mb-4">Misi SPI</h2>
             <ul class="list-disc list-inside mb-4 pl-4">
-                <li>Membantu pimpinan Politeknik Negeri Sriwijaya untuk mengidentifikasi, meminimalkan, dan berupaya semaksimal mungkin mengurangi terjadinya risiko atas penyelenggaraan kegiatan Polsri.</li>
-                <li>Sebagai mitra kerja di berbagai tingkat manajemen dan melakukan fasilitas serta bimbingan dalam mengelola berbagai kegiatan yang dinilai berpotensi menimbulkan masalah, dan membantu mengatasi berbagai masalah yang dihadapi.</li>
-                <li>Bersama-sama dengan pimpinan Politeknik Negeri Sriwijaya turut serta mengantarkan dan menjaga lembaga Polsri pada kondisi akuntabel.</li>
+                <li>Mendorong implementasi Good and Clean Governance (GCG) pada setiap unit kerja di Polsri melalui pengawasan yang berkesinambungan dan profesional;</li>
+                <li>Menjalankan fungsi pengawasan secara independen dan objektif dengan melaksanakan pengawasan dan evaluasi yang bebas dari intervensi, serta memberikan rekomendasi yang objektif untuk perbaikan proses manajemen dan tata kelola;</li>
+                <li>Mengembangkan kompetensi dan menjaga integritas SPI untuk memastikan pelaksanaan pengawasan yang terpercaya dan berkualitas;</li>
+                <li>Mendukung dan memastikan akuntabilitas dan transparansi di setiap proses kegiatan Polsri melalui sistem pengawasan dan pelaporan yang efektif;</li>
+                <li>Mengintegrasikan teknologi dan pendekatan terkini dalam audit berbasis risiko untuk menciptakan proses pengawasan yang efisien, efektif, dan ekonomis;</li>
+                <li>Memberikan masukan strategis kepada manajemen terkait mitigasi risiko dan pengambilan keputusan yang mendukung tercapainya visi Polsri sebagai institusi yang unggul dan terkemuka.</li>
             </ul>
         </div>
     </div>

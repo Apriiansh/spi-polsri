@@ -196,63 +196,57 @@ $unit_akademik_list = [
         </div>
 
         <!-- Process Steps -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-center">
             <!-- Step 1 -->
             <div class="relative text-center">
-                <!-- Connector Line -->
-                <div class="hidden lg:block absolute top-8 left-1/2 w-[calc(100%+2rem)] h-0.5 bg-gradient-to-r from-blue-400 to-green-400 -translate-y-0.5 z-0"></div>
                 <div class="relative z-10 bg-white px-2">
                     <div class="mx-auto w-16 h-16 bg-blue-500 rounded-sm flex items-center justify-center mb-4 shadow-lg">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                        </svg>
+                        <i class="fas fa-file-alt text-white text-3xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-2">1. Buat Laporan</h3>
                     <p class="text-gray-600 text-sm">Isi form laporan dengan detail yang jelas dan lengkap beserta bukti pendukung</p>
                 </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="relative text-center">
-                <!-- Connector Line -->
-                <div class="hidden lg:block absolute top-8 left-1/2 w-[calc(100%+2rem)] h-0.5 bg-gradient-to-r from-green-400 to-yellow-400 -translate-y-0.5 z-0"></div>
-                <div class="relative z-10 bg-white px-2">
-                    <div class="mx-auto w-16 h-16 bg-green-500 rounded-sm flex items-center justify-center mb-4 shadow-lg">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">2. Verifikasi</h3>
-                    <p class="text-gray-600 text-sm">Tim admin memverifikasi kelengkapan dan keabsahan laporan yang masuk</p>
+                <!-- Panah ke kanan -->
+                <div class="hidden lg:block absolute top-1/2 right-[-32px] transform -translate-y-1/2">
+                    <i class="fas fa-arrow-right text-blue-400 text-3xl"></i>
                 </div>
             </div>
-
+            <!-- Step 2 -->
+            <div class="relative text-center">
+                <div class="relative z-10 bg-white px-2">
+                    <div class="mx-auto w-16 h-16 bg-green-500 rounded-sm flex items-center justify-center mb-4 shadow-lg">
+                        <i class="fas fa-user-check text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">2. Verifikasi</h3>
+                    <p class="text-gray-600 text-sm">Laporan akan diverifikasi dan diteruskan kepada Direktur</p>
+                </div>
+                <div class="hidden lg:block absolute top-1/2 right-[-32px] transform -translate-y-1/2">
+                    <i class="fas fa-arrow-right text-green-400 text-3xl"></i>
+                </div>
+            </div>
             <!-- Step 3 -->
             <div class="relative text-center">
-                <!-- Connector Line -->
-                <div class="hidden lg:block absolute top-8 left-1/2 w-[calc(100%+2rem)] h-0.5 bg-gradient-to-r from-yellow-400 to-purple-400 -translate-y-0.5 z-0"></div>
                 <div class="relative z-10 bg-white px-2">
                     <div class="mx-auto w-16 h-16 bg-yellow-500 rounded-sm flex items-center justify-center mb-4 shadow-lg">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
+                        <i class="fas fa-search text-white text-3xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-2">3. Investigasi</h3>
                     <p class="text-gray-600 text-sm">Unit terkait melakukan penyelidikan mendalam terhadap laporan yang diterima</p>
                 </div>
+                <div class="hidden lg:block absolute top-1/2 right-[-32px] transform -translate-y-1/2">
+                    <i class="fas fa-arrow-right text-yellow-400 text-3xl"></i>
+                </div>
             </div>
-
             <!-- Step 4 -->
             <div class="relative text-center">
                 <div class="relative z-10 bg-white px-2">
                     <div class="mx-auto w-16 h-16 bg-purple-500 rounded-sm flex items-center justify-center mb-4 shadow-lg">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <i class="fas fa-check-circle text-white text-3xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-2">4. Tindak Lanjut</h3>
                     <p class="text-gray-600 text-sm">Pelaksanaan solusi dan tindakan korektif berdasarkan hasil investigasi</p>
                 </div>
+                <!-- Tidak perlu panah di step terakhir -->
             </div>
         </div>
 
@@ -265,8 +259,8 @@ $unit_akademik_list = [
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Respon Cepat</h4>
-                    <p class="text-gray-600 text-sm">Verifikasi dalam 24 jam</p>
+                    <h4 class="font-semibold text-gray-900 mb-1">Pasti di Respon</h4>
+                    <p class="text-gray-600 text-sm">Laporan segera ditindaklanjuti</p>
                 </div>
                 <div>
                     <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-sm mb-3">
@@ -306,6 +300,72 @@ $unit_akademik_list = [
                     (0711) 313-949
                 </a>
             </div>
+        </div>
+    </div>
+</div>
+
+<?php
+$laporanModel = model('LaporanModel');
+
+// Total seluruh laporan
+$totalLaporan = $laporanModel->countAll();
+
+// Statistik per status
+$statusCounts = [
+    'in_progress' => $laporanModel->where('status_laporan', 'in_progress')->countAllResults(),
+    'completed'   => $laporanModel->where('status_laporan', 'completed')->countAllResults(),
+];
+
+// Mapping status ke label dan ikon Font Awesome
+$statusMap = [
+    'total' => [
+        'label' => 'Total Laporan',
+        'icon'  => 'fas fa-list-alt',
+        'color' => 'bg-blue-100 text-blue-700'
+    ],
+    'in_progress' => [
+        'label' => 'Diproses',
+        'icon'  => 'fas fa-spinner',
+        'color' => 'bg-yellow-100 text-yellow-700'
+    ],
+    'completed' => [
+        'label' => 'Selesai',
+        'icon'  => 'fas fa-check-circle',
+        'color' => 'bg-green-100 text-green-700'
+    ]
+    ];
+?>
+
+<!-- Statistik Laporan -->
+<div class="max-w-6xl mx-auto mt-12 mb-8">
+    <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Statistik Laporan</h2>
+        <p class="text-gray-600">Status laporan yang masuk ke sistem</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Total Laporan -->
+        <div class="flex flex-col items-center justify-center rounded-lg shadow bg-white p-6">
+            <div class="mb-3 inline-flex items-center justify-center w-12 h-12 <?= $statusMap['total']['color'] ?> rounded-full">
+                <i class="<?= $statusMap['total']['icon'] ?> text-2xl"></i>
+            </div>
+            <div class="font-semibold text-gray-900"><?= $statusMap['total']['label'] ?></div>
+            <div class="text-3xl font-bold text-blue-700 mt-1"><?= $totalLaporan ?></div>
+        </div>
+        <!-- In Progress -->
+        <div class="flex flex-col items-center justify-center rounded-lg shadow bg-white p-6">
+            <div class="mb-3 inline-flex items-center justify-center w-12 h-12 <?= $statusMap['in_progress']['color'] ?> rounded-full">
+                <i class="<?= $statusMap['in_progress']['icon'] ?> text-2xl"></i>
+            </div>
+            <div class="font-semibold text-gray-900"><?= $statusMap['in_progress']['label'] ?></div>
+            <div class="text-3xl font-bold text-blue-700 mt-1"><?= $statusCounts['in_progress'] ?></div>
+        </div>
+        <!-- Completed -->
+        <div class="flex flex-col items-center justify-center rounded-lg shadow bg-white p-6">
+            <div class="mb-3 inline-flex items-center justify-center w-12 h-12 <?= $statusMap['completed']['color'] ?> rounded-full">
+                <i class="<?= $statusMap['completed']['icon'] ?> text-2xl"></i>
+            </div>
+            <div class="font-semibold text-gray-900"><?= $statusMap['completed']['label'] ?></div>
+            <div class="text-3xl font-bold text-blue-700 mt-1"><?= $statusCounts['completed'] ?></div>
         </div>
     </div>
 </div>

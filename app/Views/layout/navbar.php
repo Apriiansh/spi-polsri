@@ -277,13 +277,17 @@
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
                                         <i class="fas fa-history w-5 h-5 mr-3 text-amber-600"></i> Sejarah
                                     </a>
+                                    <a href="/profil/visimisi"
+                                        class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
+                                        <i class="fas fa-lightbulb w-5 h-5 mr-3 text-amber-600"></i> Visi & Misi
+                                    </a>
                                     <a href="/profil/struktur"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
-                                        <i class="fas fa-sitemap w-5 h-5 mr-3 text-amber-600"></i> Struktur
+                                        <i class="fas fa-sitemap w-5 h-5 mr-3 text-amber-600"></i> Struktur Organisasi
                                     </a>
                                     <a href="/profil/piagam"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
-                                        <i class="fas fa-sitemap w-5 h-5 mr-3 text-amber-600"></i> Piagam Pengawasan Intern
+                                        <i class="fas fa-scroll w-5 h-5 mr-3 text-amber-600"></i> Piagam Pengawasan Intern
                                     </a>
                                 </div>
                             </div>
@@ -365,8 +369,10 @@
                 <div id="mobile-profil-menu" class="pl-4 py-2 space-y-1 border-l-2 border-amber-400 overflow-hidden transition-all">
                     <a href="/profil/sejarah"
                         class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Sejarah</a>
-                    <a href="/profil/struktur"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Struktur</a>
+                    <a href="/profil/visimisi"
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Visi & Misi</a>
+                        <a href="/profil/struktur"
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Struktur Organisasi</a>
                     <a href="/profil/piagam"
                         class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Piagam Pengawasan Intern</a>
                 </div>
@@ -422,6 +428,10 @@
                 {
                     title: 'Sejarah',
                     url: '/profil/sejarah'
+                },
+                {
+                    title: 'Visi & Misi',
+                    url: '/profil/visimisi'
                 },
                 {
                     title: 'Struktur Organisasi',
