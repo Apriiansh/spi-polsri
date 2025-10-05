@@ -139,13 +139,15 @@
                 <div class="col-span-1 lg:col-span-1">
                     <div class="footer-section">
                         <div class="flex items-center mb-6 group">
-                            <div class="relative">
-                                <div class="h-24 w-24 mr-4 transition-all duration-300 group-hover:scale-110 drop-shadow-lg flex items-center justify-center">
-                                    <img src="<?= base_url('images/spi.svg') ?>" alt="Logo SPI POLSRI"
-                                        class="h-full w-auto transition-all duration-300 drop-shadow-sm">
+                            <a href="/" class="flex items-center space-x-3 group p-1 border border-white/20 rounded-lg shadow-sm">
+                                <img src="<?= base_url('images/polsri.png') ?>" alt="Logo POLSRI"
+                                    class="h-10 sm:h-12 transition-all duration-300 drop-shadow-sm">
+                                <div class="text-white font-bold text-left -space-y-1">
+                                    <div class="text-xs sm:text-xs tracking-wide">SATUAN</div>
+                                    <div class="text-xs sm:text-xs tracking-wide">PENGAWASAN</div>
+                                    <div class="text-xs sm:text-xs tracking-wide">INTERNAL</div>
                                 </div>
-                                <div class="absolute -inset-3 bg-white/10 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
-                            </div>
+                            </a>
                         </div>
                         <p class="text-blue-100 text-sm leading-relaxed mb-6">
                             Melakukan pengawasan internal untuk memastikan tata kelola yang baik dan akuntabel di Politeknik Negeri Sriwijaya.

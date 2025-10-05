@@ -9,10 +9,8 @@
     <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
 
     <div class="relative container mx-auto px-6 py-16 text-center">
-        <div class="inline-block p-4 bg-white/10 backdrop-blur-sm rounded-2xl mb-6">
-            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-            </svg>
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600/80 rounded-full mb-6 shadow-lg">
+            <i class="fas fa-lightbulb text-white text-4xl"></i>
         </div>
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">VISI DAN MISI</h1>
         <div class="w-24 h-1 bg-white mx-auto rounded-full"></div>
@@ -22,20 +20,54 @@
 <div class="container mx-auto px-6 pt-12 pb-40">
     <div class="container mx-auto px-6 -mt-6 relative z-10">
         <div class="prose max-w-none text-justify text-gray-800">
-            <h2 class="text-3xl font-bold mb-4">Visi SPI</h2>
-            <p class="mb-4">
-                Menjadi SPI yang independen, objektif dan berintegritas dalam mengawal terciptanya Good and Clean Governance (GCG) di Politeknik Negeri Sriwijaya yang Unggul dan Terkemuka.
-            </p>
+            <div class="mb-12">
+                <div class="flex items-center space-x-3 mb-6">
+                    <h2 class="text-3xl font-extrabold text-gray-900 border-b border-blue-100 pb-2">Visi SPI</h2>
+                </div>
+                <div class="p-6 bg-blue-50 rounded-xl border-l-4 border-blue-400">
+                    <p class="text-lg text-gray-700">
+                        "Menjadi mitra strategis dalam mengawal terciptanya <span class="italic">Good and Clean
+                            Governance (GCG)</span> di Politeknik Negeri Sriwijaya yang Unggul dan Terkemuka."
+                    </p>
+                </div>
+            </div>
 
-            <h2 class="text-3xl font-bold mb-4">Misi SPI</h2>
-            <ul class="list-disc list-inside mb-4 pl-4">
-                <li>Mendorong implementasi Good and Clean Governance (GCG) pada setiap unit kerja di Polsri melalui pengawasan yang berkesinambungan dan profesional;</li>
-                <li>Menjalankan fungsi pengawasan secara independen dan objektif dengan melaksanakan pengawasan dan evaluasi yang bebas dari intervensi, serta memberikan rekomendasi yang objektif untuk perbaikan proses manajemen dan tata kelola;</li>
-                <li>Mengembangkan kompetensi dan menjaga integritas SPI untuk memastikan pelaksanaan pengawasan yang terpercaya dan berkualitas;</li>
-                <li>Mendukung dan memastikan akuntabilitas dan transparansi di setiap proses kegiatan Polsri melalui sistem pengawasan dan pelaporan yang efektif;</li>
-                <li>Mengintegrasikan teknologi dan pendekatan terkini dalam audit berbasis risiko untuk menciptakan proses pengawasan yang efisien, efektif, dan ekonomis;</li>
-                <li>Memberikan masukan strategis kepada manajemen terkait mitigasi risiko dan pengambilan keputusan yang mendukung tercapainya visi Polsri sebagai institusi yang unggul dan terkemuka.</li>
-            </ul>
+            <div class="mb-8">
+                <div class="flex items-center space-x-3 mb-8">
+                    <h2 class="text-3xl font-extrabold text-gray-900 border-b border-blue-100 pb-2">Misi SPI</h2>
+                </div>
+
+                <!-- Daftar Misi: Menggunakan daftar vertikal yang lebih minimalis dan mudah dibaca -->
+                <ul class="space-y-6">
+
+                    <?php
+                    $misi_items = [
+                        "Mendorong implementasi Good and Clean Governance (GCG) pada setiap unit kerja di Polsri melalui pengawasan yang berkesinambungan dan profesional.",
+                        "Menjalankan fungsi pengawasan secara independen dan objektif dengan melaksanakan pengawasan dan evaluasi yang bebas dari intervensi, serta memberikan rekomendasi yang objektif untuk perbaikan proses manajemen dan tata kelola.",
+                        "Mengembangkan kompetensi dan menjaga integritas SPI untuk memastikan pelaksanaan pengawasan yang terpercaya dan berkualitas.",
+                        "Mendukung dan memastikan akuntabilitas dan transparansi di setiap proses kegiatan Polsri melalui sistem pengawasan dan pelaporan yang efektif.",
+                        "Mengintegrasikan teknologi dan pendekatan terkini dalam audit berbasis risiko untuk menciptakan proses pengawasan yang efisien, efektif, dan ekonomis.",
+                        "Memberikan masukan strategis kepada manajemen terkait mitigasi risiko dan pengambilan keputusan yang mendukung tercapainya visi Polsri sebagai institusi yang unggul dan terkemuka."
+                    ];
+
+                    foreach ($misi_items as $index => $misi) {
+                        $number = $index + 1;
+                        echo '
+                    <li class="flex items-start group">
+                        <!-- Indikator Angka Minimalis -->
+                        <div class="flex-shrink-0 w-6 h-6 flex items-center justify-center text-sm font-semibold text-blue-600 border border-blue-200 rounded-full mt-1 mr-4 bg-blue-50 group-hover:bg-blue-100 transition duration-150">
+                            ' . $number . '
+                        </div>
+                        <!-- Teks Misi dengan Garis Bawah Halus -->
+                        <p class="text-gray-700 leading-relaxed flex-1 py-1 border-b border-gray-100 group-last:border-b-0 group-hover:text-gray-800 transition duration-150">
+                            ' . $misi . '
+                        </p>
+                    </li>';
+                    }
+                    ?>
+
+                </ul>
+            </div>
         </div>
     </div>
 </div>

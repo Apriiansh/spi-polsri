@@ -60,17 +60,25 @@
         </div>
 
         <!-- Kolom Kanan: Formulir Login -->
-        <div class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 lg:p-16 relative">
-        
+        <div class="w-full md:w-1/2 flex flex-col items-center justify-center p-6 md:p-12 lg:p-16 relative">
+
             <a href="/" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition duration-150">
                 <svg class="w-8 h-8 md:w-10 md:h-10 p-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </a>
 
+            <a href="/" class="inline-flex items-center space-x-4 group p-5 border border-gray-200 bg-white rounded-lg shadow-sm mb-6">
+                <img src="<?= base_url('images/polsri.png') ?>" alt="Logo POLSRI"
+                    class="h-16 sm:h-20 transition-all duration-300 drop-shadow-sm">
+                <div class="text-black font-bold text-left -space-y-1.5">
+                    <div class="text-xl sm:text-xxl tracking-wide">SATUAN</div>
+                    <div class="text-xl sm:text-xxl tracking-wide">PENGAWASAN</div>
+                    <div class="text-xl sm:text-xxl tracking-wide">INTERNAL</div>
+                </div>
+            </a>
             <div class="w-full max-w-lg bg-white rounded-2xl md:shadow-lg p-8 sm:p-10 transition-transform-opacity hover:scale-105">
                 <div class="text-center mb-8">
-                    <img src="<?= base_url('images/spi.svg') ?>" alt="Logo SPI" class="mx-auto h-28 w-auto mb-4">
                     <h1 class="text-4xl font-extrabold text-primary-blue">LOGIN</h1>
                     <p class="text-gray-500 mt-2">Masukkan kredensial Anda untuk melanjutkan.</p>
                 </div>

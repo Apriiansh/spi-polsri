@@ -32,7 +32,7 @@ class PublicArtikelController extends BaseController
 
         $data = [
             'title'   => 'Daftar Artikel',
-            'artikel' => $artikel->orderBy('created_at', 'DESC')->paginate(10),
+            'artikel' => $artikel->orderBy('created_at', 'DESC')->paginate(6),
             'pager'   => $this->artikelModel->pager,
             'search'  => $search,
         ];

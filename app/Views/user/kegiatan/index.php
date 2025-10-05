@@ -137,13 +137,13 @@
 </div>
 
 <div class="flex justify-center my-8">
-    <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-full shadow-lg p-2 md:p-4 border border-gray-300" aria-label="Pagination">
-        <?= $pager->links('default', 'default_full') ?>
+    <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-lg shadow-lg p-2 md:p-4 border border-gray-300" aria-label="Pagination">
+        <?= $pager->links('default', 'tailwind_full') ?>
     </nav>
 </div>
 
 <!-- Floating Action Button Mobile -->
-<div class="sm:hidden fixed bottom-6 right-6 z-10">
+<div class=" sm:hidden fixed bottom-6 right-6 z-10">
     <a href="<?= base_url('user/kegiatan/create') ?>" class="w-14 h-14 bg-primary text-white rounded-lg shadow-lg flex items-center justify-center hover:bg-primary-dark transition-all duration-300 hover:scale-110">
         <i class="fas fa-plus text-xl"></i>
     </a>

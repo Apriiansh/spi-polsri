@@ -49,7 +49,7 @@ class PublicKegiatanController extends BaseController
 
         $data = [
             'title' => 'Daftar Kegiatan',
-            'kegiatan' => $kegiatan->orderBy('created_at', 'DESC')->paginate(10),
+            'kegiatan' => $kegiatan->orderBy('created_at', 'DESC')->paginate(6),
             'pager' => $this->kegiatanModel->pager,
             'search' => $search,
             'kategori_filter' => $kategori_filter,

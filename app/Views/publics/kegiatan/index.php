@@ -3,22 +3,44 @@
 <?= $this->section('content') ?>
 
 <?php
-// Ambil gambar pertama dari HTML konten
+/**
+ * Fungsi untuk mengambil semua URL gambar dari konten HTML.
+ * Menggunakan DOMDocument untuk parsing HTML.
+ */
 function get_all_images($html)
 {
     $doc = new DOMDocument();
-    @$doc->loadHTML($html); // parsing isi konten HTML
+    // Suppress warnings from broken HTML (common issue with user content)
+    @$doc->loadHTML($html);
     $tags = $doc->getElementsByTagName('img');
     $images = [];
 
     foreach ($tags as $tag) {
-        $images[] = $tag->getAttribute('src'); // ambil semua src gambar
+        $images[] = $tag->getAttribute('src');
     }
 
     return $images;
 }
+
+/**
+ * Fungsi untuk membersihkan teks dan mengambil paragraf pertama.
+ */
+function get_first_paragraph($html)
+{
+    // Cari paragraf pertama (opsional, kalau mau)
+    $doc = new DOMDocument();
+    @$doc->loadHTML($html);
+    $paragraphs = $doc->getElementsByTagName('p');
+    if ($paragraphs->length > 0) {
+        // Hapus semua tag HTML dan batasi panjangnya
+        $text = strip_tags($paragraphs->item(0)->nodeValue);
+        return substr($text, 0, 150) . (strlen($text) > 150 ? '...' : '');
+    }
+    return 'Klik untuk melihat detail kegiatan ini...';
+}
 ?>
 
+<!-- Header Section -->
 <div class="relative bg-gradient-to-br from-blue-300 via-blue-500 to-cyan-500 overflow-hidden pt-5 mb-12">
     <div class="absolute inset-0 bg-black/10"></div>
 
@@ -36,8 +58,8 @@ function get_all_images($html)
     </div>
 </div>
 
+<!-- Filter Section -->
 <div class="container mx-auto px-6 -mt-6 relative z-10">
-    <!-- Filter Section -->
     <div class="bg-white shadow-2xl rounded-2xl overflow-hidden mb-12 border border-gray-100">
         <div class="bg-gradient-to-r from-slate-50 to-blue-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
             <div class="flex items-center">
@@ -81,10 +103,10 @@ function get_all_images($html)
                         <!-- Category Filter -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
-                            <select name="kategori" class="text-gray-400 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                            <select name="kategori" class="text-gray-700 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
                                 <option class="text-gray-800" value="">Semua Kategori</option>
                                 <?php foreach ($kategoriData as $kategori_nama) : ?>
-                                    <option class="text-gray-800"  value="<?= esc($kategori_nama); ?>" <?= ($kategori_filter == $kategori_nama) ? 'selected' : ''; ?>>
+                                    <option class="text-gray-800" value="<?= esc($kategori_nama); ?>" <?= ($kategori_filter == $kategori_nama) ? 'selected' : ''; ?>>
                                         <?= esc($kategori_nama); ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -113,25 +135,16 @@ function get_all_images($html)
     </div>
 
     <!-- Kegiatan Grid -->
+    <!-- Catatan: Grid ini yang membuat kartu terlihat 'vertikal' (1 kolom) di layar kecil. -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         <?php if (!empty($kegiatan)) : ?>
             <?php foreach ($kegiatan as $item) : ?>
                 <?php
-                $imageUrls = [];
-                $firstParagraph = 'Klik untuk melihat detail kegiatan ini...';
-
                 $imageUrls = get_all_images($item['konten']);
                 if (empty($imageUrls)) {
-                    $imageUrls[] = 'https://placehold.co/400x250/E3F2FD/1976D2?text=SPI+POLSRI';
+                    $imageUrls[] = 'https://placehold.co/400x250/E3F2FD/1976D2?text=FOTO+KEGIATAN';
                 }
-
-                // Cari paragraf pertama (opsional, kalau mau)
-                $doc = new DOMDocument();
-                @$doc->loadHTML($item['konten']);
-                $paragraphs = $doc->getElementsByTagName('p');
-                if ($paragraphs->length > 0) {
-                    $firstParagraph = strip_tags($paragraphs->item(0)->nodeValue);
-                }
+                $firstParagraph = get_first_paragraph($item['konten']);
                 ?>
 
                 <article class="kegiatan-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
@@ -140,14 +153,15 @@ function get_all_images($html)
                         <div class="slider-container relative w-full h-full">
                             <?php foreach ($imageUrls as $index => $url) : ?>
                                 <div class="slider-item absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 <?= ($index === 0) ? 'opacity-100' : '' ?>">
+                                    <!-- Diperbaiki: Menggunakan object-cover untuk mengisi container tanpa distorsi -->
                                     <img src="<?= esc($url); ?>" alt="<?= esc($item['judul']); ?>"
-                                        class="w-full h-full object-fit bg-gray-100 rounded-t-2xl">
+                                        class="w-full h-full object-cover bg-gray-100 rounded-t-2xl">
                                 </div>
                             <?php endforeach; ?>
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                        <!-- Slider Navigation Buttons -->
+                        <!-- Slider Navigation Buttons (Hidden if only 1 image) -->
                         <button class="slider-prev-btn absolute top-1/2 -translate-y-1/2 left-4 text-white p-2 rounded-full bg-black/30 hover:bg-black/50 transition-colors z-20">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -159,7 +173,7 @@ function get_all_images($html)
                             </svg>
                         </button>
 
-                        <!-- Slider Dots -->
+                        <!-- Slider Dots (Hidden if only 1 image) -->
                         <div class="slider-dots absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
                             <?php foreach ($imageUrls as $index => $url) : ?>
                                 <button class="dot-btn w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors duration-300 <?= ($index === 0) ? '!bg-white' : '' ?>" data-index="<?= $index; ?>"></button>
@@ -224,14 +238,15 @@ function get_all_images($html)
 
     <!-- Pagination -->
     <div class="flex justify-center mb-8">
-        <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-full shadow-lg p-2 md:p-4 border border-gray-100" aria-label="Pagination">
-            <?= $pager->links('default', 'default_full') ?>
+        <nav class="bg-slate-700 rounded-full shadow-lg p-2 md:p-4 border border-gray-100" aria-label="Pagination>
+            <?= $pager->links('default', 'tailwind_full') ?>
         </nav>
     </div>
 </div>
 
 <!-- Styles -->
 <style>
+    /* Utility classes for line clamping */
     .line-clamp-2 {
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -246,6 +261,7 @@ function get_all_images($html)
         overflow: hidden;
     }
 
+    /* Card Hover/Shine Effect */
     .kegiatan-card {
         position: relative;
         overflow: hidden;
@@ -268,31 +284,12 @@ function get_all_images($html)
         left: 100%;
     }
 
-    /* Custom Pager Styling */
-    .pagination li a,
-    .pagination li span {
-        @apply block px-4 py-2 text-sm md:text-base font-medium transition-all duration-200 rounded-full;
-    }
 
-    .pagination li a {
-        @apply text-gray-700 hover:bg-blue-100 hover:text-blue-600;
-    }
-
-    .pagination li.active a,
-    .pagination li.active span {
-        @apply bg-blue-600 text-white shadow-md;
-    }
-
-    .pagination li.disabled a {
-        @apply text-gray-400 cursor-not-allowed pointer-events-none;
-    }
-
-    .pagination li a.pager-arrow {
-        @apply p-2 md:p-3 bg-transparent hover:bg-blue-100 text-gray-600 hover:text-blue-600 flex items-center justify-center;
-    }
-
-    .pagination li a.pager-arrow:not(.disabled) {
-        @apply hover:bg-blue-100;
+    /* Hides the slide controls if there is only one image */
+    .slider-container:has(.slider-item:only-child)~.slider-prev-btn,
+    .slider-container:has(.slider-item:only-child)~.slider-next-btn,
+    .slider-container:has(.slider-item:only-child)~.slider-dots {
+        display: none !important;
     }
 </style>
 
@@ -320,117 +317,98 @@ function get_all_images($html)
             });
         }
 
-        // Add smooth scroll for any anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
         // Add loading animation for form submission
         const form = document.querySelector('form');
         if (form) {
             form.addEventListener('submit', function() {
-                const submitBtn = form.querySelector('button[type="submit"]');
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = `
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Memproses...
-                    `;
-                }
+                const submitBtn = form.querySelector('button[type=" submit"]');
+            if (submitBtn) {
+            // Disable button and show loading spinner
+            submitBtn.disabled=true;
+            submitBtn.classList.remove('hover:from-blue-700', 'hover:to-blue-800' );
+            submitBtn.classList.add('bg-blue-500', 'cursor-not-allowed' );
+            submitBtn.innerHTML=`
+            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Memproses...
+            `;
+            }
             });
-        }
-    });
+            }
 
-    // ===============================================
-    // JAVASCRIPT FOR AUTOMATIC IMAGE SLIDER
-    // ===============================================
+            // ===============================================
+            // JAVASCRIPT FOR AUTOMATIC IMAGE SLIDER
+            // ===============================================
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const sliders = document.querySelectorAll('.kegiatan-card');
-
-        sliders.forEach(slider => {
+            const initializeSlider = (slider) => {
             const sliderItems = slider.querySelectorAll('.slider-item');
-            const prevBtn = slider.querySelector('.slider-prev-btn');
-            const nextBtn = slider.querySelector('.slider-next-btn');
-            const dotsContainer = slider.querySelector('.slider-dots');
-            const dotBtns = slider.querySelectorAll('.dot-btn');
-            let currentSlide = 0;
-            let slideInterval;
+            if (sliderItems.length <= 1) return; // Stop if only one image
 
-            const showSlide = (index) => {
-                sliderItems.forEach(item => item.classList.remove('opacity-100', 'z-10'));
-                sliderItems.forEach(item => item.classList.add('opacity-0', 'z-0'));
+                const prevBtn=slider.querySelector('.slider-prev-btn');
+                const nextBtn=slider.querySelector('.slider-next-btn');
+                const dotsContainer=slider.querySelector('.slider-dots');
+                const dotBtns=slider.querySelectorAll('.dot-btn');
+                let currentSlide=0;
+                let slideInterval;
 
-                sliderItems[index].classList.remove('opacity-0', 'z-0');
-                sliderItems[index].classList.add('opacity-100', 'z-10');
+                const showSlide=(index)=> {
+                // Ensure index loops correctly
+                currentSlide = (index + sliderItems.length) % sliderItems.length;
+
+                sliderItems.forEach(item => {
+                item.classList.remove('opacity-100', 'z-10');
+                item.classList.add('opacity-0', 'z-0');
+                });
+
+                sliderItems[currentSlide].classList.remove('opacity-0', 'z-0');
+                sliderItems[currentSlide].classList.add('opacity-100', 'z-10');
 
                 dotBtns.forEach(dot => dot.classList.remove('!bg-white'));
-                dotBtns[index].classList.add('!bg-white');
-            };
+                dotBtns[currentSlide].classList.add('!bg-white');
+                };
 
-            const nextSlide = () => {
-                currentSlide = (currentSlide + 1) % sliderItems.length;
-                showSlide(currentSlide);
-            };
+                const nextSlide = () => {
+                showSlide(currentSlide + 1);
+                };
 
-            const prevSlide = () => {
-                currentSlide = (currentSlide - 1 + sliderItems.length) % sliderItems.length;
-                showSlide(currentSlide);
-            };
-
-            const startSlider = () => {
+                const startSlider = () => {
                 clearInterval(slideInterval);
                 slideInterval = setInterval(nextSlide, 5000);
-            };
+                };
 
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => {
-                    prevSlide();
-                    startSlider();
-                });
-            }
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    nextSlide();
-                    startSlider();
-                });
-            }
-
-            if (dotsContainer) {
-                dotsContainer.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('dot-btn')) {
-                        const index = parseInt(e.target.dataset.index);
-                        showSlide(index);
-                        currentSlide = index;
-                        startSlider();
-                    }
-                });
-            }
-
-            if (sliderItems.length <= 1) {
-                if (prevBtn) prevBtn.style.display = 'none';
-                if (nextBtn) nextBtn.style.display = 'none';
-                if (dotsContainer) dotsContainer.style.display = 'none';
-            } else {
-                showSlide(currentSlide);
+                // Manual navigation resets the timer
+                const resetTimerAndNavigate = (navigateFn) => {
+                clearInterval(slideInterval);
+                navigateFn();
                 startSlider();
-            }
+                };
 
-        });
-    });
-</script>
+                if (prevBtn) {
+                prevBtn.addEventListener('click', () => resetTimerAndNavigate(() => showSlide(currentSlide - 1)));
+                }
+                if (nextBtn) {
+                nextBtn.addEventListener('click', () => resetTimerAndNavigate(() => showSlide(currentSlide + 1)));
+                }
 
-<?= $this->endSection() ?>
+                if (dotsContainer) {
+                dotsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('dot-btn')) {
+                const index = parseInt(e.target.dataset.index);
+                resetTimerAndNavigate(() => showSlide(index));
+                }
+                });
+                }
+
+                // Start everything up
+                showSlide(0);
+                startSlider();
+                };
+
+                // Initialize all sliders found on the page
+                document.querySelectorAll('.kegiatan-card').forEach(initializeSlider);
+                });
+                </script>
+
+                <?= $this->endSection() ?>

@@ -115,9 +115,9 @@
 
                 <!-- Photo Frame -->
                 <div class="photo-frame">
-                    <div class="w-40 h-56 sm:w-52 sm:h-72 md:w-64 md:h-80 border-2 border-gradient-to-br from-indigo-300 to-blue-300 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-indigo-200/50 hover:scale-105 relative">
+                    <div class="w-55 h-60 sm:w-65 sm:h-70 md:w-75 md:h-80 border-2 border-gradient-to-br from-indigo-300 to-blue-300 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-indigo-200/50 hover:scale-105 relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-blue-600/10 z-10"></div>
-                        <img src="<?= base_url('images/pakedwin.jpg') ?>" alt="Foto Kepala SPI" class="w-full h-full object-fit relative z-0">
+                        <img src="<?= base_url('images/profil/edwjs.jpg') ?>" alt="Foto Kepala SPI" class="w-full h-full object-cover relative z-0">
                     </div>
                 </div>
             </div>
@@ -198,9 +198,9 @@
                 <div class="space-y-6">
                     <h3 class="text-xl font-semibold text-gray-900">Kegiatan Terbaru</h3>
                     <div class="space-y-3">
-                        <?php if (!empty($kegiatan_terbaru)) : ?>
+                        <?php if (!empty($kegiatan_terbaru) && is_array($kegiatan_terbaru)) : ?>
                             <?php foreach (array_slice($kegiatan_terbaru, 0, 5) as $kegiatan) : ?>
-                                <a href="<?= base_url('kegiatan/' . $kegiatan['id']); ?>" class="activity-item group flex bg-gradient-to-r from-gray-50/70 to-blue-50/70 rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-300 transition-all duration-300 backdrop-blur-sm">
+                                <a href="<?= base_url('kegiatan/' . $kegiatan['slug']); ?>" class="activity-item group flex bg-gradient-to-r from-gray-50/70 to-blue-50/70 rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-300 transition-all duration-300 backdrop-blur-sm">
                                     <div class="flex-1 min-w-0">
                                         <h5 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
                                             <?= esc($kegiatan['judul']); ?>
@@ -279,7 +279,7 @@
                     <div class="upg-card rounded-2xl p-12 border border-slate-600 text-center shadow-2xl bg-cover bg-center relative" style="background-image: url('<?= base_url('images/upg-bg.png') ?>');">
                         <div class="absolute inset-0 bg-slate-900/70 z-0 rounded-2xl"></div>
 
-                        <div class="inline-block w-full px-2 py-2 mb-3 rounded-lg" style="background:rgba(30,41,59,0.7);backdrop-filter:blur(2px);">
+                        <div class="inline-block w-full px-2 py-2 mb-3 rounded-lg" style="">
                             <h3 class="text-xl font-semibold text-yellow-300 drop-shadow mb-1">Buat Laporan Sekarang</h3>
                             <p class="text-blue-100 mb-2 text-sm drop-shadow">Sistem pelaporan yang aman dan terpercaya</p>
                         </div>

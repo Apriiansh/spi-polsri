@@ -106,7 +106,7 @@
 
         /* Active link */
         .active {
-            color: #FEF3C7 !important;
+            color: rgb(22, 22, 22) !important;
             font-weight: 600;
         }
 
@@ -222,9 +222,16 @@
 
             <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-10">
-                    <a href="/" class="flex items-center space-x-3 group">
-                        <img src="<?= base_url('images/spi.svg') ?>" alt="Logo SPI POLSRI"
-                            class="h-24 w-32 sm:h-28 transition-all duration-300 group-hover:scale-105 drop-shadow-sm">
+                    <a href="/" class="flex items-center space-x-3 group p-1 border border-white/20 rounded-lg shadow-sm">
+                        <img src="<?= base_url('images/polsri.png') ?>" alt="Logo POLSRI"
+                            class="h-10 sm:h-12 transition-all duration-300 drop-shadow-sm">
+                        <div class="text-white font-bold text-left -space-y-1">
+                            <div class="text-xs sm:text-xs tracking-wide">SATUAN</div>
+                            <div class="text-xs sm:text-xs tracking-wide">PENGAWASAN</div>
+                            <div class="text-xs sm:text-xs tracking-wide">INTERNAL</div>
+                        </div>
+                        <img src="<?= base_url('images/blu.png') ?>" alt="Logo BLU"
+                            class="h-10 sm:h-12 transition-all duration-300 drop-shadow-sm">
                     </a>
 
                     <div class="hidden lg:flex items-center relative">
@@ -260,12 +267,12 @@
             <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-14">
                     <div class="flex items-center space-x-6">
-                        <a href="/" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">Beranda
+                        <a href="/" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-slate-800 transition-colors">Beranda
                             <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 rounded-full transition-all duration-300"></div>
                         </a>
                         <div class="relative group">
                             <button
-                                class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">
+                                class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-slate-800 transition-colors">
                                 Profil
                                 <i class="fas fa-chevron-down ml-1 text-xs transition-transform group-hover:rotate-180"></i>
                                 <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 transition-all duration-300"></div>
@@ -275,7 +282,7 @@
                                 <div class="p-2">
                                     <a href="/profil/sejarah"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
-                                        <i class="fas fa-history w-5 h-5 mr-3 text-amber-600"></i> Sejarah
+                                        <i class="fas fa-scroll w-5 h-5 mr-3 text-amber-600"></i> Sejarah
                                     </a>
                                     <a href="/profil/visimisi"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
@@ -287,14 +294,14 @@
                                     </a>
                                     <a href="/profil/piagam"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
-                                        <i class="fas fa-scroll w-5 h-5 mr-3 text-amber-600"></i> Piagam Pengawasan Intern
+                                        <i class="fas fa-certificate w-5 h-5 mr-3 text-amber-600"></i> Piagam Pengawasan Intern
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="relative group">
                             <button
-                                class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">
+                                class="nav-link relative flex items-center px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-slate-800 transition-colors">
                                 Peraturan
                                 <i class="fas fa-chevron-down ml-1 text-xs transition-transform group-hover:rotate-180"></i>
                                 <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 transition-all duration-300"></div>
@@ -325,13 +332,13 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/kegiatan" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">Kegiatan
+                        <a href="/kegiatan" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-slate-800 transition-colors">Kegiatan
                             <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 rounded-full transition-all duration-300"></div>
                         </a>
-                        <a href="/artikel" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">Artikel
+                        <a href="/artikel" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-slate-800 transition-colors">Artikel
                             <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 rounded-full transition-all duration-300"></div>
                         </a>
-                        <a href="/laporan/create" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-amber-100 transition-colors">Lapor SPI
+                        <a href="/laporan/create" class="nav-link relative px-4 py-2 rounded-xl text-sm font-medium text-blue-50 hover:text-slate-800 transition-colors">Lapor SPI
                             <div class="underline-effect absolute bottom-0 left-0 w-0 h-0.5 bg-amber-200 rounded-full transition-all duration-300"></div>
                         </a>
                     </div>
@@ -368,13 +375,13 @@
                 </button>
                 <div id="mobile-profil-menu" class="pl-4 py-2 space-y-1 border-l-2 border-amber-400 overflow-hidden transition-all">
                     <a href="/profil/sejarah"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Sejarah</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Sejarah</a>
                     <a href="/profil/visimisi"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Visi & Misi</a>
-                        <a href="/profil/struktur"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Struktur Organisasi</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Visi & Misi</a>
+                    <a href="/profil/struktur"
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Struktur Organisasi</a>
                     <a href="/profil/piagam"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Piagam Pengawasan Intern</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Piagam Pengawasan Intern</a>
                 </div>
 
                 <button id="mobile-peraturan-button"
@@ -383,15 +390,15 @@
                 </button>
                 <div id="mobile-peraturan-menu" class="pl-4 py-2 space-y-1 border-l-2 border-amber-400 overflow-hidden transition-all">
                     <a href="/peraturan/akuntansi-keuangan"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Akuntansi/Keuangan</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Akuntansi/Keuangan</a>
                     <a href="/peraturan/hukum"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Hukum</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Hukum</a>
                     <a href="/peraturan/manajemen-sdm"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Manajemen SDM</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Manajemen SDM</a>
                     <a href="/peraturan/manajemen-aset"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Manajemen Aset</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Manajemen Aset</a>
                     <a href="/peraturan/ketatalaksanaan"
-                        class="block px-3 py-2 text-sm text-blue-100 hover:text-amber-100 hover:bg-white/10 rounded transition-colors">Ketatalaksanaan</a>
+                        class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Ketatalaksanaan</a>
                 </div>
 
                 <a href="/kegiatan"

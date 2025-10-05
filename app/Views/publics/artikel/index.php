@@ -156,7 +156,7 @@ function parse_quill_delta($json, $limit = 150)
                         <!-- Article Badge -->
                         <div class="absolute top-4 left-4">
                             <span class="inline-block bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-full text-xs font-semibold shadow-md">
-                                 <?= esc(date('d F Y', strtotime($item['updated_at']))); ?>
+                                <?= esc(date('d F Y', strtotime($item['updated_at']))); ?>
                             </span>
                         </div>
                     </div>
@@ -211,8 +211,8 @@ function parse_quill_delta($json, $limit = 150)
 
     <!-- Pagination -->
     <div class="flex justify-center mb-8">
-        <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-full shadow-lg p-2 md:p-4 border border-gray-100" aria-label="Pagination">
-            <?= $pager->links('default', 'default_full') ?>
+        <nav class="bg-slate-700 rounded-full shadow-lg p-2 md:p-4 border border-gray-100" aria-label="Pagination">
+            <?= $pager->links('default', 'tailwind_full') ?>
         </nav>
     </div>
 </div>
@@ -254,33 +254,6 @@ function parse_quill_delta($json, $limit = 150)
 
     .artikel-card:hover::before {
         left: 100%;
-    }
-
-    /* Custom Pager Styling */
-    .pagination li a,
-    .pagination li span {
-        @apply block px-4 py-2 text-sm md:text-base font-medium transition-all duration-200 rounded-full;
-    }
-
-    .pagination li a {
-        @apply text-gray-700 hover:bg-blue-100 hover:text-blue-600;
-    }
-
-    .pagination li.active a,
-    .pagination li.active span {
-        @apply bg-blue-600 text-white shadow-md;
-    }
-
-    .pagination li.disabled a {
-        @apply text-gray-400 cursor-not-allowed pointer-events-none;
-    }
-
-    .pagination li a.pager-arrow {
-        @apply p-2 md:p-3 bg-transparent hover:bg-blue-100 text-gray-600 hover:text-blue-600 flex items-center justify-center;
-    }
-
-    .pagination li a.pager-arrow:not(.disabled) {
-        @apply hover:bg-blue-100;
     }
 </style>
 
