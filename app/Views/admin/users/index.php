@@ -24,17 +24,32 @@
             <table class="hidden lg:table w-full text-left table-auto">
                 <thead>
                     <tr class="bg-gray-100 border-b border-gray-200">
-                        <th class="py-3 px-4 font-semibold text-gray-600">ID</th>
-                        <th class="py-3 px-4 font-semibold text-gray-600">Username</th>
+                        <th class="py-3 px-4 font-semibold text-gray-600">No</th>
+                        <th class="py-3 px-4 font-semibold text-gray-600">
+                            <div class="flex items-center justify-between">
+                                <span>Username</span>
+                                <div class="flex flex-col">
+                                    <a href="<?= base_url('admin/users?sort=asc'); ?>" class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-caret-up <?= (isset($_GET['sort']) && $_GET['sort'] == 'asc') ? 'text-blue-600' : ''; ?>"></i>
+                                    </a>
+                                    <a href="<?= base_url('admin/users?sort=desc'); ?>" class="text-gray-400 hover:text-gray-600 -mt-1">
+                                        <i class="fas fa-caret-down <?= (isset($_GET['sort']) && $_GET['sort'] == 'desc') ? 'text-blue-600' : ''; ?>"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Email</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Bidang</th>
                         <th class="py-3 px-4 font-semibold text-gray-600">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user): ?>
+                    <?php
+                    $no = 1;
+                    foreach ($users as $user):
+                    ?>
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <td class="py-3 px-4 text-sm text-gray-700">#<?= $user['id']; ?></td>
+                            <td class="py-3 px-4 text-sm text-gray-700"><?= $no++; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700"><?= $user['username']; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700"><?= $user['email']; ?></td>
                             <td class="py-3 px-4 text-sm text-gray-700"><?= $user['bidang']; ?></td>
@@ -56,11 +71,17 @@
 
             <!-- Card grid untuk layar kecil -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
-                <?php foreach ($users as $user): ?>
+                <?php
+                $no = 1;
+                foreach ($users as $user):
+                ?>
                     <div class="border rounded-lg p-4 shadow hover:shadow-md bg-white">
-                        <h3 class="font-semibold text-gray-800"><?= $user['username']; ?></h3>
+                        <div class="flex items-start justify-between mb-2">
+                            <h3 class="font-semibold text-gray-800"><?= $user['username']; ?></h3>
+                            <span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">#<?= $no++; ?></span>
+                        </div>
                         <p class="text-sm text-gray-600">Email: <?= $user['email']; ?></p>
-                        <p class="text-sm text-gray-600">Role: <?= $user['role']; ?></p>
+                        <p class="text-sm text-gray-600">Bidang: <?= $user['bidang']; ?></p>
                         <div class="flex items-center space-x-3 mt-3">
                             <a href="<?= base_url('admin/users/edit/' . $user['id']); ?>" class="text-blue-600 hover:text-blue-800">
                                 <i class="fas fa-edit"></i>
@@ -77,12 +98,6 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="flex justify-center my-8">
-    <nav class="flex items-center space-x-1.5 md:space-x-3 bg-white rounded-lg shadow-lg p-2 md:p-4 border border-gray-300" aria-label="Pagination">
-        <?= $pager->links('default', 'tailwind_full') ?>
-    </nav>
 </div>
 
 <?= $this->endSection(); ?>

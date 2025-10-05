@@ -101,23 +101,23 @@
                     <div class="inline-block p-3 bg-gradient-to-br from-indigo-100 to-blue-100 backdrop-blur-sm rounded-xl mb-6 sm:mb-8">
                         <i class="fas fa-quote-left text-xl sm:text-2xl text-indigo-600"></i>
                     </div>
-
                     <blockquote class="text-lg sm:text-xl lg:text-3xl text-gray-800 font-light leading-relaxed mb-6 sm:mb-8 quote-text break-words">
-                    SPI telah bertransformasi tidak hanya sebagai Pengawas Kepatuhan <span class="italic">(Watchdog)</span>, tapi memastikan perannya sebagai Mitra Strategis  <span class="italic">(Strategic Partner)</span> manajemen dalam mencapai visi sebagai institusi pendidikan tinggi vokasi yang unggul dan terkemuka.    
+                        SPI telah bertransformasi tidak hanya sebagai Pengawas Kepatuhan <span class="italic">(Watchdog)</span>, tapi memastikan perannya sebagai Mitra Strategis <span class="italic">(Strategic Partner)</span> manajemen dalam mencapai visi sebagai institusi pendidikan tinggi vokasi yang unggul dan terkemuka.
                     </blockquote>
-
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start quote-author gap-2 sm:gap-4">
-                        <div class="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-indigo-300 to-blue-300"></div>
-                        <cite class="text-gray-800 font-medium text-sm sm:text-base">Kepala SPI POLSRI</cite>
-                        <div class="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-blue-300 to-indigo-300"></div>
+                    <div class="quote-author">
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-4 mb-2">
+                            <div class="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-indigo-300 to-blue-300"></div>
+                            <cite class="text-gray-800 font-semibold text-base sm:text-lg not-italic">Edwin Frymaruwah, S.E., M.Ak., A-CPA, CACP, CIB, QIA</cite>
+                            <div class="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-blue-300 to-indigo-300"></div>
+                        </div>
+                        <p class="text-indigo-600 font-medium text-sm sm:text-base text-center lg:pr-16 mt-1">Kepala SPI POLSRI</p>
                     </div>
                 </div>
-
                 <!-- Photo Frame -->
                 <div class="photo-frame">
                     <div class="w-55 h-60 sm:w-65 sm:h-70 md:w-75 md:h-80 border-2 border-gradient-to-br from-indigo-300 to-blue-300 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-indigo-200/50 hover:scale-105 relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-blue-600/10 z-10"></div>
-                        <img src="<?= base_url('images/profil/edwjs.jpg') ?>" alt="Foto Kepala SPI" class="w-full h-full object-cover relative z-0">
+                        <img src="<?= base_url('images/profil/edwjs.jpg') ?>" alt="Edwin Frymaruwah - Kepala SPI POLSRI" class="w-full h-full object-cover relative z-0">
                     </div>
                 </div>
             </div>
@@ -244,7 +244,7 @@
                             <i class="fas fa-exclamation-triangle text-2xl text-yellow-400"></i>
                         </div>
                         <div>
-                            <h2 class="text-3xl lg:text-4xl font-bold text-gray-800">Unit Pengawasan Gratifikasi</h2>
+                            <h2 class="text-3xl lg:text-4xl font-bold text-gray-800">Unit Pengendalian Gratifikasi</h2>
                             <div class="w-16 h-1 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full"></div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                             <i class="fas fa-eye-low-vision text-blue-800 mr-2"></i>
                             Proses Transparan
                         </div>
-                        
+
                     </div>
                 </div>
 

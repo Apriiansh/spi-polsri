@@ -87,6 +87,10 @@
                         <i class="fas fa-users w-5"></i>
                         <span>Manajemen User</span>
                     </a>
+                    <a href="<?= site_url('admin/kegiatan') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                        <i class="fas fa-calendar-alt w-5"></i>
+                        <span>Kegiatan</span>
+                    </a>
                     <a href="<?= site_url('admin/artikel') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fas fa-newspaper w-5"></i>
                         <span>Artikel</span>
@@ -94,10 +98,6 @@
                     <a href="<?= site_url('admin/laporan') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fas fa-chart-line w-5"></i>
                         <span>Laporan</span>
-                    </a>
-                    <a href="<?= site_url('admin/kegiatan') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
-                        <i class="fas fa-calendar-alt w-5"></i>
-                        <span>Kegiatan</span>
                     </a>
 
                     <!-- Logout -->

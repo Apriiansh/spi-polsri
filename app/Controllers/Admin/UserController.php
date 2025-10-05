@@ -20,12 +20,12 @@ class UserController extends BaseController
         $search = $this->request->getVar('search');
         $role = $this->request->getVar('role');
         $status = $this->request->getVar('status');
+        $sort = $this->request->getVar('sort'); 
 
         $builder = $this->userModel;
 
         $builder = $builder->where('role !=', 'admin');
 
-        // Filters
         if ($search) {
             $builder = $builder
                 ->groupStart()
@@ -42,13 +42,22 @@ class UserController extends BaseController
             $builder = $builder->where('status', $status);
         }
 
+        if ($sort == 'asc') {
+            $builder = $builder->orderBy('username', 'ASC');
+        } elseif ($sort == 'desc') {
+            $builder = $builder->orderBy('username', 'DESC');
+        } else {
+            $builder = $builder->orderBy('created_at', 'DESC'); 
+        }
+
         $data = [
             'title'  => 'Manajemen User',
-            'users'  => $builder->orderBy('created_at', 'DESC')->paginate(10),
+            'users'  => $builder->findAll(),
             'pager'  => $this->userModel->pager,
             'search' => $search,
             'role'   => $role,
             'status' => $status,
+            'sort'   => $sort, 
         ];
 
         return view('admin/users/index', $data);

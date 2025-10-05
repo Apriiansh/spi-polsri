@@ -90,7 +90,7 @@
             </div>
             <div class="text-center md:text-left">
                 <h3 class="text-xl font-bold text-blue-700">Bidang Hukum</h3>
-                <h4 class="text-2xl font-semibold text-gray-800 mt-1">Dr. Yuli Asmara TriPutra, S.H., M.Hum.</h4>
+                <h4 class="text-2xl font-semibold text-gray-800 mt-1">Dr. Yuli Asmara Triputra, S.H., M.Hum.</h4>
                 <div class="w-16 h-1 bg-blue-500 my-3 mx-auto md:mx-0"></div>
                 <p class="text-gray-600">Menangani aspek hukum dan compliance dengan pengalaman praktik hukum 13 tahun. Lulusan S2 Hukum dengan spesialisasi hukum administrasi negara dan tata kelola.</p>
             </div>
@@ -118,7 +118,8 @@
                 <h3 class="text-xl font-bold text-blue-700">Bidang Ketatalaksanaan</h3>
                 <h4 class="text-2xl font-semibold text-gray-800 mt-1">Kurnia Widya Oktarini, S.E., M.Si.</h4>
                 <div class="w-16 h-1 bg-blue-500 my-3 mx-auto md:mx-0"></div>
-                <p class="text-gray-600">Mengawasi tata kelola dan prosedur operasional dengan pengalaman 9 tahun. Lulusan S2 Administrasi Publik dengan keahlian dalam reformasi birokrasi.</p>
+                <p class="text-gray-600">Lulusan dari Akuntansi Universitas Sriwijaya yang mengajar di Jurusan Akuntansi Polsri. Ia aktif dalam publikasi ilmiah sebagai Managing Editor Jurnal Pengabdian Masyarakat Akuntansi, Bisnis dan Ekonomi, dan sejak 2023 memimpin Tax Center Politeknik Negeri Sriwijaya. Saat ini, ia bertanggung jawab di bidang ketatalaksanaan pada Satuan Pengawas Internal (SPI), mendukung tata kelola institusi yang akuntabel dan transparan.
+                </p>
             </div>
         </div>
 

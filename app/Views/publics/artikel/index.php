@@ -211,7 +211,7 @@ function parse_quill_delta($json, $limit = 150)
 
     <!-- Pagination -->
     <div class="flex justify-center mb-8">
-        <nav class="bg-slate-700 rounded-full shadow-lg p-2 md:p-4 border border-gray-100" aria-label="Pagination">
+        <nav class="p-1 md:p-2 border border-2 border-gray-400" aria-label="Pagination">
             <?= $pager->links('default', 'tailwind_full') ?>
         </nav>
     </div>

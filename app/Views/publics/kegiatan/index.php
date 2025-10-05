@@ -48,10 +48,8 @@ function get_first_paragraph($html)
     <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
 
     <div class="relative container mx-auto px-6 py-16 text-center">
-        <div class="inline-block p-4 bg-white/10 backdrop-blur-sm rounded-2xl mb-6">
-            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-            </svg>
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600/80 rounded-full mb-6 shadow-lg">
+            <i class="fas fa-calendar-alt text-white text-4xl"></i>
         </div>
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">KEGIATAN</h1>
         <div class="w-24 h-1 bg-white mx-auto rounded-full"></div>
@@ -238,7 +236,7 @@ function get_first_paragraph($html)
 
     <!-- Pagination -->
     <div class="flex justify-center mb-8">
-        <nav class="bg-slate-700 rounded-full shadow-lg p-2 md:p-4 border border-gray-100" aria-label="Pagination>
+        <nav class="p-1 md:p-2 border border-2 border-gray-400" aria-label="Pagination">
             <?= $pager->links('default', 'tailwind_full') ?>
         </nav>
     </div>
@@ -284,7 +282,6 @@ function get_first_paragraph($html)
         left: 100%;
     }
 
-
     /* Hides the slide controls if there is only one image */
     .slider-container:has(.slider-item:only-child)~.slider-prev-btn,
     .slider-container:has(.slider-item:only-child)~.slider-next-btn,
@@ -321,45 +318,45 @@ function get_first_paragraph($html)
         const form = document.querySelector('form');
         if (form) {
             form.addEventListener('submit', function() {
-                const submitBtn = form.querySelector('button[type=" submit"]');
-            if (submitBtn) {
-            // Disable button and show loading spinner
-            submitBtn.disabled=true;
-            submitBtn.classList.remove('hover:from-blue-700', 'hover:to-blue-800' );
-            submitBtn.classList.add('bg-blue-500', 'cursor-not-allowed' );
-            submitBtn.innerHTML=`
-            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Memproses...
-            `;
-            }
+                const submitBtn = form.querySelector('button[type="submit"]');
+                if (submitBtn) {
+                    // Disable button and show loading spinner
+                    submitBtn.disabled = true;
+                    submitBtn.classList.remove('hover:from-blue-700', 'hover:to-blue-800');
+                    submitBtn.classList.add('bg-blue-500', 'cursor-not-allowed');
+                    submitBtn.innerHTML = `
+                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Memproses...
+                    `;
+                }
             });
-            }
+        }
 
-            // ===============================================
-            // JAVASCRIPT FOR AUTOMATIC IMAGE SLIDER
-            // ===============================================
+        // ===============================================
+        // JAVASCRIPT FOR AUTOMATIC IMAGE SLIDER
+        // ===============================================
 
-            const initializeSlider = (slider) => {
+        const initializeSlider = (slider) => {
             const sliderItems = slider.querySelectorAll('.slider-item');
             if (sliderItems.length <= 1) return; // Stop if only one image
 
-                const prevBtn=slider.querySelector('.slider-prev-btn');
-                const nextBtn=slider.querySelector('.slider-next-btn');
-                const dotsContainer=slider.querySelector('.slider-dots');
-                const dotBtns=slider.querySelectorAll('.dot-btn');
-                let currentSlide=0;
-                let slideInterval;
+            const prevBtn = slider.querySelector('.slider-prev-btn');
+            const nextBtn = slider.querySelector('.slider-next-btn');
+            const dotsContainer = slider.querySelector('.slider-dots');
+            const dotBtns = slider.querySelectorAll('.dot-btn');
+            let currentSlide = 0;
+            let slideInterval;
 
-                const showSlide=(index)=> {
+            const showSlide = (index) => {
                 // Ensure index loops correctly
                 currentSlide = (index + sliderItems.length) % sliderItems.length;
 
                 sliderItems.forEach(item => {
-                item.classList.remove('opacity-100', 'z-10');
-                item.classList.add('opacity-0', 'z-0');
+                    item.classList.remove('opacity-100', 'z-10');
+                    item.classList.add('opacity-0', 'z-0');
                 });
 
                 sliderItems[currentSlide].classList.remove('opacity-0', 'z-0');
@@ -367,48 +364,48 @@ function get_first_paragraph($html)
 
                 dotBtns.forEach(dot => dot.classList.remove('!bg-white'));
                 dotBtns[currentSlide].classList.add('!bg-white');
-                };
+            };
 
-                const nextSlide = () => {
+            const nextSlide = () => {
                 showSlide(currentSlide + 1);
-                };
+            };
 
-                const startSlider = () => {
+            const startSlider = () => {
                 clearInterval(slideInterval);
                 slideInterval = setInterval(nextSlide, 5000);
-                };
+            };
 
-                // Manual navigation resets the timer
-                const resetTimerAndNavigate = (navigateFn) => {
+            // Manual navigation resets the timer
+            const resetTimerAndNavigate = (navigateFn) => {
                 clearInterval(slideInterval);
                 navigateFn();
                 startSlider();
-                };
+            };
 
-                if (prevBtn) {
+            if (prevBtn) {
                 prevBtn.addEventListener('click', () => resetTimerAndNavigate(() => showSlide(currentSlide - 1)));
-                }
-                if (nextBtn) {
+            }
+            if (nextBtn) {
                 nextBtn.addEventListener('click', () => resetTimerAndNavigate(() => showSlide(currentSlide + 1)));
-                }
+            }
 
-                if (dotsContainer) {
+            if (dotsContainer) {
                 dotsContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('dot-btn')) {
-                const index = parseInt(e.target.dataset.index);
-                resetTimerAndNavigate(() => showSlide(index));
-                }
+                    if (e.target.classList.contains('dot-btn')) {
+                        const index = parseInt(e.target.dataset.index);
+                        resetTimerAndNavigate(() => showSlide(index));
+                    }
                 });
-                }
+            }
 
-                // Start everything up
-                showSlide(0);
-                startSlider();
-                };
+            // Start everything up
+            showSlide(0);
+            startSlider();
+        };
 
-                // Initialize all sliders found on the page
-                document.querySelectorAll('.kegiatan-card').forEach(initializeSlider);
-                });
-                </script>
+        // Initialize all sliders found on the page
+        document.querySelectorAll('.kegiatan-card').forEach(initializeSlider);
+    });
+</script>
 
-                <?= $this->endSection() ?>
+<?= $this->endSection() ?>
