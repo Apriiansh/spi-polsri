@@ -17,7 +17,6 @@
 </div>
 
 <!-- Main Content Section -->
-<!-- Hapus container dan bg putih -->
 <div class="px-4 py-8 mb-12">
     <h2 class="text-2xl md:text-3xl font-semibold text-center text-blue-700 mb-12">Bagan Struktur Organisasi SPI<br/>Politeknik Negeri Sriwijaya</h2>
     
@@ -27,13 +26,12 @@
         <!-- Level 1: Direktur -->
         <div class="mb-8">
             <div class="profil-card" onclick="scrollToDetail('direktur')">
-                <div class="profil-photo-wrapper border-blue-400">
+                <div class="profil-photo-wrapper-square border-blue-400">
                     <img src="<?= base_url('assets/images/profil/direktur.jpg') ?>" alt="Direktur" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                 </div>
                 <div class="profil-content">
                     <div class="profil-title">Direktur</div>
-                    <div class="profil-name">Prof. Dr. [Nama Direktur]</div>
-                    <div class="profil-subtitle">Pimpinan Unit Kerja</div>
+                    <div class="profil-name">Dr. Irawan Rusnadi, M.T.</div>
                 </div>
                 <button class="profil-info-btn">
                     <i class="fas fa-info-circle"></i>
@@ -47,13 +45,12 @@
         <!-- Level 2: Kepala SPI -->
         <div class="mb-8">
             <div class="profil-card" onclick="scrollToDetail('kepala-spi')">
-                <div class="profil-photo-wrapper border-yellow-400">
+                <div class="profil-photo-wrapper-square border-yellow-400">
                     <img src="<?= base_url('assets/images/profil/kepala-spi.jpg') ?>" alt="Kepala SPI" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                 </div>
                 <div class="profil-content">
                     <div class="profil-title">Kepala SPI</div>
-                    <div class="profil-name">[Nama Kepala SPI]</div>
-                    <div class="profil-subtitle">Koordinator Unit</div>
+                    <div class="profil-name">Edwin Frymaruwah, S.E., M.Ak.</div>
                 </div>
                 <button class="profil-info-btn">
                     <i class="fas fa-info-circle"></i>
@@ -62,26 +59,23 @@
         </div>
 
         <!-- Connector dengan cabang ke Sekretaris -->
-        <div class="relative w-full max-w-4xl flex justify-center mb-8">
-            <div class="relative flex items-start" style="width: 100%;">
-                <!-- Garis vertical dari Kepala SPI -->
-                <div class="absolute left-1/2 transform -translate-x-1/2" style="width: 2px; height: 40px; background: linear-gradient(to bottom, #93c5fd, #3b82f6);"></div>
-                
-                <!-- Garis horizontal ke kiri untuk Sekretaris -->
-                <div class="absolute left-0 top-10" style="width: calc(50% - 140px); height: 2px; background: linear-gradient(to right, #3b82f6, #93c5fd);"></div>
-                
-                <!-- Garis vertical turun ke Sekretaris -->
-                <div class="absolute left-0 top-10" style="width: 2px; height: 40px; background: linear-gradient(to bottom, #93c5fd, #3b82f6); margin-left: calc(50% - 140px);"></div>
-                
-                <!-- Sekretaris Card -->
-                <div class="absolute top-12" style="left: calc(50% - 280px);">
+        <div class="relative w-full flex justify-center mb-8">
+            <!-- Garis vertical dari Kepala SPI -->
+            <div class="profil-line-vertical"></div>
+        </div>
+
+        <!-- Level 3: Sekretaris dan Bidang-bidang dalam satu baris -->
+        <div class="relative w-full max-w-6xl mb-8">
+            <div class="flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-12">
+                <!-- Sekretaris -->
+                <div class="flex flex-col items-center">
                     <div class="profil-card" onclick="scrollToDetail('sekretaris')">
-                        <div class="profil-photo-wrapper border-teal-400">
+                        <div class="profil-photo-wrapper-square border-teal-400">
                             <img src="<?= base_url('assets/images/profil/sekretaris.jpg') ?>" alt="Sekretaris" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                         </div>
                         <div class="profil-content">
                             <div class="profil-title">Sekretaris</div>
-                            <div class="profil-name">[Nama Sekretaris]</div>
+                            <div class="profil-name">Sulastriani, M.Si.</div>
                             <div class="profil-subtitle">Administrasi</div>
                         </div>
                         <button class="profil-info-btn">
@@ -89,98 +83,89 @@
                         </button>
                     </div>
                 </div>
-                
-                <!-- Spacer untuk memberi ruang untuk Sekretaris -->
-                <div style="height: 320px; width: 100%;"></div>
-            </div>
-        </div>
 
-        <!-- Bidang-bidang Section -->
-        <div class="relative w-full max-w-6xl">
-            <div class="profil-line-horizontal"></div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mt-8 justify-items-center">
-                <!-- Bidang Akuntansi/Keuangan -->
-                <div class="flex flex-col items-center">
-                    <div class="profil-line-vertical-short"></div>
-                    <div class="profil-card-small" onclick="scrollToDetail('bidang-akuntansi')">
-                        <div class="profil-photo-wrapper-small border-orange-400">
-                            <img src="<?= base_url('assets/images/profil/bidang-akuntansi.jpg') ?>" alt="Bidang Akuntansi" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                <!-- Bidang-bidang Section -->
+                <div class="flex-1">
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
+                        <!-- Bidang Akuntansi/Keuangan -->
+                        <div class="flex flex-col items-center">
+                            <div class="profil-card-small" onclick="scrollToDetail('bidang-akuntansi')">
+                                <div class="profil-photo-wrapper-small-square border-orange-400">
+                                    <img src="<?= base_url('assets/images/profil/bidang-akuntansi.jpg') ?>" alt="Bidang Akuntansi" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                                </div>
+                                <div class="profil-content-small">
+                                    <div class="profil-title-small">Bidang Akuntansi/Keuangan</div>
+                                    <div class="profil-name-small">Tiara Nurpratiwi, S.E., M.Si.</div>
+                                </div>
+                                <button class="profil-info-btn-small">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="profil-content-small">
-                            <div class="profil-title-small">Bidang Akuntansi/Keuangan</div>
-                            <div class="profil-name-small">[Nama Kepala Bidang]</div>
-                        </div>
-                        <button class="profil-info-btn-small">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Bidang Manajemen SDM -->
-                <div class="flex flex-col items-center">
-                    <div class="profil-line-vertical-short"></div>
-                    <div class="profil-card-small" onclick="scrollToDetail('bidang-sdm')">
-                        <div class="profil-photo-wrapper-small border-emerald-400">
-                            <img src="<?= base_url('assets/images/profil/bidang-sdm.jpg') ?>" alt="Bidang SDM" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                        <!-- Bidang Manajemen SDM -->
+                        <div class="flex flex-col items-center">
+                            <div class="profil-card-small" onclick="scrollToDetail('bidang-sdm')">
+                                <div class="profil-photo-wrapper-small-square border-emerald-400">
+                                    <img src="<?= base_url('assets/images/profil/bidang-sdm.jpg') ?>" alt="Bidang SDM" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                                </div>
+                                <div class="profil-content-small">
+                                    <div class="profil-title-small">Bidang Manajemen SDM</div>
+                                    <div class="profil-name-small">Desri Yanto, S.E., M.Si.</div>
+                                </div>
+                                <button class="profil-info-btn-small">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="profil-content-small">
-                            <div class="profil-title-small">Bidang Manajemen SDM</div>
-                            <div class="profil-name-small">[Nama Kepala Bidang]</div>
-                        </div>
-                        <button class="profil-info-btn-small">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Bidang Hukum -->
-                <div class="flex flex-col items-center">
-                    <div class="profil-line-vertical-short"></div>
-                    <div class="profil-card-small" onclick="scrollToDetail('bidang-hukum')">
-                        <div class="profil-photo-wrapper-small border-red-400">
-                            <img src="<?= base_url('assets/images/profil/bidang-hukum.jpg') ?>" alt="Bidang Hukum" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                        <!-- Bidang Hukum -->
+                        <div class="flex flex-col items-center">
+                            <div class="profil-card-small" onclick="scrollToDetail('bidang-hukum')">
+                                <div class="profil-photo-wrapper-small-square border-red-400">
+                                    <img src="<?= base_url('assets/images/profil/bidang-hukum.jpg') ?>" alt="Bidang Hukum" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                                </div>
+                                <div class="profil-content-small">
+                                    <div class="profil-title-small">Bidang Hukum</div>
+                                    <div class="profil-name-small">Dr. Yuli Asmara Tri Putra, S.H., M.Hum.</div>
+                                </div>
+                                <button class="profil-info-btn-small">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="profil-content-small">
-                            <div class="profil-title-small">Bidang Hukum</div>
-                            <div class="profil-name-small">[Nama Kepala Bidang]</div>
-                        </div>
-                        <button class="profil-info-btn-small">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Bidang Manajemen Aset -->
-                <div class="flex flex-col items-center">
-                    <div class="profil-line-vertical-short"></div>
-                    <div class="profil-card-small" onclick="scrollToDetail('bidang-aset')">
-                        <div class="profil-photo-wrapper-small border-purple-400">
-                            <img src="<?= base_url('assets/images/profil/bidang-aset.jpg') ?>" alt="Bidang Aset" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                        <!-- Bidang Manajemen Aset -->
+                        <div class="flex flex-col items-center">
+                            <div class="profil-card-small" onclick="scrollToDetail('bidang-aset')">
+                                <div class="profil-photo-wrapper-small-square border-purple-400">
+                                    <img src="<?= base_url('assets/images/profil/bidang-aset.jpg') ?>" alt="Bidang Aset" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                                </div>
+                                <div class="profil-content-small">
+                                    <div class="profil-title-small">Bidang Manajemen Aset</div>
+                                    <div class="profil-name-small">[Nama Kepala Bidang]</div>
+                                </div>
+                                <button class="profil-info-btn-small">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="profil-content-small">
-                            <div class="profil-title-small">Bidang Manajemen Aset</div>
-                            <div class="profil-name-small">[Nama Kepala Bidang]</div>
-                        </div>
-                        <button class="profil-info-btn-small">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Bidang Ketatalaksanaan -->
-                <div class="flex flex-col items-center">
-                    <div class="profil-line-vertical-short"></div>
-                    <div class="profil-card-small" onclick="scrollToDetail('bidang-tata')">
-                        <div class="profil-photo-wrapper-small border-indigo-400">
-                            <img src="<?= base_url('assets/images/profil/bidang-tata.jpg') ?>" alt="Bidang Tata" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                        <!-- Bidang Ketatalaksanaan -->
+                        <div class="flex flex-col items-center">
+                            <div class="profil-card-small" onclick="scrollToDetail('bidang-tata')">
+                                <div class="profil-photo-wrapper-small-square border-indigo-400">
+                                    <img src="<?= base_url('assets/images/profil/bidang-tata.jpg') ?>" alt="Bidang Tata" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                                </div>
+                                <div class="profil-content-small">
+                                    <div class="profil-title-small">Bidang Ketatalaksanaan</div>
+                                    <div class="profil-name-small">Kurnia Widya Oktarini, S.E., M.Si.</div>
+                                </div>
+                                <button class="profil-info-btn-small">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="profil-content-small">
-                            <div class="profil-title-small">Bidang Ketatalaksanaan</div>
-                            <div class="profil-name-small">[Nama Kepala Bidang]</div>
-                        </div>
-                        <button class="profil-info-btn-small">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -192,7 +177,7 @@
         <!-- Level 4: Staf Administrasi -->
         <div class="mt-8">
             <div class="profil-card" onclick="scrollToDetail('staf-admin')">
-                <div class="profil-photo-wrapper border-gray-400">
+                <div class="profil-photo-wrapper-square border-gray-400">
                     <img src="<?= base_url('assets/images/profil/staf-admin.jpg') ?>" alt="Staf Administrasi" class="profil-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                 </div>
                 <div class="profil-content">
@@ -218,14 +203,14 @@
             <h3 class="profile-jabatan">Direktur</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
                         <img src="<?= base_url('assets/images/profil/direktur.jpg') ?>" alt="Direktur" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
                 <div class="profile-content flex-1">
                     <h4 class="profile-nama">Dr. Irawan Rusnadi, M.T.</h4>
                     <div class="profile-divider"></div>
-                    <p class="profile-bio">Memimpin Politeknik Negeri Sriwijaya dengan pengalaman lebih dari 20 tahun di bidang pendidikan tinggi. Meraih gelar Profesor dalam bidang [Bidang]. Aktif dalam berbagai profilanisasi profesional dan penelitian.</p>
+                    <p class="profile-bio">Memimpin Politeknik Negeri Sriwijaya dengan pengalaman lebih dari 20 tahun di bidang pendidikan tinggi. Meraih gelar Profesor dalam bidang [Bidang]. Aktif dalam berbagai organisasi profesional dan penelitian.</p>
                 </div>
             </div>
         </div>
@@ -235,7 +220,7 @@
             <h3 class="profile-jabatan">Kepala SPI</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
                         <img src="<?= base_url('assets/images/profil/edw.jpg') ?>" alt="Kepala SPI" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
@@ -252,12 +237,12 @@
             <h3 class="profile-jabatan">Sekretaris</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
                         <img src="<?= base_url('assets/images/profil/sekretaris.jpg') ?>" alt="Sekretaris" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
                 <div class="profile-content flex-1">
-                    <h4 class="profile-nama">[Nama Sekretaris]</h4>
+                    <h4 class="profile-nama">Sulastriani, M.Si.</h4>
                     <div class="profile-divider"></div>
                     <p class="profile-bio">Mengelola administrasi dan koordinasi SPI dengan pengalaman administrasi lebih dari 10 tahun. Lulusan S1 Administrasi Publik dengan kemampuan manajemen dokumen yang excellent.</p>
                 </div>
@@ -269,12 +254,12 @@
             <h3 class="profile-jabatan">Bidang Akuntansi/Keuangan</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
-                        <img src="<?= base_url('assets/images/profil/.jpg') ?>" alt="Bidang Akuntansi" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
+                        <img src="<?= base_url('assets/images/profil/bidang-akuntansi.jpg') ?>" alt="Bidang Akuntansi" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
                 <div class="profile-content flex-1">
-                    <h4 class="profile-nama">[Nama Kepala Bidang]</h4>
+                    <h4 class="profile-nama">Tiara Nurpratiwi, S.E., M.Si.</h4>
                     <div class="profile-divider"></div>
                     <p class="profile-bio">Memimpin audit keuangan dan akuntansi dengan pengalaman 12 tahun. Lulusan S2 Akuntansi dan bersertifikat CPA. Ahli dalam audit laporan keuangan dan sistem akuntansi.</p>
                 </div>
@@ -286,14 +271,14 @@
             <h3 class="profile-jabatan">Bidang Manajemen SDM</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
                         <img src="<?= base_url('assets/images/profil/bidang-sdm.jpg') ?>" alt="Bidang SDM" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
                 <div class="profile-content flex-1">
-                    <h4 class="profile-nama">[Nama Kepala Bidang]</h4>
+                    <h4 class="profile-nama">Desri Yanto, S.E., M.Si.</h4>
                     <div class="profile-divider"></div>
-                    <p class="profile-bio">Bertanggung jawab atas audit SDM dengan pengalaman 10 tahun di manajemen SDM. Lulusan S2 Manajemen SDM dengan spesialisasi dalam pengembangan profilanisasi.</p>
+                    <p class="profile-bio">Bertanggung jawab atas audit SDM dengan pengalaman 10 tahun di manajemen SDM. Lulusan S2 Manajemen SDM dengan spesialisasi dalam pengembangan organisasi.</p>
                 </div>
             </div>
         </div>
@@ -303,12 +288,12 @@
             <h3 class="profile-jabatan">Bidang Hukum</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
                         <img src="<?= base_url('assets/images/profil/bidang-hukum.jpg') ?>" alt="Bidang Hukum" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
                 <div class="profile-content flex-1">
-                    <h4 class="profile-nama">[Nama Kepala Bidang]</h4>
+                    <h4 class="profile-nama">Dr. Yuli Asmara Tri Putra, S.H., M.Hum.</h4>
                     <div class="profile-divider"></div>
                     <p class="profile-bio">Menangani aspek hukum dan compliance dengan pengalaman praktik hukum 13 tahun. Lulusan S2 Hukum dengan spesialisasi hukum administrasi negara dan tata kelola.</p>
                 </div>
@@ -320,7 +305,7 @@
             <h3 class="profile-jabatan">Bidang Manajemen Aset</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
                         <img src="<?= base_url('assets/images/profil/bidang-aset.jpg') ?>" alt="Bidang Aset" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
@@ -337,12 +322,12 @@
             <h3 class="profile-jabatan">Bidang Ketatalaksanaan</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
                         <img src="<?= base_url('assets/images/profil/bidang-tata.jpg') ?>" alt="Bidang Tata" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
                 <div class="profile-content flex-1">
-                    <h4 class="profile-nama">[Nama Kepala Bidang]</h4>
+                    <h4 class="profile-nama">Kurnia Widya Oktarini, S.E., M.Si.</h4>
                     <div class="profile-divider"></div>
                     <p class="profile-bio">Mengawasi tata kelola dan prosedur operasional dengan pengalaman 9 tahun. Lulusan S2 Administrasi Publik dengan keahlian dalam reformasi birokrasi.</p>
                 </div>
@@ -354,7 +339,7 @@
             <h3 class="profile-jabatan">Staf Administrasi</h3>
             <div class="profile-card-body">
                 <div class="flex-shrink-0">
-                    <div class="profile-photo-wrapper" style="width:180px; height:180px;">
+                    <div class="profile-photo-wrapper-square-large" style="width:180px; height:180px;">
                         <img src="<?= base_url('assets/images/profil/staf-admin.jpg') ?>" alt="Staf Administrasi" class="profile-photo" onerror="this.src='<?= base_url('assets/images/profil/placeholder.jpg') ?>'">
                     </div>
                 </div>
@@ -417,10 +402,30 @@
     background: #f3f4f6;
 }
 
+.profil-photo-wrapper-square {
+    width: 96px;
+    height: 96px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border-width: 4px;
+    margin: 0 auto 1rem;
+    background: #f3f4f6;
+}
+
 .profil-photo-wrapper-small {
     width: 64px;
     height: 64px;
     border-radius: 50%;
+    overflow: hidden;
+    border-width: 3px;
+    margin: 0 auto 0.75rem;
+    background: #f3f4f6;
+}
+
+.profil-photo-wrapper-small-square {
+    width: 64px;
+    height: 64px;
+    border-radius: 0.375rem;
     overflow: hidden;
     border-width: 3px;
     margin: 0 auto 0.75rem;
@@ -580,6 +585,12 @@
     justify-content: center;
 }
 
+.profile-photo-wrapper-square-large {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #f3f4f6;
+}
+
 .profile-photo {
     width: 100%;
     height: 100%;
@@ -652,6 +663,11 @@
     
     .profile-photo-wrapper {
         height: 200px;
+    }
+    
+    .profile-card-body {
+        flex-direction: column;
+        text-align: center;
     }
 }
 </style>
