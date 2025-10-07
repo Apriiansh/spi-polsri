@@ -27,19 +27,17 @@ $routes->group('', function ($routes) {
     $routes->get('profil/visimisi', 'Home::visimisi');
     $routes->get('profil/piagam', 'Home::piagam');
 
-    // Halaman Peraturan (Rute Statis)
-    $routes->get('peraturan/akuntansi-keuangan', 'Home::peraturan_akuntansi_keuangan');
-    $routes->get('peraturan/hukum', 'Home::peraturan_hukum');
-    $routes->get('peraturan/manajemen-sdm', 'Home::peraturan_manajemen_sdm');
-    $routes->get('peraturan/manajemen-aset', 'Home::peraturan_manajemen_aset');
-    $routes->get('peraturan/ketatalaksanaan', 'Home::peraturan_ketatalaksanaan');
-
     // Halaman Kegiatan & Laporan
     $routes->get('kegiatan', 'PublicKegiatanController::index');
     $routes->get('kegiatan/(:any)', 'PublicKegiatanController::show/$1');
     
     $routes->get('artikel', 'PublicArtikelController::index');
     $routes->get('artikel/(:any)', 'PublicArtikelController::show/$1');
+    // Halaman Peraturan (Dinamis dari Controller) - Urutan diperbaiki
+    $routes->get('peraturan', 'PublicPeraturanController::index');
+    $routes->get('peraturan/kategori/(:segment)', 'PublicPeraturanController::byCategory/$1');
+    $routes->get('peraturan/show/(:num)', 'PublicPeraturanController::show/$1');
+    $routes->get('peraturan/download/(:num)', 'PublicPeraturanController::download/$1');
 
     $routes->get('laporan/create', 'LaporanController::create');
     $routes->post('laporan/store', 'LaporanController::store');
@@ -93,6 +91,16 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
         $routes->get('show/(:num)', 'Admin\LaporanController::show/$1');
         $routes->post('update-status/(:num)', 'Admin\LaporanController::updateStatus/$1');
         $routes->post('delete/(:num)', 'Admin\LaporanController::delete/$1');
+        $routes->get('testEmail', 'Admin\LaporanController::testEmail'); // Dev only
+    });
+
+    // Peraturan Management Routes (Admin)
+    $routes->group('peraturan', function ($routes) {
+        $routes->get('/', 'Admin\PeraturanController::index');
+        $routes->get('show/(:num)', 'Admin\PeraturanController::show/$1');
+        $routes->post('update-status/(:num)', 'Admin\PeraturanController::updateStatus/$1');
+        $routes->get('download/(:num)', 'Admin\PeraturanController::download/$1');
+        $routes->post('delete/(:num)', 'Admin\PeraturanController::delete/$1');
     });
    
 });
@@ -129,6 +137,18 @@ $routes->group('user', ['filter' => 'auth'], function ($routes) {
         $routes->delete('delete/(:num)', 'User\KegiatanController::delete/$1');
 
         $routes->post('uploadImage', 'User\KegiatanController::uploadImage');
+    });
+
+    // Di dalam group user
+    $routes->group('peraturan', function ($routes) {
+        $routes->get('/', 'User\PeraturanController::index');
+        $routes->get('create', 'User\PeraturanController::create');
+        $routes->post('store', 'User\PeraturanController::store');
+        $routes->get('show/(:num)', 'User\PeraturanController::show/$1');
+        $routes->get('edit/(:num)', 'User\PeraturanController::edit/$1');
+        $routes->post('update/(:num)', 'User\PeraturanController::update/$1');
+        $routes->delete('delete/(:num)', 'User\PeraturanController::delete/$1');
+        $routes->get('download/(:num)', 'User\PeraturanController::download/$1');
     });
 
     // Laporan Management Routes

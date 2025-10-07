@@ -309,23 +309,23 @@
                             <div
                                 class="dropdown-menu absolute left-0 mt-2 w-64 rounded-2xl shadow-soft-xl bg-white/95 backdrop-blur-sm border border-white/30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
                                 <div class="p-2">
-                                    <a href="/peraturan/akuntansi-keuangan"
+                                    <a href="/peraturan/kategori/akuntansi-keuangan"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
                                         <i class="fas fa-landmark w-5 h-5 mr-3 text-amber-600"></i> Akuntansi/Keuangan
                                     </a>
-                                    <a href="/peraturan/hukum"
+                                    <a href="/peraturan/kategori/hukum"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
                                         <i class="fas fa-gavel w-5 h-5 mr-3 text-amber-600"></i> Hukum
                                     </a>
-                                    <a href="/peraturan/manajemen-sdm"
+                                    <a href="/peraturan/kategori/manajemen-sdm"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
                                         <i class="fas fa-users-cog w-5 h-5 mr-3 text-amber-600"></i> Manajemen SDM
                                     </a>
-                                    <a href="/peraturan/manajemen-aset"
+                                    <a href="/peraturan/kategori/manajemen-aset"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
                                         <i class="fas fa-building w-5 h-5 mr-3 text-amber-600"></i> Manajemen Aset
                                     </a>
-                                    <a href="/peraturan/ketatalaksanaan"
+                                    <a href="/peraturan/kategori/ketatalaksanaan"
                                         class="dropdown-item flex items-center px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-amber-50 rounded-xl transition-colors">
                                         <i class="fas fa-file-alt w-5 h-5 mr-3 text-amber-600"></i> Ketatalaksanaan
                                     </a>
@@ -389,15 +389,15 @@
                     Peraturan <i id="mobile-peraturan-icon" class="fas fa-chevron-down text-sm transition-transform"></i>
                 </button>
                 <div id="mobile-peraturan-menu" class="pl-4 py-2 space-y-1 border-l-2 border-amber-400 overflow-hidden transition-all">
-                    <a href="/peraturan/akuntansi-keuangan"
+                    <a href="/peraturan/kategori/akuntansi-keuangan"
                         class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Akuntansi/Keuangan</a>
-                    <a href="/peraturan/hukum"
+                    <a href="/peraturan/kategori/hukum"
                         class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Hukum</a>
-                    <a href="/peraturan/manajemen-sdm"
+                    <a href="/peraturan/kategori/manajemen-sdm"
                         class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Manajemen SDM</a>
-                    <a href="/peraturan/manajemen-aset"
+                    <a href="/peraturan/kategori/manajemen-aset"
                         class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Manajemen Aset</a>
-                    <a href="/peraturan/ketatalaksanaan"
+                    <a href="/peraturan/kategori/ketatalaksanaan"
                         class="block px-3 py-2 text-sm text-blue-100 hover:text-slate-800 hover:bg-white/10 rounded transition-colors">Ketatalaksanaan</a>
                 </div>
 

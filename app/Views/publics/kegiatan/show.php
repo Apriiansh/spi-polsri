@@ -1,5 +1,4 @@
 <?= $this->extend('layout/main') ?>
-
 <?= $this->section('content') ?>
 
 <!-- Hero Header -->
@@ -40,6 +39,10 @@
     <div class="overflow-hidden p-8 border border-gray-100">
         <div class="prose max-w-none text-slate-800">
             <style>
+                .prose p {
+                    line-height: 1.5;
+                    margin-bottom: 1.25rem;
+                }
                 .prose ul,
                 .prose ol {
                     list-style-type: decimal;
@@ -52,16 +55,21 @@
                     margin-bottom: 0.5rem;
                 }
 
+                .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+                    margin-bottom: 1rem;
+                    margin-top: 1.5rem;
+                }
+
                 .prose img {
                     display: block;
-                    max-width: 100%;
                     width: 100%;
-                    height: 400px;
-                    /* bisa disesuaikan (misal 300px/500px) */
-                    object-fit: contain;
+                    max-width: 800px;
+                    height: 500px;
+                    object-fit: cover;
                     object-position: center;
-                    margin: 1rem auto;
+                    margin: 2rem auto;
                     border-radius: 0.75rem;
+                    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
                 }
 
                 .prose .ql-align-center {
@@ -76,8 +84,13 @@
                 .prose .ql-align-justify {
                     text-align: justify;
                 }
+
+                .prose blockquote,
+                .prose pre {
+                    margin-bottom: 1.25rem;
+                }
             </style>
-            <?= $kegiatan['konten']; ?>
+            <?= $renderedContent ?>
         </div>
 
         <div class="mt-8 text-center">
@@ -85,7 +98,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7m11 0l-7 7 7 7"></path>
                 </svg>
-                back
+                Kembali
             </a>
         </div>
     </div>

@@ -1,105 +1,116 @@
-<?= $this->extend('layout/user_main') ?>
-<?= $this->section('content') ?>
+<?= $this->extend('layout/admin_main'); ?>
+<?= $this->section('content'); ?>
 
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<style>
+    .container { padding: 2rem; }
+    h2 { color: #212529; margin-bottom: 1.5rem; border-bottom: 2px solid #0d6efd; padding-bottom: 0.5rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-control, .form-select { width: 100%; padding: 0.75rem; border: 1px solid #ced4da; border-radius: 0.5rem; }
+    #editor { min-height: 300px; background-color: #fff; }
+    .btn { padding: 0.75rem 1.25rem; font-weight: 600; border-radius: 0.5rem; cursor: pointer; }
+    .btn-primary { background-color: #0d6efd; color: white; }
+    .btn-secondary { background-color: #6c757d; color: white; }
+</style>
 
-<div class="p-6 max-w-3xl mx-auto">
-    <div class="bg-white shadow-lg rounded-xl p-6">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-            <i class="fas fa-pen-nib mr-2 text-indigo-600"></i> <?= esc($title) ?>
-        </h1>
+<div class="container">
+    <h2><?= esc($title); ?></h2>
 
-        <?php if (session()->getFlashdata('error')) : ?>
-            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-                <?= session()->getFlashdata('error'); ?>
-            </div>
-        <?php endif; ?>
+    <?php if (session()->getFlashdata('error')) : ?>
+        <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
+    <?php endif; ?>
 
-        <form action="<?= base_url('user/artikel/store') ?>" method="post" onsubmit="return submitForm(event);">
-            <?= csrf_field() ?>
+    <form action="<?= base_url('admin/kegiatan/store'); ?>" method="post" onsubmit="return submitQuillForm();">
+        <?= csrf_field(); ?>
 
-            <div class="mb-4">
-                <label for="title" class="block mb-1 text-sm font-medium text-gray-700">Judul Artikel</label>
-                <input type="text" id="title" name="title"
-                    class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                    value="<?= old('title') ?>" required>
-                <?= $validation?->showError('title', 'error-msg') ?>
-            </div>
+        <div class="form-group mb-3">
+            <label for="judul">Judul Kegiatan</label>
+            <input type="text" id="judul" name="judul" class="form-control" value="<?= old('judul'); ?>">
+            <?= $validation?->showError('judul', 'error-msg') ?>
+        </div>
 
-            <div class="mb-4">
-                <label class="block mb-1 text-sm font-medium text-gray-700">Konten Artikel</label>
-                <div id="editor" style="height: 300px;" class="mb-2 bg-white border border-gray-300 rounded-md"></div>
-                <input type="hidden" name="content" id="content-json">
-                <?= $validation?->showError('content', 'error-msg') ?>
-            </div>
+        <div class="form-group mb-3">
+            <label for="kategori">Kategori</label>
+            <select id="kategori" name="kategori" class="form-select">
+                <option value="">Pilih Kategori</option>
+                <?php foreach ($kategoriData as $kategori_nama) : ?>
+                    <option value="<?= esc($kategori_nama); ?>" <?= (old('kategori') == $kategori_nama) ? 'selected' : ''; ?>>
+                        <?= esc($kategori_nama); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <?= $validation?->showError('kategori', 'error-msg') ?>
+        </div>
 
-            <div class="flex justify-end gap-3 pt-4">
-                <a href="<?= base_url('user/artikel') ?>" class="px-4 py-2 rounded-lg border text-gray-700 hover:bg-gray-100 flex items-center">
-                    <i class="fas fa-times mr-2"></i> Batal
-                </a>
-                <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 flex items-center">
-                    <i class="fas fa-paper-plane mr-2"></i> Kirim Artikel
-                </button>
-            </div>
-        </form>
-    </div>
+        <div class="form-group mb-3">
+            <label>Konten Kegiatan</label>
+            <div id="editor"></div>
+            <input type="hidden" name="konten" id="konten-json">
+            <?= $validation?->showError('konten', 'error-msg') ?>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+            <a href="<?= base_url('admin/kegiatan'); ?>" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary">Tambah Kegiatan</button>
+        </div>
+    </form>
 </div>
 
+<?= $this->endSection(); ?>
+
+<?= $this->section('scripts'); ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
-    var quill = new Quill('#editor', {
-        theme: 'snow',
-        modules: {
-            toolbar: [
-                [{
-                    header: [2, 3, false]
-                }],
-                ['bold', 'italic', 'underline', 'strike'],
-                ['blockquote', 'code-block'],
-                [{
-                    'list': 'ordered'
-                }, {
-                    'list': 'bullet'
-                }],
-                [{
-                    'script': 'sub'
-                }, {
-                    'script': 'super'
-                }],
-                [{
-                    'indent': '-1'
-                }, {
-                    'indent': '+1'
-                }],
-                [{
-                    'direction': 'rtl'
-                }],
-                [{
-                    'color': []
-                }, {
-                    'background': []
-                }],
-                [{
-                    'align': []
-                }],
-                ['link', 'image', 'video'],
-                ['clean']
-            ]
+    document.addEventListener('DOMContentLoaded', function() {
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: {
+                    container: [
+                        [{ 'header': [1, 2, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote', 'code-block'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'indent': '-1' }, { 'indent': '+1' }],
+                        [{ 'align': [] }],
+                        ['link', 'image'], ['clean']
+                    ],
+                    handlers: {
+                        'image': function() {
+                            const input = document.createElement('input');
+                            input.type = 'file';
+                            input.accept = 'image/*';
+                            input.click();
+                            input.onchange = async () => {
+                                const file = input.files[0];
+                                const formData = new FormData();
+                                formData.append('image', file);
+                                try {
+                                    const res = await fetch('<?= base_url('admin/kegiatan/uploadImage'); ?>', {
+                                        method: 'POST',
+                                        body: formData,
+                                        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                                    });
+                                    const result = await res.json();
+                                    if (result.url) {
+                                        const range = quill.getSelection();
+                                        quill.insertEmbed(range.index, 'image', result.url);
+                                    } else alert('Gagal upload: ' + (result.error || 'Kesalahan.'));
+                                } catch (e) {
+                                    console.error(e);
+                                    alert('Upload gagal.');
+                                }
+                            };
+                        }
+                    }
+                }
+            }
+        });
+
+        window.submitQuillForm = function() {
+            document.getElementById('konten-json').value = JSON.stringify(quill.getContents());
+            return true;
         }
     });
-
-    function submitForm(e) {
-        var content = JSON.stringify(quill.getContents());
-        document.getElementById('content-json').value = content;
-        return true;
-    }
-
-    // Restore old content if validation failed
-    <?php if (old('content')): ?>
-        try {
-            quill.setContents(<?= old('content') ?>);
-        } catch (e) {}
-    <?php endif; ?>
 </script>
-
-<?= $this->endSection() ?>
+<?= $this->endSection(); ?>

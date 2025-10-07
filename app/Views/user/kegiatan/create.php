@@ -6,23 +6,14 @@
 <!-- Quill.js CSS -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <style>
-    :root {
-        --primary-color: #0d6efd;
-        --secondary-color: #6c757d;
-        --success-color: #198754;
-        --danger-color: #dc3545;
-        --light-color: #f8f9fa;
-        --dark-color: #212529;
-    }
-
     .container {
         padding: 2rem;
     }
 
     h2 {
-        color: var(--dark-color);
+        color: #212529;
         margin-bottom: 1.5rem;
-        border-bottom: 2px solid var(--primary-color);
+        border-bottom: 2px solid #0d6efd;
         padding-bottom: 0.5rem;
     }
 
@@ -37,7 +28,6 @@
         font-size: 1rem;
         border: 1px solid #ced4da;
         border-radius: 0.5rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 
     .form-control:focus,
@@ -48,8 +38,7 @@
     }
 
     .error-msg {
-        display: block;
-        color: var(--danger-color);
+        color: #dc3545;
         font-size: 0.875rem;
         margin-top: 0.25rem;
     }
@@ -65,7 +54,7 @@
     }
 
     .btn-primary {
-        background-color: var(--primary-color);
+        background-color: #0d6efd;
         color: white;
     }
 
@@ -74,28 +63,12 @@
     }
 
     .btn-secondary {
-        background-color: var(--secondary-color);
+        background-color: #6c757d;
         color: white;
     }
 
     .btn-secondary:hover {
         background-color: #5c636a;
-    }
-
-    .d-flex {
-        display: flex;
-    }
-
-    .gap-2 {
-        gap: 0.5rem;
-    }
-
-    .mb-3 {
-        margin-bottom: 1rem;
-    }
-
-    .mb-2 {
-        margin-bottom: 0.5rem;
     }
 
     #editor {
@@ -130,14 +103,13 @@
                     </option>
                 <?php endforeach; ?>
             </select>
-
             <?= $validation?->showError('kategori', 'error-msg') ?>
         </div>
 
         <div class="form-group mb-3">
             <label class="block mb-1 text-sm font-medium text-gray-700">Konten Kegiatan</label>
             <div id="editor"></div>
-            <input type="hidden" name="konten" id="konten-html">
+            <input type="hidden" name="konten" id="konten-json">
             <?= $validation?->showError('konten', 'error-msg') ?>
         </div>
 
@@ -151,88 +123,27 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('scripts'); ?>
-<!-- Quill.js Library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // --- JavaScript untuk Quill.js ---
         var quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
-                toolbar: {
-                    container: [
-                        [{
-                            'header': [1, 2, false]
-                        }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        ['blockquote', 'code-block'],
-                        [{
-                            'list': 'ordered'
-                        }],
-                        [{
-                            'script': 'sub'
-                        }, {
-                            'script': 'super'
-                        }],
-                        [{
-                            'indent': '-1'
-                        }, {
-                            'indent': '+1'
-                        }],
-                        [{
-                            'direction': 'rtl'
-                        }],
-                        [{
-                            'align': []
-                        }],
-                        ['link', 'image'],
-                        ['clean']
-                    ],
-                    handlers: {
-                        'image': handleImageUpload
-                    }
-                }
+                toolbar: [
+                    [{ 'header': [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['blockquote', 'code-block'],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
             }
         });
 
-        function handleImageUpload() {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-            input.click();
-
-            input.onchange = async () => {
-                const file = input.files[0];
-                const formData = new FormData();
-                formData.append('image', file);
-
-                try {
-                    const response = await fetch('<?= base_url('user/kegiatan/uploadImage'); ?>', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    });
-                    const result = await response.json();
-
-                    if (result.url) {
-                        const range = quill.getSelection();
-                        quill.insertEmbed(range.index, 'image', result.url);
-                    } else {
-                        alert('Gagal mengunggah gambar: ' + (result.error || 'Terjadi kesalahan.'));
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('Gagal mengunggah gambar.');
-                }
-            };
-        }
-
         window.submitQuillForm = function() {
-            var konten = quill.root.innerHTML;
-            document.getElementById('konten-html').value = konten;
+            var delta = quill.getContents();
+            document.getElementById('konten-json').value = JSON.stringify(delta);
             return true;
         }
     });

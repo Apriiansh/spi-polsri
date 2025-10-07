@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\KegiatanModel;
 use CodeIgniter\Controller;
+use nadar\quill\Lexer;
 
 class PublicKegiatanController extends BaseController
 {
@@ -62,6 +63,7 @@ class PublicKegiatanController extends BaseController
     /**
      * Menampilkan detail kegiatan berdasarkan slug.
      * Hanya menampilkan kegiatan dengan status 'verified'.
+     * Mendukung parsing konten Quill JSON menjadi HTML.
      *
      * @param string $slug Slug dari kegiatan
      */
@@ -78,11 +80,32 @@ class PublicKegiatanController extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Kegiatan tidak ditemukan: ' . $slug);
         }
 
+        // Render konten Quill JSON ke HTML jika formatnya JSON
+        $renderedContent = $kegiatan['konten'];
+        if ($this->isJson($kegiatan['konten'])) {
+            try {
+                $lexer = new Lexer($kegiatan['konten']);
+                $renderedContent = $lexer->render();
+            } catch (\Exception $e) {
+                $renderedContent = '<p>Gagal merender konten kegiatan.</p>';
+            }
+        }
+
         $data = [
             'title' => $kegiatan['judul'],
             'kegiatan' => $kegiatan,
+            'renderedContent' => $renderedContent,
         ];
 
         return view('publics/kegiatan/show', $data);
+    }
+
+    /**
+     * Mengecek apakah string adalah JSON valid.
+     */
+    private function isJson($string)
+    {
+        json_decode($string);
+        return (json_last_error() === JSON_ERROR_NONE);
     }
 }

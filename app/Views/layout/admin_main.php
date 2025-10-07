@@ -95,6 +95,10 @@
                         <i class="fas fa-newspaper w-5"></i>
                         <span>Artikel</span>
                     </a>
+                    <a href="<?= site_url('admin/peraturan') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                        <i class="fas fa-gavel w-5"></i>
+                        <span>Peraturan</span>
+                    </a>
                     <a href="<?= site_url('admin/laporan') ?>" class="nav-item flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fas fa-chart-line w-5"></i>
                         <span>Laporan</span>

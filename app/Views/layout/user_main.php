@@ -95,16 +95,20 @@
                         <span>Dashboard</span>
                     </a>
                     <a href="/user/laporan" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
-                        <i class="fa-regular fa-file-lines text-slate-400"></i>
+                        <i class="fa-solid fa-file text-slate-400"></i>
                         <span>Laporan</span>
                     </a>
                     <a href="/user/kegiatan" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
-                        <i class="fa-solid fa-pen-to-square text-slate-400"></i>
+                        <i class="fa-solid fa-calendar-alt text-slate-400"></i>
                         <span>Kegiatan</span>
                     </a>
                     <a href="/user/artikel" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
-                        <i class="fa-regular fa-file-lines text-slate-400"></i>
+                        <i class="fa-solid fa-newspaper text-slate-400"></i>
                         <span>Artikel</span>
+                    </a>
+                    <a href="/user/peraturan" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
+                        <i class="fa-solid fa-gavel text-slate-400"></i>
+                        <span>Peraturan</span>
                     </a>
                     <a href="/user/profile" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-sidebar-hover smooth-transition">
                         <i class="fa-solid fa-user text-slate-400"></i>

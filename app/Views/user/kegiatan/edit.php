@@ -1,26 +1,16 @@
 <?= $this->extend('layout/user_main'); ?>
 <?= $this->section('content'); ?>
 
-<!-- Quill.js CSS -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <style>
-    :root {
-        --primary-color: #0d6efd;
-        --secondary-color: #6c757d;
-        --success-color: #198754;
-        --danger-color: #dc3545;
-        --light-color: #f8f9fa;
-        --dark-color: #212529;
-    }
-
     .container {
         padding: 2rem;
     }
 
     h2 {
-        color: var(--dark-color);
+        color: #212529;
         margin-bottom: 1.5rem;
-        border-bottom: 2px solid var(--primary-color);
+        border-bottom: 2px solid #0d6efd;
         padding-bottom: 0.5rem;
     }
 
@@ -35,7 +25,6 @@
         font-size: 1rem;
         border: 1px solid #ced4da;
         border-radius: 0.5rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 
     .form-control:focus,
@@ -46,8 +35,7 @@
     }
 
     .error-msg {
-        display: block;
-        color: var(--danger-color);
+        color: #dc3545;
         font-size: 0.875rem;
         margin-top: 0.25rem;
     }
@@ -63,7 +51,7 @@
     }
 
     .btn-primary {
-        background-color: var(--primary-color);
+        background-color: #0d6efd;
         color: white;
     }
 
@@ -72,28 +60,12 @@
     }
 
     .btn-secondary {
-        background-color: var(--secondary-color);
+        background-color: #6c757d;
         color: white;
     }
 
     .btn-secondary:hover {
         background-color: #5c636a;
-    }
-
-    .d-flex {
-        display: flex;
-    }
-
-    .gap-2 {
-        gap: 0.5rem;
-    }
-
-    .mb-3 {
-        margin-bottom: 1rem;
-    }
-
-    .mb-2 {
-        margin-bottom: 0.5rem;
     }
 
     #editor {
@@ -123,7 +95,7 @@
             <select id="kategori" name="kategori" class="form-select">
                 <option value="">Pilih Kategori</option>
                 <?php foreach ($kategoriData as $kategori_nama) : ?>
-                    <option value="<?= esc($kategori_nama); ?>" <?= (old('kategori', $kegiatan['kategori']) == $kategori_nama) ? 'selected' : ''; ?>>
+                    <option value="<?= esc((string)$kategori_nama); ?>" <?= (old('kategori', $kegiatan['kategori']) == $kategori_nama) ? 'selected' : ''; ?>>
                         <?= esc($kategori_nama); ?>
                     </option>
                 <?php endforeach; ?>
@@ -134,13 +106,13 @@
         <div class="form-group mb-3">
             <label class="block mb-1 text-sm font-medium text-gray-700">Konten Kegiatan</label>
             <div id="editor"></div>
-            <input type="hidden" name="konten" id="konten-html">
+            <input type="hidden" name="konten" id="konten-json">
             <?= $validation?->showError('konten', 'error-msg') ?>
         </div>
 
         <div class="d-flex justify-content-end gap-2">
             <a href="<?= base_url('user/kegiatan'); ?>" class="btn btn-secondary">Batal</a>
-            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            <button type="submit" class="btn btn-primary">Perbarui Kegiatan</button>
         </div>
     </form>
 </div>
@@ -148,115 +120,37 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('scripts'); ?>
-<!-- Quill.js Library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // --- JavaScript untuk Quill.js ---
         var quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
-                toolbar: {
-                    container: [
-                        [{
-                            "header": [1, 2, false]
-                        }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        ['blockquote', 'code-block'],
-                        [{
-                            'list': 'ordered'
-                        }],
-                        [{
-                            'script': 'sub'
-                        }, {
-                            'script': 'super'
-                        }],
-                        [{
-                            'indent': '-1'
-                        }, {
-                            'indent': '+1'
-                        }],
-                        [{
-                            'direction': 'rtl'
-                        }],
-                        [{
-                            'align': []
-                        }],
-                        ['link', 'image'],
-                        ['clean']
-                    ],
-                    handlers: {
-                        'image': handleImageUpload
-                    }
-                }
+                toolbar: [
+                    [{ 'header': [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['blockquote', 'code-block'],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
             }
         });
 
-        // Muat konten lama ke editor dengan proper escaping
+        // Load konten lama jika ada
+        var oldContent = <?= json_encode($kegiatan['konten']); ?>;
         try {
-            var existingContent = <?= json_encode($kegiatan['konten']); ?>;
-            quill.root.innerHTML = existingContent;
-        } catch (e) {
-            console.error("Failed to load existing content:", e);
-            // Fallback: coba load content secara aman
-            quill.root.innerHTML = '';
-        }
-
-        function handleImageUpload() {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-            input.click();
-
-            input.onchange = async () => {
-                const file = input.files[0];
-                if (!file) return;
-
-                const formData = new FormData();
-                formData.append('image', file);
-
-                try {
-                    const response = await fetch('<?= base_url('user/kegiatan/uploadImage'); ?>', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-
-                    const result = await response.json();
-
-                    if (result.url) {
-                        const range = quill.getSelection() || {
-                            index: 0
-                        };
-                        quill.insertEmbed(range.index, 'image', result.url);
-                    } else {
-                        alert('Gagal mengunggah gambar: ' + (result.error || 'Terjadi kesalahan.'));
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('Gagal mengunggah gambar. Silakan coba lagi.');
-                }
-            };
-        }
-
-        // Submit form dengan konten Quill
-        window.submitQuillForm = function() {
-            var konten = quill.root.innerHTML;
-
-            // Validasi konten tidak kosong
-            if (quill.getText().trim().length === 0) {
-                alert('Konten kegiatan tidak boleh kosong');
-                return false;
+            if (oldContent && JSON.parse(oldContent)) {
+                quill.setContents(JSON.parse(oldContent));
             }
+        } catch (e) {
+            console.error('Gagal memuat konten Quill:', e);
+        }
 
-            document.getElementById('konten-html').value = konten;
+        window.submitQuillForm = function() {
+            var delta = quill.getContents();
+            document.getElementById('konten-json').value = JSON.stringify(delta);
             return true;
         }
     });

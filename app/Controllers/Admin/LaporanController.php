@@ -107,28 +107,65 @@ class LaporanController extends BaseController
             return redirect()->back();
         }
 
-        $this->laporanModel->update($id, ['status_laporan' => $newStatus]);
+        // Simpan status lama untuk perbandingan
+        $oldStatus = $laporan['status_laporan'];
 
-        // Kirim email notifikasi
-        $email = \Config\Services::email();
-        $email->setTo($laporan['email_pelapor']);
-        $email->setSubject('Update Status Laporan Anda [SPI POLSRI]');
+        // Update status laporan
+        $updateResult = $this->laporanModel->update($id, ['status_laporan' => $newStatus]);
 
-        $message = view('email/status_update', [
-            'laporan' => $laporan,
-            'newStatus' => $newStatus
-        ]);
-        $email->setMessage($message);
-
-        if ($email->send()) {
-            $session->setFlashdata('success', 'Status laporan berhasil diperbarui dan notifikasi email telah dikirim.');
-        } else {
-            // Optional: Log the error for debugging
-            // log_message('error', $email->printDebugger(['headers']));
-            $session->setFlashdata('success', 'Status laporan berhasil diperbarui, tetapi notifikasi email gagal dikirim.');
+        if (!$updateResult) {
+            $session->setFlashdata('error', 'Gagal memperbarui status laporan.');
+            return redirect()->back();
         }
 
+        // Kirim email notifikasi jika ada email pelapor dan status berubah
+        if (!empty($laporan['email_pelapor']) && $oldStatus !== $newStatus) {
+            $this->sendStatusUpdateEmail($laporan, $newStatus, $oldStatus);
+        }
+
+        $session->setFlashdata('success', 'Status laporan berhasil diperbarui.');
         return redirect()->to(site_url('admin/laporan/show/' . $id));
+    }
+
+    /**
+     * Kirim email notifikasi update status
+     */
+    private function sendStatusUpdateEmail($laporan, $newStatus, $oldStatus)
+    {
+        try {
+            $email = \Config\Services::email();
+            
+            // Set email penerima
+            $email->setTo($laporan['email_pelapor']);
+            
+            // Set subject
+            $email->setSubject('Update Status Laporan Anda [SPI POLSRI]');
+            
+            // Persiapkan data untuk email template (sesuai dengan template yang ada)
+            $emailData = [
+                'laporan' => $laporan,
+                'newStatus' => $newStatus
+            ];
+
+            // Load email template
+            $message = view('email/status_update', $emailData);
+            $email->setMessage($message);
+
+            // Kirim email
+            if ($email->send()) {
+                log_message('info', "Email status update berhasil dikirim ke {$laporan['email_pelapor']} untuk laporan ID: {$laporan['id']}");
+                return true;
+            } else {
+                // Log error jika gagal
+                $debugInfo = $email->printDebugger(['headers']);
+                log_message('error', "Gagal mengirim email status update: " . $debugInfo);
+                return false;
+            }
+            
+        } catch (\Exception $e) {
+            log_message('error', "Exception saat mengirim email: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function delete($id)
@@ -152,5 +189,59 @@ class LaporanController extends BaseController
 
         $session->setFlashdata('success', 'Laporan berhasil dihapus.');
         return redirect()->to(site_url('admin/laporan'));
+    }
+
+    /**
+     * Method untuk testing pengiriman email (DEVELOPMENT ONLY)
+     * Akses: /admin/laporan/testEmail
+     */
+    public function testEmail()
+    {
+        // HANYA untuk testing - hapus atau comment di production!
+        if (ENVIRONMENT === 'production') {
+            return 'Method ini hanya tersedia di development mode.';
+        }
+
+        // Data dummy untuk testing
+        $testLaporan = [
+            'id' => 999,
+            'judul' => 'Test Laporan - Pengadaan Barang Tidak Sesuai Prosedur',
+            'tracking_code' => 'TEST-' . date('Ymd') . '-001',
+            'email_pelapor' => 'apriansyahmlp@gmail.com', // GANTI dengan email Anda untuk testing
+            'kategori_laporan' => 'Pengadaan Barang/Jasa',
+            'klasifikasi_laporan' => 'Pengaduan',
+            'status_laporan' => 'pending',
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        // Test berbagai status
+        $statuses = ['pending', 'in_progress', 'completed', 'not_actionable'];
+        $testStatus = $this->request->getGet('status') ?? 'in_progress';
+
+        if (!in_array($testStatus, $statuses)) {
+            $testStatus = 'in_progress';
+        }
+
+        $result = $this->sendStatusUpdateEmail($testLaporan, $testStatus, 'pending');
+
+        if ($result) {
+            return "✅ Email test berhasil dikirim!<br><br>" .
+                   "Status: <strong>{$testStatus}</strong><br>" .
+                   "Penerima: <strong>{$testLaporan['email_pelapor']}</strong><br><br>" .
+                   "Cek inbox email Anda (termasuk folder spam/junk).<br><br>" .
+                   "Test status lain:<br>" .
+                   "- <a href='" . site_url('admin/laporan/testEmail?status=pending') . "'>Pending</a><br>" .
+                   "- <a href='" . site_url('admin/laporan/testEmail?status=in_progress') . "'>In Progress</a><br>" .
+                   "- <a href='" . site_url('admin/laporan/testEmail?status=completed') . "'>Completed</a><br>" .
+                   "- <a href='" . site_url('admin/laporan/testEmail?status=not_actionable') . "'>Not Actionable</a>";
+        } else {
+            return "❌ Email gagal dikirim!<br><br>" .
+                   "Cek log file untuk detail error:<br>" .
+                   "- <code>writable/logs/log-" . date('Y-m-d') . ".log</code><br><br>" .
+                   "Kemungkinan penyebab:<br>" .
+                   "1. Kredensial Brevo salah di file .env<br>" .
+                   "2. SMTP port diblokir oleh firewall/hosting<br>" .
+                   "3. Koneksi internet bermasalah";
+        }
     }
 }

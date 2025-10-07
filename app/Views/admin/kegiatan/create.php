@@ -134,7 +134,7 @@
         <div class="form-group mb-3">
             <label class="block mb-1 text-sm font-medium text-gray-700">Konten Kegiatan</label>
             <div id="editor"></div>
-            <input type="hidden" name="konten" id="konten-html">
+            <input type="hidden" name="konten" id="konten-json">
             <?= $validation?->showError('konten', 'error-msg') ?>
         </div>
 
@@ -153,84 +153,34 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // --- JavaScript untuk Quill.js ---
         var quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
-                toolbar: {
-                    container: [
-                        [{
-                            'header': [1, 2, false]
-                        }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        ['blockquote', 'code-block'],
-                        [{
-                            'list': 'ordered'
-                        }],
-                        [{
-                            'script': 'sub'
-                        }, {
-                            'script': 'super'
-                        }],
-                        [{
-                            'indent': '-1'
-                        }, {
-                            'indent': '+1'
-                        }],
-                        [{
-                            'direction': 'rtl'
-                        }],
-                        [{
-                            'align': []
-                        }],
-                        ['link', 'image'],
-                        ['clean']
-                    ],
-                    handlers: {
-                        'image': handleImageUpload
-                    }
-                }
+                toolbar: [
+                    [{ 'header': [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['blockquote', 'code-block'],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    [{ 'script': 'sub'}, { 'script': 'super' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'direction': 'rtl' }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
             }
         });
 
-        function handleImageUpload() {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-            input.click();
-
-            input.onchange = async () => {
-                const file = input.files[0];
-                const formData = new FormData();
-                formData.append('image', file);
-
-                try {
-                    const response = await fetch('<?= base_url('admin/kegiatan/uploadImage'); ?>', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    });
-                    const result = await response.json();
-
-                    if (result.url) {
-                        const range = quill.getSelection();
-                        quill.insertEmbed(range.index, 'image', result.url);
-                    } else {
-                        alert('Gagal mengunggah gambar: ' + (result.error || 'Terjadi kesalahan.'));
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('Gagal mengunggah gambar.');
-                }
-            };
-        }
-
-        // Fungsi yang dipanggil saat formulir disubmit
+        // Submit form dengan konten Quill sebagai JSON
         window.submitQuillForm = function() {
-            var konten = quill.root.innerHTML;
-            document.getElementById('konten-html').value = konten;
+            var delta = quill.getContents();
+
+            if (quill.getText().trim().length === 0) {
+                alert('Konten kegiatan tidak boleh kosong.');
+                return false;
+            }
+
+            document.getElementById('konten-json').value = JSON.stringify(delta);
             return true;
         }
     });

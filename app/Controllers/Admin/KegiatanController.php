@@ -4,7 +4,6 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\KegiatanModel;
-use DOMDocument;
 
 class KegiatanController extends BaseController
 {
@@ -117,6 +116,10 @@ class KegiatanController extends BaseController
         $slug   = $this->to_slug($judul);
         $konten = $this->request->getPost('konten');
 
+        if (json_decode($konten) === null) {
+            return redirect()->back()->withInput()->with('error', 'Format konten tidak valid.');
+        }
+
         $data = [
             'judul'    => $judul,
             'slug'     => $slug,
@@ -177,6 +180,10 @@ class KegiatanController extends BaseController
         $slug   = $this->to_slug($judul);
         $konten = $this->request->getPost('konten');
 
+        if (json_decode($konten) === null) {
+            return redirect()->back()->withInput()->with('error', 'Format konten tidak valid.');
+        }
+
         $data = [
             'judul'    => $judul,
             'slug'     => $slug,
@@ -196,21 +203,6 @@ class KegiatanController extends BaseController
         $kegiatan = $this->kegiatanModel->find($id);
         if (!$kegiatan) {
             return redirect()->to('/admin/kegiatan')->with('error', 'Kegiatan tidak ditemukan.');
-        }
-
-        $dom = new DOMDocument();
-        @$dom->loadHTML($kegiatan['konten'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-        $images = $dom->getElementsByTagName('img');
-        foreach ($images as $img) {
-            $src = $img->getAttribute('src');
-            if (strpos($src, base_url('uploads/kegiatan/')) !== false) {
-                $filename = basename($src);
-                $filePath = ROOTPATH . 'public/uploads/kegiatan/' . $filename;
-                if (file_exists($filePath)) {
-                    unlink($filePath);
-                }
-            }
         }
 
         if ($this->kegiatanModel->delete($id)) {
@@ -233,40 +225,5 @@ class KegiatanController extends BaseController
         ];
 
         return view('admin/kegiatan/show', $data);
-    }
-
-    public function uploadImage()
-    {
-        $validationRule = [
-            'image' => [
-                'label' => 'Gambar',
-                'rules' => 'uploaded[image]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/gif]|max_size[image,2048]',
-                'errors' => [
-                    'uploaded' => 'Tidak ada gambar yang diunggah.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'Format gambar tidak didukung.',
-                    'max_size' => 'Ukuran gambar terlalu besar. Maksimal 2MB.'
-                ]
-            ]
-        ];
-
-        if (!$this->validate($validationRule)) {
-            return $this->response->setJSON(['error' => $this->validator->getError('image')]);
-        }
-
-        $img = $this->request->getFile('image');
-
-        if ($img && $img->isValid()) {
-            $newName = $img->getRandomName();
-            try {
-                $img->move(ROOTPATH . 'public/uploads/kegiatan', $newName);
-                $url = base_url('uploads/kegiatan/' . $newName);
-                return $this->response->setJSON(['url' => $url]);
-            } catch (\Exception $e) {
-                return $this->response->setJSON(['error' => 'Gagal memindahkan file: ' . $e->getMessage()]);
-            }
-        }
-
-        return $this->response->setJSON(['error' => 'Gagal mengunggah gambar.']);
     }
 }

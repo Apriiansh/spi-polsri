@@ -92,9 +92,14 @@
                         <input type="text" id="username" name="username" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none input-focus-border transition duration-150" placeholder="Masukkan username atau email Anda" required>
                     </div>
 
-                    <div class="mb-6">
+                     <div class="mb-6">
                         <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
-                        <input type="password" id="password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none input-focus-border transition duration-150" placeholder="Masukkan password Anda" required>
+                        <div class="relative">
+                            <input type="password" id="password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none input-focus-border transition duration-150 pr-12" placeholder="Masukkan password Anda" required>
+                            <button type="button" id="toggle-password" class="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none">
+                                <i class="fas fa-eye" id="password-icon"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" class="w-full bg-primary-blue text-white font-bold py-3 px-4 rounded-lg hover:bg-secondary-blue focus:outline-none focus:ring-2 focus:ring-secondary-blue focus:ring-offset-2 transition duration-150 shadow-md hover:shadow-lg">
@@ -102,13 +107,37 @@
                     </button>
                 </form>
 
-                <div id="error-message" class="mt-6 p-3 bg-red-100 text-red-700 border border-red-400 rounded-lg text-sm text-center" style="display:none;">
-                    Username atau password salah. Silakan coba lagi.
-                </div>
+                <!-- Success and Error Messages -->
+                <?php if (session()->getFlashdata('success')): ?>
+                    <div id="success-message" class="mt-6 p-3 bg-green-100 text-green-700 border border-green-400 rounded-lg text-sm text-center">
+                        <?= session()->getFlashdata('success') ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (session()->getFlashdata('error')): ?>
+                    <div id="error-message" class="mt-6 p-3 bg-red-100 text-red-700 border border-red-400 rounded-lg text-sm text-center">
+                        <?= session()->getFlashdata('error') ?>
+                    </div>
+                <?php endif; ?>
 
                 <div class="text-center mt-6 text-sm text-gray-500">
                     <p>Lupa kata sandi? <a href="/forgot-password" class="text-secondary-blue hover:underline">Reset di sini.</a></p>
                 </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const passwordInput = document.getElementById('password');
+                        const togglePasswordButton = document.getElementById('toggle-password');
+                        const passwordIcon = document.getElementById('password-icon');
+
+                        togglePasswordButton.addEventListener('click', function() {
+                            const isPasswordVisible = passwordInput.type === 'text';
+                            passwordInput.type = isPasswordVisible ? 'password' : 'text';
+                            passwordIcon.classList.toggle('fa-eye', isPasswordVisible);
+                            passwordIcon.classList.toggle('fa-eye-slash', !isPasswordVisible);
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>

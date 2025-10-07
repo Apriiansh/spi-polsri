@@ -27,7 +27,10 @@ class LaporanController extends BaseController
             return redirect()->to('login');
         }
 
-        $laporanModel->where('kategori_laporan', $userBidang);
+        $laporanModel->groupStart()
+            ->where('kategori_laporan', $userBidang)
+            ->orWhere('kategori_laporan', 'penyuapan')
+            ->groupEnd();
 
         // Get filter values
         $status = $this->request->getGet('status');
@@ -47,7 +50,10 @@ class LaporanController extends BaseController
 
         $klasifikasi_options = (new LaporanModel())
             ->distinct()
+            ->groupStart()
             ->where('kategori_laporan', $userBidang)
+            ->orWhere('kategori_laporan', 'penyuapan')
+            ->groupEnd()
             ->where('klasifikasi_laporan IS NOT NULL')
             ->where('klasifikasi_laporan !=', '')
             ->findColumn('klasifikasi_laporan') ?? [];
@@ -85,7 +91,12 @@ class LaporanController extends BaseController
             return redirect()->to('login');
         }
 
-        $laporan = $this->laporanModel->where('kategori_laporan', $userBidang)->find($id);
+        $laporan = $this->laporanModel
+            ->groupStart()
+            ->where('kategori_laporan', $userBidang)
+            ->orWhere('kategori_laporan', 'penyuapan')
+            ->groupEnd()
+            ->find($id);
 
         if (!$laporan) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Laporan tidak ditemukan atau tidak dapat diakses.');
@@ -109,7 +120,12 @@ class LaporanController extends BaseController
             return redirect()->to('login');
         }
 
-        $laporan = $this->laporanModel->where('kategori_laporan', $userBidang)->find($id);
+        $laporan = $this->laporanModel
+            ->groupStart()
+            ->where('kategori_laporan', $userBidang)
+            ->orWhere('kategori_laporan', 'penyuapan')
+            ->groupEnd()
+            ->find($id);
 
         if (!$laporan) {
             $session->setFlashdata('error', 'Laporan tidak ditemukan atau tidak dapat diakses.');
@@ -155,7 +171,12 @@ class LaporanController extends BaseController
             return redirect()->to('login');
         }
 
-        $laporan = $this->laporanModel->where('kategori_laporan', $userBidang)->find($id);
+        $laporan = $this->laporanModel
+            ->groupStart()
+            ->where('kategori_laporan', $userBidang)
+            ->orWhere('kategori_laporan', 'penyuapan')
+            ->groupEnd()
+            ->find($id);
 
         if (!$laporan) {
             $session->setFlashdata('error', 'Laporan tidak ditemukan atau tidak dapat diakses.');

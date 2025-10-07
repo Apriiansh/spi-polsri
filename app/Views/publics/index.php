@@ -58,7 +58,7 @@
     </section>
 
     <!-- ========= LOGO PARTNERSHIP ========= -->
-    <section class="py-16 relative overflow-hidden">
+    <section class="py-8 relative overflow-hidden">
         <div class="absolute inset-0 opacity-30">
             <div class="absolute top-12 left-20 w-32 h-32 bg-gradient-to-br from-black-200 to-indigo-200 rounded-full blur-2xl floating-slow"></div>
             <div class="absolute bottom-12 right-20 w-24 h-24 bg-gradient-to-br from-indigo-200 to-slate-200 rounded-full blur-xl floating-reverse"></div>
@@ -240,8 +240,8 @@
                 <!-- Content -->
                 <div class="flex-1 text-center lg:text-left">
                     <div class="inline-flex items-center mb-8">
-                        <div class="p-4 bg-gradient-to-br from-slate-800/70 to-slate-700/40 backdrop-blur-sm rounded-xl mr-4">
-                            <i class="fas fa-exclamation-triangle text-2xl text-yellow-400"></i>
+                        <div class="p-4 bg-gradient-to-br from-gray-200/20 to-gray-100/10 backdrop-blur-sm rounded-xl mr-4">
+                            <img src="<?= base_url('images/icons/upg.png') ?>" alt="UPG Icon" class="h-15 w-15">
                         </div>
                         <div>
                             <h2 class="text-3xl lg:text-4xl font-bold text-gray-800">Unit Pengendalian Gratifikasi</h2>

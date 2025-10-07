@@ -13,7 +13,8 @@ $kategori_list = [
     'Hukum',
     'Manajemen SDM',
     'Manajemen Aset',
-    'Ketatalaksanaan'
+    'Ketatalaksanaan',
+    'Penyuapan'
 ];
 
 $unit_non_akademik_list = [
@@ -252,59 +253,39 @@ $unit_akademik_list = [
 
         <!-- Timeline Information -->
         <div class="mt-12 bg-gradient-to-r from-blue-50 to-sky-50 rounded-sm p-8 border border-blue-100">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                 <div>
                     <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-sm mb-3">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <i class="fas fa-circle-dot text-blue-800"></i>
                     </div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Pasti di Respon</h4>
+                    <h4 class="font-semibold text-gray-900 mb-1">Pasti Ditindaklanjuti</h4>
                     <p class="text-gray-600 text-sm">Laporan segera ditindaklanjuti</p>
                 </div>
                 <div>
                     <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-sm mb-3">
-                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                        </svg>
+                        <i class="fas fa-user-secret text-blue-800"></i>
                     </div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Kerahasiaan Terjamin</h4>
+                    <h4 class="font-semibold text-gray-900 mb-1">Perlindungan Pelapor</h4>
                     <p class="text-gray-600 text-sm">Data pelapor dilindungi</p>
                 </div>
                 <div>
                     <div class="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-sm mb-3">
-                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM10.07 14.93l-6.36 6.36a1.5 1.5 0 01-2.12-2.12l6.36-6.36M3 3l18 18"></path>
-                        </svg>
+                        <i class="fas fa-shield-alt text-blue-800"></i>
                     </div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Transparansi</h4>
+                    <h4 class="font-semibold text-gray-900 mb-1">Terjamin Kerahasiaan</h4>
+                    <p class="text-gray-600 text-sm">Data Anda aman</p>
+                </div>
+                <div>
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-sm mb-3">
+                        <i class="fas fa-eye-low-vision text-blue-800"></i>
+                    </div>
+                    <h4 class="font-semibold text-gray-900 mb-1">Proses Transparan</h4>
                     <p class="text-gray-600 text-sm">Update status secara berkala</p>
                 </div>
             </div>
         </div>
 
-        <!-- Contact Information -->
-        <div class="mt-8 text-center">
-            <p class="text-gray-600 mb-2">Butuh bantuan atau informasi lebih lanjut?</p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="mailto:spi@polsri.ac.id" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-sm hover:bg-blue-200 transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                    </svg>
-                    spi@polsri.ac.id
-                </a>
-                <a href="tel:0711-313949" class="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-sm hover:bg-green-200 transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                    </svg>
-                    (0711) 313-949
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php
+        <?php
 $laporanModel = model('LaporanModel');
 
 // Total seluruh laporan
@@ -336,7 +317,8 @@ $statusMap = [
     ];
 ?>
 
-<!-- Statistik Laporan -->
+
+        <!-- Statistik Laporan -->
 <div class="max-w-6xl mx-auto mt-12 mb-8">
     <div class="text-center mb-6">
         <h2 class="text-2xl font-bold text-gray-900 mb-2">Statistik Laporan</h2>
@@ -369,6 +351,30 @@ $statusMap = [
         </div>
     </div>
 </div>
+
+        <!-- Contact Information -->
+        <div class="mt-8 text-center">
+            <p class="text-gray-600 mb-2">Butuh bantuan atau informasi lebih lanjut?</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="mailto:spi@polsri.ac.id" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-sm hover:bg-blue-200 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    spi@polsri.ac.id
+                </a>
+                <a href="tel:0711-313949" class="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-sm hover:bg-green-200 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                    </svg>
+                    (0711) 313-949
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

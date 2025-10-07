@@ -4,7 +4,6 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Models\KegiatanModel;
-use DOMDocument;
 
 class KegiatanController extends BaseController
 {
@@ -14,7 +13,6 @@ class KegiatanController extends BaseController
     {
         $this->kegiatanModel = new KegiatanModel();
 
-        // Pastikan user sudah login
         if (!session()->has('user_id') || !session()->get('user_id')) {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu');
             header('Location: ' . base_url('/login'));
@@ -42,10 +40,9 @@ class KegiatanController extends BaseController
         return trim($string, '-');
     }
 
-    // Method untuk mendapatkan user_id yang aman
     private function getCurrentUserId()
     {
-        $userId = session()->get('user_id');  // Ubah dari 'id' ke 'user_id'
+        $userId = session()->get('user_id');
 
         if (!$userId) {
             throw new \Exception('User tidak terautentikasi');
@@ -97,10 +94,6 @@ class KegiatanController extends BaseController
 
     public function store()
     {
-        // Debug session (hapus setelah masalah teratasi)
-        log_message('debug', 'Session data: ' . json_encode(session()->get()));
-        log_message('debug', 'User ID from session: ' . session()->get('user_id'));
-
         try {
             $userId = $this->getCurrentUserId();
         } catch (\Exception $e) {
@@ -119,19 +112,24 @@ class KegiatanController extends BaseController
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
 
+        $judul  = $this->request->getPost('judul');
+        $konten = $this->request->getPost('konten');
+
+        if (json_decode($konten) === null) {
+            return redirect()->back()->withInput()->with('error', 'Format konten tidak valid.');
+        }
+
         $data = [
-            'user_id'  => $userId, // Menggunakan method getCurrentUserId()
-            'judul'    => $this->request->getPost('judul'),
-            'slug'     => $this->to_slug($this->request->getPost('judul')),
+            'user_id'  => $userId,
+            'judul'    => $judul,
+            'slug'     => $this->to_slug($judul),
             'kategori' => $this->request->getPost('kategori'),
-            'konten'   => $this->request->getPost('konten'),
+            'konten'   => $konten,
+            'status'   => 'pending',
         ];
 
-        // Debug data yang akan disimpan (hapus setelah masalah teratasi)
-        log_message('debug', 'Data to insert: ' . json_encode($data));
-
         if ($this->kegiatanModel->insert($data)) {
-            return redirect()->to('/user/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan.');
+            return redirect()->to('/user/kegiatan')->with('success', 'Kegiatan berhasil ditambahkan. Menunggu verifikasi admin.');
         }
 
         return redirect()->back()->withInput()->with('error', 'Gagal menambahkan kegiatan.');
@@ -187,11 +185,18 @@ class KegiatanController extends BaseController
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
 
+        $judul  = $this->request->getPost('judul');
+        $konten = $this->request->getPost('konten');
+
+        if (json_decode($konten) === null) {
+            return redirect()->back()->withInput()->with('error', 'Format konten tidak valid.');
+        }
+
         $data = [
-            'judul'    => $this->request->getPost('judul'),
-            'slug'     => $this->to_slug($this->request->getPost('judul')),
+            'judul'    => $judul,
+            'slug'     => $this->to_slug($judul),
             'kategori' => $this->request->getPost('kategori'),
-            'konten'   => $this->request->getPost('konten'),
+            'konten'   => $konten,
         ];
 
         if ($this->kegiatanModel->update($id, $data)) {
@@ -210,21 +215,7 @@ class KegiatanController extends BaseController
         }
 
         if ($kegiatan['user_id'] != $this->getCurrentUserId()) {
-            return redirect()->to('/user/kegiatan')->with('error', 'Anda tidak memiliki izin untuk mengakses sumber daya ini.');
-        }
-
-        $dom = new DOMDocument();
-        @$dom->loadHTML($kegiatan['konten'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $images = $dom->getElementsByTagName('img');
-        foreach ($images as $img) {
-            $src = $img->getAttribute('src');
-            if (strpos($src, base_url('uploads/kegiatan/')) !== false) {
-                $filename = basename($src);
-                $filePath = ROOTPATH . 'public/uploads/kegiatan/' . $filename;
-                if (file_exists($filePath)) {
-                    unlink($filePath);
-                }
-            }
+            return redirect()->to('/user/kegiatan')->with('error', 'Anda tidak memiliki izin untuk menghapus kegiatan ini.');
         }
 
         if ($this->kegiatanModel->delete($id)) {
@@ -243,7 +234,7 @@ class KegiatanController extends BaseController
         }
 
         if ($kegiatan['user_id'] != $this->getCurrentUserId()) {
-            return redirect()->to('/user/kegiatan')->with('error', 'Anda tidak memiliki izin untuk mengakses sumber daya ini.');
+            return redirect()->to('/user/kegiatan')->with('error', 'Anda tidak memiliki izin untuk melihat kegiatan ini.');
         }
 
         $data = [
@@ -252,30 +243,5 @@ class KegiatanController extends BaseController
         ];
 
         return view('user/kegiatan/show', $data);
-    }
-
-    public function uploadImage()
-    {
-        $validationRule = [
-            'image' => [
-                'label' => 'Gambar',
-                'rules' => 'uploaded[image]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/gif]|max_size[image,2048]',
-            ]
-        ];
-
-        if (!$this->validate($validationRule)) {
-            return $this->response->setJSON(['error' => $this->validator->getError('image')]);
-        }
-
-        $img = $this->request->getFile('image');
-
-        if ($img && $img->isValid()) {
-            $newName = $img->getRandomName();
-            $img->move(ROOTPATH . 'public/uploads/kegiatan', $newName);
-            $url = base_url('uploads/kegiatan/' . $newName);
-            return $this->response->setJSON(['url' => $url]);
-        }
-
-        return $this->response->setJSON(['error' => 'Gagal mengunggah gambar.']);
     }
 }

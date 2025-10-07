@@ -104,39 +104,25 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <?php
-                                    $statusClass = '';
-                                    $statusIcon = '';
-                                    switch ($article['status']) {
-                                        case 'pending':
-                                            $statusClass = 'bg-yellow-100 text-yellow-800 border-yellow-200';
-                                            $statusIcon = 'fas fa-clock';
-                                            break;
-                                        case 'verified':
-                                            $statusClass = 'bg-green-100 text-green-800 border-green-200';
-                                            $statusIcon = 'fas fa-check-circle';
-                                            break;
-                                        case 'rejected':
-                                            $statusClass = 'bg-red-100 text-red-800 border-red-200';
-                                            $statusIcon = 'fas fa-times-circle';
-                                            break;
-                                    }
-                                    ?>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border <?= $statusClass ?>">
-                                        <i class="<?= $statusIcon ?> mr-1"></i>
-                                        <?= esc(ucfirst($article['status'])) ?>
-                                    </span>
+                                    <form action="<?= base_url('admin/artikel/update-status/' . $article['id']) ?>" method="post">
+                                        <?= csrf_field() ?>
+                                        <?php
+                                        $statusClass = '';
+                                        switch ($article['status']) {
+                                            case 'pending': $statusClass = 'bg-yellow-100 text-yellow-800 border-yellow-300 focus:ring-yellow-200'; break;
+                                            case 'verified': $statusClass = 'bg-green-100 text-green-800 border-green-300 focus:ring-green-200'; break;
+                                            case 'rejected': $statusClass = 'bg-red-100 text-red-800 border-red-300 focus:ring-red-200'; break;
+                                        }
+                                        ?>
+                                        <select name="status" onchange="this.form.submit()" class="text-xs font-medium border rounded-full px-2.5 py-1 w-full <?= $statusClass ?> focus:outline-none focus:ring-2">
+                                            <option value="pending" <?= $article['status'] == 'pending' ? 'selected' : '' ?>>Pending</option>
+                                            <option value="verified" <?= $article['status'] == 'verified' ? 'selected' : '' ?>>Terverifikasi</option>
+                                            <option value="rejected" <?= $article['status'] == 'rejected' ? 'selected' : '' ?>>Ditolak</option>
+                                        </select>
+                                    </form>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center space-x-2">
-                                        <form action="<?= base_url('admin/artikel/update-status/' . $article['id']) ?>" method="post" class="inline-flex">
-                                            <?= csrf_field(); ?>
-                                            <select name="status" onchange="this.form.submit()" class="text-sm px-3 py-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition-all duration-200">
-                                                <option value="pending" <?= ($article['status'] == 'pending') ? 'selected' : '' ?>>Pending</option>
-                                                <option value="verified" <?= ($article['status'] == 'verified') ? 'selected' : '' ?>>Terverifikasi</option>
-                                                <option value="rejected" <?= ($article['status'] == 'rejected') ? 'selected' : '' ?>>Ditolak</option>
-                                            </select>
-                                        </form>
                                         <a href="<?= base_url('admin/artikel/show/' . $article['id']); ?>" class="text-blue-600 hover:text-blue-800 p-1 rounded transition-colors duration-200" title="Lihat artikel">
                                             <i class="fas fa-eye"></i>
                                         </a>

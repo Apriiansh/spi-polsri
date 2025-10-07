@@ -47,9 +47,9 @@ class AuthController extends Controller
                 $session->set($ses_data);
 
                 if ($user['role'] == 'admin') {
-                    return redirect()->to(site_url('admin/dashboard'));
+                    return redirect()->to('/admin/dashboard');
                 } else {
-                    return redirect()->to(site_url('user/dashboard'));
+                    return redirect()->to('/user/dashboard');
                 }
             } else {
                 $session->setFlashdata('error', 'Password salah. Silakan coba lagi.');
@@ -92,10 +92,11 @@ class AuthController extends Controller
                 $session->setFlashdata('error', 'Gagal mengirim email. Silakan coba lagi.');
             }
         } else {
-            $session->setFlashdata('error', 'Email tidak ditemukan dalam sistem kami.');
+            // Pesan yang sama untuk mencegah user enumeration
+            $session->setFlashdata('success', 'Jika email Anda terdaftar, link reset password telah dikirim.');
         }
 
-        return redirect()->to(site_url('forgot-password'));
+        return redirect()->to('/forgot-password');
     }
 
     public function resetPassword($token)
@@ -108,7 +109,7 @@ class AuthController extends Controller
             return view('auth/reset_password', ['token' => $token]);
         } else {
             session()->setFlashdata('error', 'Token reset password tidak valid atau telah kedaluwarsa.');
-            return redirect()->to(site_url('forgot-password'));
+            return redirect()->to('/forgot-password');
         }
     }
 
@@ -145,10 +146,10 @@ class AuthController extends Controller
         if ($user) {
             $this->userModel->updatePassword($user['id'], $password);
             $session->setFlashdata('success', 'Password Anda telah berhasil diubah. Silakan login.');
-            return redirect()->to(site_url('login'));
+            return redirect()->to('/login');
         } else {
             $session->setFlashdata('error', 'Token reset password tidak valid atau telah kedaluwarsa.');
-            return redirect()->to(site_url('forgot-password'));
+            return redirect()->to('/forgot-password');
         }
     }
 
@@ -156,6 +157,6 @@ class AuthController extends Controller
     {
         $session = session();
         $session->destroy();
-        return redirect()->to(site_url('login'));
+        return redirect()->to('/login');
     }
 }
