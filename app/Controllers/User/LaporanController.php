@@ -114,6 +114,7 @@ class LaporanController extends BaseController
         $session = session();
         $userBidang = $session->get('bidang');
         $newStatus = $this->request->getPost('status_laporan');
+        $updateKeterangan = $this->request->getPost('update_keterangan');
 
         if (!$userBidang) {
             $session->setFlashdata('error', 'Bidang user tidak ditemukan.');
@@ -137,27 +138,34 @@ class LaporanController extends BaseController
             return redirect()->back();
         }
 
-        $this->laporanModel->update($id, ['status_laporan' => $newStatus]);
+        // Simpan status lama untuk perbandingan
+        $oldStatus = $laporan['status_laporan'];
 
-        // Kirim email notifikasi
-        $email = \Config\Services::email();
-        $email->setTo($laporan['email_pelapor']);
-        $email->setSubject('Update Status Laporan Anda [SPI POLSRI]');
+        // Data untuk diupdate
+        $updateData = [
+            'status_laporan' => $newStatus,
+            'update_keterangan' => $updateKeterangan
+        ];
 
-        $message = view('email/status_update', [
-            'laporan' => $laporan,
-            'newStatus' => $newStatus
-        ]);
-        $email->setMessage($message);
+        // Update status laporan
+        $updateResult = $this->laporanModel->update($id, $updateData);
 
-        if ($email->send()) {
-            $session->setFlashdata('success', 'Status laporan berhasil diperbarui dan notifikasi email telah dikirim.');
-        } else {
-            // Optional: Log the error for debugging
-            // log_message('error', $email->printDebugger(['headers']));
-            $session->setFlashdata('success', 'Status laporan berhasil diperbarui, tetapi notifikasi email gagal dikirim.');
+        if (!$updateResult) {
+            $session->setFlashdata('error', 'Gagal memperbarui status laporan.');
+            return redirect()->back();
         }
 
+        // Jika email pelapor ada dan status berubah, arahkan ke halaman kirim email manual
+        if (!empty($laporan['email_pelapor']) && $oldStatus !== $newStatus) {
+            session()->setFlashdata('success', 'Status laporan berhasil diperbarui. Silakan kirim notifikasi email kepada pelapor.');
+            return view('email/status_update_preview', [
+                'laporan' => $laporan,
+                'newStatus' => $newStatus,
+                'update_keterangan' => $updateKeterangan
+            ]);
+        }
+
+        $session->setFlashdata('success', 'Status laporan berhasil diperbarui.');
         return redirect()->to(site_url('user/laporan/show/' . $id));
     }
 

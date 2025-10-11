@@ -161,6 +161,13 @@
             </div>
             <?php endif; ?>
 
+            <?php if (!empty($update_keterangan)): ?>
+            <div class="status-description" style="margin-top: 15px; border-left-color: #6c757d; background-color: #f1f3f5; color: #495057;">
+                <p style="font-weight: bold; color: #343a40;">Keterangan dari Tim SPI:</p>
+                <p style="margin-top: 5px;"><?= nl2br(esc($update_keterangan)); ?></p>
+            </div>
+            <?php endif; ?>
+
             <p style="margin-top: 30px;">Terima kasih atas partisipasi Anda dalam menjaga integritas dan kualitas layanan di lingkungan Politeknik Negeri Sriwijaya.</p>
 
             <p style="margin-top: 20px;">

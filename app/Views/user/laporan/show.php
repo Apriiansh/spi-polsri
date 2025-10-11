@@ -38,6 +38,9 @@
                 <p><span class="font-medium text-black-600">Lokasi Kejadian:</span> <?= esc($laporan['lok_kejadian']); ?></p>
                 <p><span class="font-medium text-black-600">Dibuat:</span> <?= esc(date('d F Y H:i', strtotime($laporan['created_at']))); ?></p>
                 <p><span class="font-medium text-black-600">Terakhir Update:</span> <?= esc(date('d F Y H:i', strtotime($laporan['updated_at']))); ?></p>
+                <?php if (!empty($laporan['update_keterangan'])) : ?>
+                    <p><span class="font-medium text-black-600">Keterangan Update:</span> <?= esc($laporan['update_keterangan']); ?></p>
+                <?php endif; ?>
             </div>
             <div>
                 <p class="font-medium text-gray-600 mb-1">Isi Laporan:</p>
@@ -63,7 +66,7 @@
     <!-- Form Update Status -->
     <div class="bg-white shadow-sm rounded-xl p-6">
         <h2 class="text-lg font-semibold text-gray-700 border-b pb-2 mb-4">Perbarui Status</h2>
-        <form action="<?= base_url('admin/laporan/update-status/' . $laporan['id']); ?>" method="post" class="space-y-4">
+        <form action="<?= base_url('user/laporan/update-status/' . $laporan['id']); ?>" method="post" class="space-y-4">
             <?= csrf_field(); ?>
             <div>
                 <label for="status_laporan" class="block text-sm font-medium text-gray-700 mb-1">Status:</label>
@@ -74,6 +77,12 @@
                     <option value="completed" <?= ($laporan['status_laporan'] == 'completed') ? 'selected' : ''; ?>>Selesai</option>
                     <option value="not_actionable" <?= ($laporan['status_laporan'] == 'not_actionable') ? 'selected' : ''; ?>>Tidak Dapat Ditindaklanjuti</option>
                 </select>
+            </div>
+            <div>
+                <label for="update_keterangan" class="block text-sm font-medium text-gray-700 mb-1">Keterangan (Opsional):</label>
+                <textarea name="update_keterangan" id="update_keterangan" rows="3"
+                    class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Tambahkan keterangan atau catatan terkait pembaruan status..."><?= esc($laporan['update_keterangan'] ?? ''); ?></textarea>
             </div>
             <button type="submit"
                 class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm text-sm font-medium transition">

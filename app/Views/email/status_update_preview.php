@@ -2,6 +2,7 @@
     // Data dari controller
     $laporan = $laporan ?? [];
     $newStatus = $newStatus ?? 'tidak diketahui';
+    $updateKeterangan = $update_keterangan ?? '';
     $statusMapping = [
         'pending' => 'Pending',
         'in_progress' => 'Sedang Diproses',
@@ -22,12 +23,15 @@
 "
         . "------------------------------------
 "
-        . "ID Laporan: #" . esc($laporan['id'] ?? 'N/A') . "\n"
         . "Judul: " . esc($laporan['judul'] ?? 'Tidak ada judul') . "\n"
         . "Tanggal Update: " . date('d F Y, H:i') . " WIB\n\n"
-        . "STATUS TERBARU: " . esc($statusText) . "\n"
-        . "------------------------------------
-\n"
+        . "Status Laporan: " . esc($statusText) . "\n";
+
+    if (!empty($updateKeterangan)) {
+        $plainTextBody .= "Keterangan: " . esc($updateKeterangan) . "\n";
+    }
+
+    $plainTextBody .= "------------------------------------\n\n"
         . "Terima kasih atas partisipasi Anda dalam menjaga integritas di lingkungan Politeknik Negeri Sriwijaya.\n\n"
         . "Hormat kami,\n"
         . "Tim Satuan Pengawas Internal (SPI) POLSRI";
@@ -75,6 +79,11 @@
             <hr class="my-2">
             <p class="text-sm text-slate-500">Status Baru:</p>
             <p class="font-bold text-slate-800 text-lg"><?= esc($statusText) ?></p>
+            <?php if (!empty($updateKeterangan)): ?>
+                <hr class="my-2">
+                <p class="text-sm text-slate-500">Keterangan:</p>
+                <p class="text-slate-700 text-base"><?= esc($updateKeterangan) ?></p>
+            <?php endif; ?>
         </div>
 
         <a href="<?= $mailtoLink ?>" 
