@@ -67,37 +67,32 @@ class AuthController extends Controller
     }
 
     public function sendResetLink()
-    {
-        $session = session();
-        $emailAddress = $this->request->getVar('email');
-        $user = $this->userModel->findByEmail($emailAddress);
+{
+    $session = session();
+    $emailAddress = $this->request->getVar('email');
+    $user = $this->userModel->findByEmail($emailAddress);
 
-        if ($user) {
-            $token = bin2hex(random_bytes(20));
-            $expires = date('Y-m-d H:i:s', time() + 3600); // 1 hour
-
-            $this->userModel->updateResetToken($user['id'], $token, $expires);
-
-            $this->email->setTo($emailAddress);
-            $this->email->setSubject('Reset Password Akun SPI POLSRI');
-            
-            $message = view('email/reset_password_link', [
-                'resetLink' => site_url('reset-password/' . $token)
-            ]);
-            $this->email->setMessage($message);
-
-            if ($this->email->send()) {
-                $session->setFlashdata('success', 'Link reset password telah dikirim ke email Anda.');
-            } else {
-                $session->setFlashdata('error', 'Gagal mengirim email. Silakan coba lagi.');
-            }
-        } else {
-            // Pesan yang sama untuk mencegah user enumeration
-            $session->setFlashdata('success', 'Jika email Anda terdaftar, link reset password telah dikirim.');
-        }
-
+    if (!$user) {
+        $session->setFlashdata('error', 'Email tidak ditemukan dalam sistem.');
         return redirect()->to('/forgot-password');
     }
+
+    // Generate token reset
+    $token = bin2hex(random_bytes(20));
+    $expires = date('Y-m-d H:i:s', time() + 3600); // Berlaku 1 jam
+    $this->userModel->updateResetToken($user['id'], $token, $expires);
+
+    // Buat link reset
+    $resetLink = site_url('reset-password/' . $token);
+
+    // Tampilkan halaman email manual
+    return view('email/reset_password_preview', [
+        'resetLink' => $resetLink,
+        'emailAddress' => $emailAddress,
+        'username' => $user['username'] ?? 'Pengguna',
+    ]);
+}
+
 
     public function resetPassword($token)
     {

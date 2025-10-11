@@ -118,9 +118,13 @@ class LaporanController extends BaseController
             return redirect()->back();
         }
 
-        // Kirim email notifikasi jika ada email pelapor dan status berubah
+        // Jika email pelapor ada dan status berubah, arahkan ke halaman kirim email manual
         if (!empty($laporan['email_pelapor']) && $oldStatus !== $newStatus) {
-            $this->sendStatusUpdateEmail($laporan, $newStatus, $oldStatus);
+            session()->setFlashdata('success', 'Status laporan berhasil diperbarui. Silakan kirim notifikasi email kepada pelapor.');
+            return view('email/status_update_preview', [
+                'laporan' => $laporan,
+                'newStatus' => $newStatus
+            ]);
         }
 
         $session->setFlashdata('success', 'Status laporan berhasil diperbarui.');

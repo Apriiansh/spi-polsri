@@ -16,7 +16,7 @@ class Home extends BaseController
     public function index(): string
     {
         $data = [
-            'title' => 'Beranda - SPI POLSRI',
+            'title' => 'Beranda',
             'kegiatan_terbaru' => $this->kegiatanModel->orderBy('created_at', 'DESC')->limit(3)->findAll()
         ];
         return view('publics/index', $data);
@@ -25,7 +25,7 @@ class Home extends BaseController
     public function sejarah(): string
     {
         $data = [
-            'title' => 'Sejarah - SPI POLSRI'
+            'title' => 'Sejarah'
         ];
         return view('publics/sejarah', $data);
     }
@@ -33,7 +33,7 @@ class Home extends BaseController
     public function struktur(): string
     {
         $data = [
-            'title' => 'Struktur Organisasi - SPI POLSRI'
+            'title' => 'Struktur Organisasi'
         ];
         return view('publics/strukturorganisasi', $data);
     }
@@ -41,7 +41,7 @@ class Home extends BaseController
     public function visimisi(): string
     {
         $data = [
-            'title' => 'Visi & Misi - SPI POLSRI'
+            'title' => 'Visi & Misi'
         ];
         return view('publics/visimisi', $data);
     }
@@ -49,7 +49,7 @@ class Home extends BaseController
     public function piagam(): string
     {
         $data = [
-            'title' => 'Piagam Penghargaan Intern - SPI POLSRI'
+            'title' => 'Piagam Penghargaan Intern'
         ];
         return view('publics/piagam', $data);
     }

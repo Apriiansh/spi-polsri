@@ -22,7 +22,8 @@ class LaporanModel extends Model
         'lok_kejadian',
         'unit_kerja',
         'gambar_bukti',
-        'status_laporan'
+        'status_laporan',
+        'update_keterangan'
     ];
 
     protected bool $allowEmptyInserts = false;
